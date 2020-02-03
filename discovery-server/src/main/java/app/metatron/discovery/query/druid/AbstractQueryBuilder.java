@@ -232,6 +232,7 @@ public abstract class AbstractQueryBuilder {
   protected AbstractQueryBuilder(DataSource dataSource) {
 
     this.dataSource = dataSource;
+    this.dataSource.setName(this.dataSource.getEngineName());
 
     // Segmentmeta Query 의 경우 별로 datasource 메타정보가 필요없는 경우가 존재함
     if (dataSource.getMetaDataSource() == null
