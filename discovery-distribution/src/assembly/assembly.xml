@@ -23,7 +23,7 @@
             <directoryMode>0755</directoryMode>
             <fileMode>0755</fileMode>
             <includes>
-                <include>metatron.sh</include>
+                <include>discovery.sh</include>
                 <include>common.sh</include>
             </includes>
             <outputDirectory>bin</outputDirectory>

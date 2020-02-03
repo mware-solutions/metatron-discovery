@@ -52,7 +52,7 @@ There is two way to get the running binary file.
 - Directly download the final binary file from [this link](https://sktmetatronkrsouthshared.blob.core.windows.net/metatron-public/discovery-dist/latest/metatron-discovery-latest-bin.tar.gz)
 - Or, build source code from this repository as shown below:
   - Clone this project.
-  <pre><code>$ git clone https://github.com/metatron-app/metatron-discovery.git</code></pre>
+  <pre><code>$ git clone https://github.com/mware-solutions/bigconnect-discovery.git</code></pre>
   - Build through Maven 3.3+.
   <pre><code>$ mvn clean install -DskipTests</code></pre>
   Building the whole project takes some time especially for the "discovery-frontend". Please wait a few minutes.

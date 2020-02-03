@@ -3123,8 +3123,8 @@
         </insert>
         <insert tableName="user_group_member">
             <column name="ID" value="1000012" />
-            <column name="MEMBER_ID" value="metatron" />
-            <column name="MEMBER_NAME" value="Metatron" />
+            <column name="MEMBER_ID" value="discovery" />
+            <column name="MEMBER_NAME" value="Discovery" />
             <column name="GROUP_ID" value="ID_GROUP_GENERAL_USER" />
         </insert>
         <insert tableName="user_group_member">
@@ -3194,7 +3194,7 @@
             <column name="MODIFIED_BY" value="admin" />
             <column name="MODIFIED_TIME" valueDate="${now}" />
             <column name="VERSION" value="0" />
-            <column name="USER_EMAIL" value="admin@metatron.com" />
+            <column name="USER_EMAIL" value="admin@localhost" />
             <column name="USER_FULL_NAME" value="Administrator" />
             <column name="USER_IMAGE_URL" />
             <column name="USER_STATUS" value="ACTIVATED" />
@@ -3210,7 +3210,7 @@
             <column name="MODIFIED_BY" value="admin" />
             <column name="MODIFIED_TIME" valueDate="${now}" />
             <column name="VERSION" value="0" />
-            <column name="USER_EMAIL" value="polaris@metatron.com" />
+            <column name="USER_EMAIL" value="polaris@localhost" />
             <column name="USER_FULL_NAME" value="Polaris" />
             <column name="USER_IMAGE_URL" />
             <column name="USER_STATUS" value="ACTIVATED" />
@@ -3220,20 +3220,20 @@
             <column name="USER_PASSWORD" value="polaris" />
         </insert>
         <insert tableName="users">
-            <column name="ID" value="metatron" />
+            <column name="ID" value="discovery" />
             <column name="CREATED_BY" value="admin" />
             <column name="CREATED_TIME" valueDate="${now}" />
             <column name="MODIFIED_BY" value="admin" />
             <column name="MODIFIED_TIME" valueDate="${now}" />
             <column name="VERSION" value="0" />
-            <column name="USER_EMAIL" value="metatron@metatron.com" />
-            <column name="USER_FULL_NAME" value="Metatron" />
+            <column name="USER_EMAIL" value="discovery@localhost" />
+            <column name="USER_FULL_NAME" value="Discovery" />
             <column name="USER_IMAGE_URL" />
             <column name="USER_STATUS" value="ACTIVATED" />
             <column name="USER_STATUS_MSG" />
             <column name="USER_TEL" />
-            <column name="USER_NAME" value="metatron" />
-            <column name="USER_PASSWORD" value="metatron" />
+            <column name="USER_NAME" value="discovery" />
+            <column name="USER_PASSWORD" value="discovery" />
         </insert>
         <insert tableName="users">
             <column name="ID" value="guest" />
@@ -3242,7 +3242,7 @@
             <column name="MODIFIED_BY" value="admin" />
             <column name="MODIFIED_TIME" valueDate="${now}" />
             <column name="VERSION" value="0" />
-            <column name="USER_EMAIL" value="guest@metatron.com" />
+            <column name="USER_EMAIL" value="guest@localhost" />
             <column name="USER_FULL_NAME" value="Guest" />
             <column name="USER_IMAGE_URL" />
             <column name="USER_STATUS" value="ACTIVATED" />
@@ -3307,8 +3307,8 @@
         </insert>
         <insert tableName="workspace">
             <column name="ID" value="ws-05" />
-            <column name="ws_name" value="Metatron Workspace" />
-            <column name="ws_owner_id" value="metatron" />
+            <column name="ws_name" value="Discovery Workspace" />
+            <column name="ws_owner_id" value="discovery" />
             <column name="ws_pub_type" value="PRIVATE" />
             <column name="ws_desc" value="" />
             <column name="ws_published" valueBoolean="FALSE" />
@@ -3395,7 +3395,7 @@
         </insert>
         <insert tableName="workspace_member">
             <column name="id" value="100002" />
-            <column name="member_id" value="metatron" />
+            <column name="member_id" value="discovery" />
             <column name="member_type" value="USER" />
             <column name="member_role" value="Editor" />
             <column name="ws_id" value="ws-03" />
