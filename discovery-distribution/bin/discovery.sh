@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USAGE="-e Usage: metatron.sh\n\t
+USAGE="-e Usage: discovery.sh\n\t
         [--config=directory] [--management] [--debug=port] {start|stop|restart|status}"
 
 while [ $# -gt 0 ]; do

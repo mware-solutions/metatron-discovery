@@ -45,7 +45,7 @@ public abstract class JupyterBuilder implements JupyterAction {
     /**
      * check set SPARK_HOME
      *
-     * located in conf/metatron-env.sh
+     * located in conf/discovery-env.sh
      * e.g. export METATRON_SPARK_HOME="/home/metatron/servers/spark"
      *
      * @return directory path of spark

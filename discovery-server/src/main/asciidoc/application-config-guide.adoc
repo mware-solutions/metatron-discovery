@@ -25,7 +25,7 @@ spring:
     multipart: # Used to adjust the maximum size when uploading files
       max-file-size: 300Mb
       max-request-size: 300Mb
-  # The default value is set according to the setting of the METATRON_DB_TYPE value(h2 or mysql) in metatron-env.sh.
+  # The default value is set according to the setting of the METATRON_DB_TYPE value(h2 or mysql) in discovery-env.sh.
   # If you want additional configuration, it is recommended to manage only connection pool or jpa related properties.
   # If you want to set up a new data source type, you can change it from the 'platform' property.
   datasource:
@@ -60,7 +60,7 @@ server:
       enabled: false
       protocol: AJP/1.3
       port: 8280
-logging: 
+logging:
   # If you want to set up a separate log, create a separate file to specify the path to the file.
   # Please refer to https://logback.qos.ch/manual/configuration.html
   config: classpath:logback-console.xml
@@ -87,7 +87,7 @@ polaris:
   storage:
     # The stagedb concept is internally used as an intermediary processing medium when processing large amounts of data
     # when ingesting or transforming data in an application. We are using hive and specify the information related to it.
-    stagedb: 
+    stagedb:
       hostname: localhost # for hiveserver
       port: 10000         # for hiveserver
       username: hive      # for hiveserver

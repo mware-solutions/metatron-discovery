@@ -16,8 +16,8 @@ if [[ -z "${METATRON_CONF_DIR}" ]]; then
   export METATRON_CONF_DIR="${METATRON_HOME}/conf"
 fi
 
-if [[ -f "${METATRON_CONF_DIR}/metatron-env.sh" ]]; then
-  . "${METATRON_CONF_DIR}/metatron-env.sh"
+if [[ -f "${METATRON_CONF_DIR}/discovery-env.sh" ]]; then
+  . "${METATRON_CONF_DIR}/discovery-env.sh"
 fi
 
 if [[ -z "${METATRON_LOG_DIR}" ]]; then
