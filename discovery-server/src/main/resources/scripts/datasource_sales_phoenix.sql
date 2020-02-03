@@ -1,9 +1,9 @@
 -- DataSource
-INSERT INTO dataconnection(dc_implementor, id, created_by, created_time, modified_by, modified_time, version, dc_name, dc_hostname, dc_port, dc_type, dc_username, dc_password, dc_database, dc_options) VALUES('PHOENIX', 'dc-phoenix-01', 'polaris@metatron.com', NOW(), 'polaris@metatron.com', NOW(), 0, 'phoenix-local', 'localhost', 8765, 'JDBC', 'phoenix', 'phoenix', NULL, NULL);
+INSERT INTO dataconnection(dc_implementor, id, created_by, created_time, modified_by, modified_time, version, dc_name, dc_hostname, dc_port, dc_type, dc_username, dc_password, dc_database, dc_options) VALUES('PHOENIX', 'dc-phoenix-01', 'polaris@localhost', NOW(), 'polaris@localhost', NOW(), 0, 'phoenix-local', 'localhost', 8765, 'JDBC', 'phoenix', 'phoenix', NULL, NULL);
 
 INSERT INTO ingestion(id, ingest_data_type, ingest_data_database, ingest_data_schema, ingest_data_query) values(420, 'TABLE', NULL, NULL, 'sales');
 
-INSERT INTO datasource(id, ds_name, ds_alias, ds_owner_id, ds_desc, ds_filter_at_select, ds_type, ds_conn_type, ds_granularity, ds_enabled, ds_status, dc_id, ingest_id, version, created_time, created_by, modified_time, modified_by) VALUES('ds-42', 'sales_phoenix', 'sales_phoenix_live', 'polaris@metatron.com', 'sales data (2011~2014)', true, 'MASTER', 'LIVE', 'DAY', true, 'ENABLED', 'dc-phoenix-01', 420, 1.0, NOW(), 'admin@metatron.com',  NOW(), 'admin@metatron.com');
+INSERT INTO datasource(id, ds_name, ds_alias, ds_owner_id, ds_desc, ds_filter_at_select, ds_type, ds_conn_type, ds_granularity, ds_enabled, ds_status, dc_id, ingest_id, version, created_time, created_by, modified_time, modified_by) VALUES('ds-42', 'sales_phoenix', 'sales_phoenix_live', 'polaris@localhost', 'sales data (2011~2014)', true, 'MASTER', 'LIVE', 'DAY', true, 'ENABLED', 'dc-phoenix-01', 420, 1.0, NOW(), 'admin@localhost',  NOW(), 'admin@localhost');
 
 INSERT INTO field(id, ds_id, seq, field_name, field_type, bi_type) values(10042000, 'ds-42', 0, 'OrderDate', 'TIMESTAMP', 'DIMENSION' );
 INSERT INTO field(id, ds_id, seq, field_name, field_type, bi_type) values(10042001, 'ds-42', 1, 'Category', 'TEXT', 'DIMENSION' );

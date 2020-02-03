@@ -784,10 +784,6 @@ export class LNBComponent extends AbstractComponent implements OnInit, OnDestroy
 
   public popupManual() {
     const browserLang:string = this.translateService.getBrowserLang();
-    if (browserLang.match(/ko/)) {
-      window.open("https://metatron-app.github.io/metatron-doc-discovery/", "_blank");
-    } else {
-      window.open("https://metatron-app.github.io/metatron-doc-discovery/en", "_blank");
-    }
+    window.open("https://docs.bigconnect.io/analytics/bigconnect-discovery", "_blank");
   }
 }

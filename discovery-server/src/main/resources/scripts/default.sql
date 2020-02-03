@@ -1,9 +1,9 @@
 -- User 정보
 INSERT INTO users(ID, CREATED_BY, CREATED_TIME, MODIFIED_BY, MODIFIED_TIME, VERSION, USER_EMAIL, USER_FULL_NAME, USER_IMAGE_URL, USER_STATUS, USER_STATUS_MSG, USER_TEL, USER_NAME, USER_PASSWORD) VALUES
-('admin', 'admin', now(), 'admin', now(), 0, 'admin@metatron.com', 'Administrator', NULL, 'ACTIVATED', NULL, NULL, 'admin', 'admin'),
-('polaris', 'admin', now(), 'admin', now(), 0, 'polaris@metatron.com', 'Polaris', NULL, 'ACTIVATED', NULL, NULL, 'polaris', 'polaris'),
-('metatron', 'admin', now(), 'admin', now(), 0, 'metatron@metatron.com', 'Metatron', NULL, 'ACTIVATED', NULL, NULL, 'metatron', 'metatron'),
-('guest', 'admin', now(), 'admin', now(), 0, 'guest@metatron.com', 'Guest', NULL, 'ACTIVATED', NULL, NULL, 'guest', 'guest');
+('admin', 'admin', now(), 'admin', now(), 0, 'admin@localhost', 'Administrator', NULL, 'ACTIVATED', NULL, NULL, 'admin', 'admin'),
+('polaris', 'admin', now(), 'admin', now(), 0, 'polaris@localhost', 'Polaris', NULL, 'ACTIVATED', NULL, NULL, 'polaris', 'polaris'),
+('bigconnect', 'admin', now(), 'admin', now(), 0, 'bigconnect@localhost', 'Bigconnect', NULL, 'ACTIVATED', NULL, NULL, 'bigconnect', 'bigconnect'),
+('guest', 'admin', now(), 'admin', now(), 0, 'guest@localhost', 'Guest', NULL, 'ACTIVATED', NULL, NULL, 'guest', 'guest');
 
 INSERT INTO user_group(ID, CREATED_BY, CREATED_TIME, MODIFIED_BY, MODIFIED_TIME, VERSION, GROUP_DESC, GROUP_NAME, GROUP_PREDEFINED, GROUP_MEMBER_COUNT, GROUP_DEFAULT) VALUES
 ('ID_GROUP_GENERAL_USER', 'admin', NOW(), 'admin', NOW(), 0, '', 'General-User', TRUE, 1, TRUE),
@@ -12,7 +12,7 @@ INSERT INTO user_group(ID, CREATED_BY, CREATED_TIME, MODIFIED_BY, MODIFIED_TIME,
 
 INSERT INTO user_group_member(ID, MEMBER_ID, MEMBER_NAME, GROUP_ID) VALUES
 (1000011, 'polaris', 'Polaris', 'ID_GROUP_DATA_MANAGER'),
-(1000012, 'metatron', 'Metatron', 'ID_GROUP_GENERAL_USER'),
+(1000012, 'bigconnect', 'Bigconnect', 'ID_GROUP_GENERAL_USER'),
 (1000013, 'admin', 'Administrator', 'ID_GROUP_ADMIN');
 
 -- Global Role
@@ -107,13 +107,13 @@ INSERT INTO role_perm(ROLE_ID, PERM_ID) VALUES
 INSERT INTO workspace(id, ws_name, ws_owner_id, ws_pub_type, ws_desc, ws_published, version, created_time, created_by, modified_time, modified_by) VALUES
 ('ws-00', 'Admin Workspace', 'admin', 'PRIVATE', '', FALSE, 1.0, NOW(), 'admin',  NOW(), 'admin'),
 ('ws-02', 'Polaris Workspace', 'polaris', 'PRIVATE', '', NULL, 1.0, NOW(), 'admin',  NOW(), 'admin'),
-('ws-05', 'Metatron Workspace', 'metatron', 'PRIVATE', '', FALSE, 1.0, NOW(), 'admin',  NOW(), 'admin'),
+('ws-05', 'Bigconnect Workspace', 'bigconnect', 'PRIVATE', '', FALSE, 1.0, NOW(), 'admin',  NOW(), 'admin'),
 ('ws-03', 'Shared Workspace', 'polaris', 'SHARED', '', NULL, 1.0, NOW(), 'polaris',  NOW(), 'polaris'),
 ('ws-10', 'Guest Workspace', 'guest', 'SHARED', '', TRUE, 1.0, NOW(), 'polaris',  NOW(), 'polaris');
 
 INSERT INTO workspace_member(id, member_id, member_type, member_role, ws_id) VALUES
 (100001, 'admin', 'USER', 'Watcher', 'ws-03'),
-(100002, 'metatron', 'USER', 'Editor', 'ws-03');
+(100002, 'bigconnect', 'USER', 'Editor', 'ws-03');
 
 INSERT INTO role_set_workspace(RS_ID, WS_ID) VALUES
 ('DEFAULT_ROLE_SET', 'ws-03'),
@@ -153,5 +153,5 @@ INSERT INTO field(id, ds_id, seq, field_name, field_type, field_logical_type, fi
 (10047026, 'ds-gis-37', 26, 'latitude', 'STRING', 'LNT', 'DIMENSION', null),
 (10047027, 'ds-gis-37', 27, 'longitude', 'STRING', 'LNG', 'DIMENSION', null),
 (10047028, 'ds-gis-37', 27, 'location', 'STRUCT', 'GEO_POINT', 'DIMENSION', null);
- 
+
 COMMIT;
