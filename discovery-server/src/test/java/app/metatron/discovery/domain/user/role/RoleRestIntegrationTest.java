@@ -16,7 +16,7 @@ package app.metatron.discovery.domain.user.role;
 
 import com.google.common.collect.Lists;
 
-import com.facebook.presto.jdbc.internal.guava.collect.Maps;
+import io.prestosql.jdbc.$internal.guava.collect.Maps;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;

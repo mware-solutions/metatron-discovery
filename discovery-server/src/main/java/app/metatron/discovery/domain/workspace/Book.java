@@ -16,7 +16,7 @@ package app.metatron.discovery.domain.workspace;
 
 import com.google.common.collect.Lists;
 
-import com.facebook.presto.jdbc.internal.guava.collect.Maps;
+import io.prestosql.jdbc.$internal.guava.collect.Maps;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

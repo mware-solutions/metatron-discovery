@@ -16,8 +16,7 @@ package app.metatron.discovery.domain.engine;
 
 import com.google.common.collect.Lists;
 
-import com.facebook.presto.jdbc.internal.guava.collect.Sets;
-
+import io.prestosql.jdbc.$internal.guava.collect.Sets;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 

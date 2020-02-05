@@ -1,7 +1,7 @@
 package app.metatron.discovery.fixture;
 
-import com.facebook.presto.jdbc.internal.guava.base.Charsets;
-import com.facebook.presto.jdbc.internal.guava.io.Resources;
+import io.prestosql.jdbc.$internal.guava.base.Charsets;
+import io.prestosql.jdbc.$internal.guava.io.Resources;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.jdbc.support.JdbcUtils;

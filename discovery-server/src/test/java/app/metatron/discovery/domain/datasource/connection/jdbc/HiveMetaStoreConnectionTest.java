@@ -138,7 +138,7 @@ public class HiveMetaStoreConnectionTest {
   }
 
   @Test
-  public void getSchemaViaThrift() throws TException{
+  public void getSchemaViaThrift() throws TException {
     DataConnection dataConnection = new DataConnection("HIVE");
     dataConnection.setHostname("localhost");
     dataConnection.setUsername("hive");
@@ -170,7 +170,7 @@ public class HiveMetaStoreConnectionTest {
   }
 
   @Test
-  public void getPartitionsViaThrift() throws TException{
+  public void getPartitionsViaThrift() throws TException {
     DataConnection dataConnection = new DataConnection("HIVE");
     dataConnection.setHostname("localhost");
     dataConnection.setUsername("hive");
@@ -185,7 +185,7 @@ public class HiveMetaStoreConnectionTest {
     System.out.println(schemas);
   }
 
-  private HiveMetaStoreClient getHiveMetaStoreClient(String host, String port) throws MetaException{
+  private HiveMetaStoreClient getHiveMetaStoreClient(String host, String port) throws MetaException {
     HiveConf hiveConf = new HiveConf();
     hiveConf.setVar(HiveConf.ConfVars.METASTOREURIS, "thrift://" + host + ":" + port);
     HiveMetaStoreClient hiveMetaStoreClient = new HiveMetaStoreClient(hiveConf);

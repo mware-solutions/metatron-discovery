@@ -88,7 +88,7 @@ export class LNBComponent extends AbstractComponent implements OnInit, OnDestroy
     managementDatasource: false,
     managementMetadata: false,
     // TODO: 추후에 엔진 모니터링 메뉴에 대한 권한이 있는지 검사하는 로직 추가 필요 ( 임시 작업 )
-    managementEngineMonitoring: false,
+    managementEngineMonitoring: true,
     userAdmin: false,
     workspaceAdmin: false,
     lineage: false

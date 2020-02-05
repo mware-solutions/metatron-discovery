@@ -339,7 +339,7 @@ public class PivotResultFormat extends SearchResultFormat {
                 .collect(Collectors.toList());
       }
       // 각 요소별 데이터 초기화
-      Map<String, List> result = com.facebook.presto.jdbc.internal.guava.collect.Maps.newHashMap();
+      Map<String, List> result = io.prestosql.jdbc.$internal.guava.collect.Maps.newHashMap();
       result.put(timeFieldName, Lists.newArrayList());
       for (String parameterName : parameterNames) {
         List<List<Double>> values = Lists.newArrayList();

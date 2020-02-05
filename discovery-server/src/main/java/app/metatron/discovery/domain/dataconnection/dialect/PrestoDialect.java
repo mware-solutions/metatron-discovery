@@ -14,8 +14,7 @@
 
 package app.metatron.discovery.domain.dataconnection.dialect;
 
-import com.facebook.presto.jdbc.PrestoArray;
-
+import io.prestosql.jdbc.PrestoArray;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -99,7 +98,7 @@ public class PrestoDialect implements JdbcDialect {
 
   @Override
   public String getDriverClass(JdbcConnectInformation connectInfo) {
-    return "com.facebook.presto.jdbc.PrestoDriver";
+    return "io.prestosql.jdbc.PrestoDriver";
   }
 
   @Override

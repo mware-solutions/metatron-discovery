@@ -87,11 +87,10 @@
         <docker.image.prefix>metatron</docker.image.prefix>
 
         <!-- plugin versions -->
-        <!--<hive.version>2.3.2</hive.version>-->
-        <hive.version>1.2.1000.2.5.5.0-157</hive.version>
+        <hive.version>2.3.6</hive.version>
 
         <!-- used in dataprep -->
-        <hadoop.version>2.7.2</hadoop.version>
+        <hadoop.version>2.7.3</hadoop.version>
 
         <!-- Metatron Build Version -->
         <metatron.app.version>${project.version}</metatron.app.version>
@@ -702,9 +701,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.facebook.presto</groupId>
+                <groupId>io.prestosql</groupId>
                 <artifactId>presto-jdbc</artifactId>
-                <version>0.152.3</version>
+                <version>329</version>
             </dependency>
 
             <dependency>

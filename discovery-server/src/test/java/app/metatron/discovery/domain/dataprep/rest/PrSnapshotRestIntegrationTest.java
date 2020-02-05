@@ -19,7 +19,7 @@ import static com.jayway.restassured.RestAssured.given;
 import app.metatron.discovery.AbstractRestIntegrationTest;
 import app.metatron.discovery.core.oauth.OAuthRequest;
 import app.metatron.discovery.core.oauth.OAuthTestExecutionListener;
-import com.facebook.presto.jdbc.internal.jackson.core.JsonProcessingException;
+import io.prestosql.jdbc.$internal.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;

@@ -55,7 +55,7 @@ import app.metatron.discovery.domain.dataprep.teddy.exceptions.IllegalColumnName
 import app.metatron.discovery.domain.dataprep.teddy.exceptions.TeddyException;
 import app.metatron.discovery.domain.storage.StorageProperties;
 import app.metatron.discovery.domain.storage.StorageProperties.StageDBConnection;
-import com.facebook.presto.jdbc.internal.guava.collect.Lists;
+import io.prestosql.jdbc.$internal.guava.collect.Lists;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import java.io.IOException;

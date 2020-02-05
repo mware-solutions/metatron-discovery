@@ -14,7 +14,7 @@
 
 package app.metatron.discovery.domain.workspace;
 
-import com.facebook.presto.jdbc.internal.guava.collect.Lists;
+import io.prestosql.jdbc.$internal.guava.collect.Lists;
 import com.querydsl.jpa.JPQLQuery;
 
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;

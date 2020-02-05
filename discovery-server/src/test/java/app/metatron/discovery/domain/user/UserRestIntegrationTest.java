@@ -14,8 +14,8 @@
 
 package app.metatron.discovery.domain.user;
 
-import com.facebook.presto.jdbc.internal.guava.collect.Lists;
-import com.facebook.presto.jdbc.internal.guava.collect.Maps;
+import io.prestosql.jdbc.$internal.guava.collect.Lists;
+import io.prestosql.jdbc.$internal.guava.collect.Maps;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;

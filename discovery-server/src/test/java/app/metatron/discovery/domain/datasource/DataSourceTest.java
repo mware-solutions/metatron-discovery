@@ -17,7 +17,7 @@ package app.metatron.discovery.domain.datasource;
 import app.metatron.discovery.common.datasource.DataType;
 import com.google.common.collect.Sets;
 
-import com.facebook.presto.jdbc.internal.guava.collect.Maps;
+import io.prestosql.jdbc.$internal.guava.collect.Maps;
 
 import org.junit.Test;
 

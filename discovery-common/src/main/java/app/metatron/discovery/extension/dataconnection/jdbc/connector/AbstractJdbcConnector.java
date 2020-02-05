@@ -73,6 +73,7 @@ public abstract class AbstractJdbcConnector implements JdbcConnector{
       Driver driver = getDriver(connectionUrl, driverClassName);
       return driver.connect(connectionUrl, properties);
     } catch (SQLException e){
+      e.printStackTrace();
       throw new JdbcDataConnectionException(JdbcDataConnectionErrorCodes.DATASOURCE_CONNECTION_ERROR,
                                             e.getMessage());
     }

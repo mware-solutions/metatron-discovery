@@ -57,8 +57,8 @@ import app.metatron.discovery.domain.workbook.configurations.widget.shelf.MapVie
 import app.metatron.discovery.query.druid.Query;
 import app.metatron.discovery.query.druid.meta.AnalysisType;
 import app.metatron.discovery.query.druid.queries.*;
-import com.facebook.presto.jdbc.internal.guava.collect.Maps;
-import com.facebook.presto.jdbc.internal.guava.collect.Sets;
+import io.prestosql.jdbc.$internal.guava.collect.Maps;
+import io.prestosql.jdbc.$internal.guava.collect.Sets;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;

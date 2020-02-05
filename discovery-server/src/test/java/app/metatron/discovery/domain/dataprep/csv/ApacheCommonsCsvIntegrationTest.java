@@ -14,7 +14,7 @@
 
 package app.metatron.discovery.domain.dataprep.csv;
 
-import com.facebook.presto.jdbc.internal.jackson.core.JsonProcessingException;
+import io.prestosql.jdbc.$internal.jackson.core.JsonProcessingException;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;

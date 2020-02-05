@@ -132,7 +132,7 @@ public class DataSourceValidator {
       }
       metaDataSource = dataSourceRepository.findByIdIncludeConnection(temporaryDataSource.getDataSourceId());
     } else {
-      metaDataSource = dataSourceRepository.findByEngineName(dataSource.getEngineName());
+      metaDataSource = dataSourceRepository.findByEngineName(dataSource.getName());
     }
 
     if (metaDataSource == null) {
