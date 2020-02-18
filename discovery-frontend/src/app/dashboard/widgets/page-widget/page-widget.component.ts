@@ -74,7 +74,6 @@ import {Pivot} from "../../../domain/workbook/configurations/pivot";
 import {MapChartComponent} from '../../../common/component/chart/type/map-chart/map-chart.component';
 import {Shelf, ShelfLayers} from "../../../domain/workbook/configurations/shelf/shelf";
 import {CommonConstant} from "../../../common/constant/common.constant";
-import {clone} from "@turf/turf";
 
 declare let $;
 declare let moment;
@@ -1568,17 +1567,26 @@ export class PageWidgetComponent extends AbstractWidgetComponent implements OnIn
       this.chart['setQuery'] = this.query;
     }
 
+    const cloneGlobalFilters = _.cloneDeep( globalFilters );
+    if( cloneGlobalFilters ) {
+      cloneGlobalFilters.forEach( gf => {
+        delete gf['clzField'];
+        delete gf['fieldObj'];
+      });
+    }
+
     // 차트 클리어 여부 판단
     const isClear: boolean = (this.chart && 'function' === typeof this.chart.clear
       && (this._currentSelectionFilterString !== JSON.stringify(currentSelectionFilters)
-        || this._currentGlobalFilterString !== JSON.stringify(globalFilters)));
+        || this._currentGlobalFilterString !== JSON.stringify(cloneGlobalFilters)));
 
     // 필터 정보 저장
     this._currentSelectionFilters = currentSelectionFilters;
     this._currentSelectionFilterString = JSON.stringify(currentSelectionFilters);
-    this._currentGlobalFilterString = JSON.stringify(globalFilters);
+    this._currentGlobalFilterString = JSON.stringify(cloneGlobalFilters);
+    const disableCache: boolean = this.isRealTimeWidget;
 
-    this.datasourceService.searchQuery(cloneQuery).then((data) => {
+    this.datasourceService.searchQuery(cloneQuery, disableCache).then((data) => {
 
       if (this.resultData && this.isRealTimeWidget && cloneQuery.pivot.columns.some(item => 'TIMESTAMP' === item.subRole)) {
 
@@ -1589,11 +1597,16 @@ export class PageWidgetComponent extends AbstractWidgetComponent implements OnIn
         //   data.columns[0].value.push(Math.floor((Math.random() * 12) - 9));
         // }
 
-        let colData = data.columns[0].value;
-        let newData = data.rows.map((rowItem, idx) => {
+        const columnSize = data.columns.length;
+        let newData = data.rows.map((rowItem, rowIndex) => {
+          let columnValues = [];
+          for(let columnIdx = 0; columnIdx < columnSize; ++columnIdx){
+            let columnValue = data.columns[columnIdx].value;
+            columnValues.push(columnValue[rowIndex]);
+          }
           return {
             row: rowItem,
-            col: colData[idx]
+            col: columnValues
           };
         }).sort((a, b) => {
           return moment(a.row).isBefore(moment(b.row));
@@ -1601,10 +1614,11 @@ export class PageWidgetComponent extends AbstractWidgetComponent implements OnIn
         newData.forEach(newItem => {
           if (!this.resultData.data.rows.some(row => row === newItem.row)) {
             this.resultData.data.rows.push(newItem.row);
-            this.resultData.data.columns[0].value.push(newItem.col);
+            for(let columnIdx = 0; columnIdx < columnSize; ++columnIdx){
+              this.resultData.data.columns[columnIdx].value.push(newItem.col[columnIdx]);
+            }
           }
         });
-        // console.info( '>>>>>>', newData );
       } else {
         this.resultData = {
           data,
