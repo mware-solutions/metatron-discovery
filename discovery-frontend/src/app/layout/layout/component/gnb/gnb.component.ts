@@ -26,6 +26,7 @@ import {EventBroadcaster} from "../../../../common/event/event.broadcaster";
 @Component({
   selector: 'app-gnb',
   templateUrl: './gnb.component.html',
+  styleUrls: ['./gnb.component.css']
 })
 export class GnbComponent extends AbstractComponent implements OnInit, OnDestroy {
   /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

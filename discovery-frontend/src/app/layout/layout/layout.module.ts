@@ -34,6 +34,7 @@ import {StagedbEnabledGuard} from '../../common/gaurd/stagedb-enabled.guard';
 import {StorageService} from '../../data-storage/service/storage.service';
 import {ConnectionListGuard} from "../../common/gaurd/connection-list.guard";
 import {LNBLogoComponent} from "./component/logo/lnb-logo.component";
+import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
 
 const layoutRoutes: Routes = [
   {
@@ -88,7 +89,8 @@ const layoutRoutes: Routes = [
     WorkspaceShareModule,
     //TODO common 으로 올릴것인지 확인
     FileModule,
-    RouterModule.forChild(layoutRoutes)
+    RouterModule.forChild(layoutRoutes),
+    NgZorroAntdModule,
   ],
   declarations: [
     LayoutComponent,

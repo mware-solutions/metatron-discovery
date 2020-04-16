@@ -2647,12 +2647,9 @@ ul.ddp-list-form2 li:hover .ddp-btn-control {display:block;}
 /***********************************************************************************************************
 	PAGE : 워크스페이스 리스트 (block)
 ************************************************************************************************************/
-.ddp-ui-space-contents {position:relative; padding:133px 80px 60px 80px; box-sizing:border-box;}
-.ddp-ui-top-info {position:fixed; left:0; right:0; top:54px; height:132px; padding:0 80px; border-bottom:1px solid #d0d0d3; z-index:60;
+.ddp-ui-space-contents {position:relative; padding:133px 0 60px 0; box-sizing:border-box;}
+.ddp-ui-top-info {position:fixed; left:0; right:0; top:85px; height:60px; padding:0 0; z-index:60;
   background-color: #fff; /* layer fill content */
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,.15); /* drop shadow */
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.15); /* drop shadow */
-  box-shadow: 0 1px 3px rgba(0,0,0,.15); /* drop shadow */
 }
 .ddp-ui-top-info .ddp-ui-title {position:relative; padding:35px 200px 0 0;}
 .ddp-ui-top-info .ddp-ui-title .ddp-ui-title-in {display:inline-block; position:relative; max-width:100%; padding-right:85px; box-sizing:border-box; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
@@ -2700,10 +2697,11 @@ ul.ddp-list-form2 li:hover .ddp-btn-control {display:block;}
 .ddp-ui-top-info .ddp-wrap-info-summary .ddp-data-info-right .ddp-ui-more {float:left; margin-left:5px;  margin-right:-10px; position:relative; z-index:60;}
 .ddp-ui-top-info .ddp-wrap-info-summary .ddp-data-info-right .ddp-ui-more a.ddp-icon-more:before {transform:rotate(90deg)}
 .ddp-ui-top-info .ddp-wrap-info-summary .ddp-data-info-right .ddp-ui-more.ddp-selected .ddp-icon-more:before {background-position:0 -4px;}
-.ddp-ui-top-info .ddp-wrap-info-summary .ddp-data-info-right .ddp-ui-more .ddp-wrap-popup2 {display:none; position:absolute; top:25px; right:0;}
-.ddp-ui-top-info .ddp-wrap-info-summary .ddp-data-info-right .ddp-ui-more.ddp-selected .ddp-wrap-popup2 {display:block;}
+.ddp-ui-top-info .ddp-wrap-info-summary .ddp-ui-more .ddp-wrap-popup2 {display:none; position:absolute; top:25px; right:0;}
 
-.ddp-ui-top-info .ddp-wrap-info-summary .ddp-data-info-right .ddp-ui-more.ddp-selected:hover .ddp-ui-tooltip-info {display:none;}
+.ddp-ui-top-info .ddp-wrap-info-summary .ddp-ui-more.ddp-selected .ddp-wrap-popup2 {display:block;}
+
+.ddp-ui-top-info .ddp-wrap-info-summary .ddp-ui-more.ddp-selected:hover .ddp-ui-tooltip-info {display:none;}
 .ddp-wrap-folder {margin:0 -8px 9px -8px;}
 .ddp-box-folder {float:left; position:relative; margin:3px 8px; padding:8px 16px 8px 43px; width:308px; height:44px; border-radius:3px; border:1px solid #ddd; font-size:0; background-color:#fff; box-sizing:border-box; cursor: pointer;}
 .ddp-box-folder.ddp-selected:before  {display:inline-block; content:''; position:absolute; top:-1px; left:-1px; right:-1px; bottom:-1px; border:1px solid #90969f;}
@@ -5478,9 +5476,7 @@ table.ddp-table-order tr td {padding:13px 13px; border-top:1px solid #e7e7ea; fo
 .ddp-top-flow .ddp-ui-buttons {position:absolute; top:50%; right:12px; margin-top:-15px;}
 .ddp-top-flow .ddp-ui-buttons a[class*="ddp-btn-"] {margin-right:5px;}
 
-/*.ddp-top-flow .ddp-ui-more.ddp-selected .ddp-icon-more:before {background-position:left -12px}*/
-/*.ddp-top-flow .ddp-ui-more .ddp-wrap-popup2 {display:none; position:absolute; top:100%; right:-10px; margin-top:10px; width:250px;}*/
-/*.ddp-top-flow .ddp-ui-more.ddp-selected .ddp-wrap-popup2 {display:block;}*/
+
 em.ddp-icon-shot {display:inline-block; width:16px; height:11px; margin-right:7px; background:url(../../images/icon_shot.png) no-repeat; vertical-align:middle;}
 a:hover em.ddp-icon-shot {background-position:-17px top;}
 
@@ -10976,3 +10972,6 @@ table.ddp-table-detail tbody tr td .ddp-txt-logical [class*="ddp-icon-type-"]{po
 .ddp-wrap-table-detail .ddp-table-solid-bg {width:50%;}
 table.ddp-table-solid-bg tr th {padding:3px 15px;color:#90969f; font-weight:normal; font-size:13px; background-color:#f6f6f7; text-align:left;}
 table.ddp-table-solid-bg tr td {padding:5px 15px; font-size:13px; color:#4b515b;}
+
+
+.ddp-layout-header .blabla.ddp-selected .ddp-ui-sub-myinfo {display:block;}

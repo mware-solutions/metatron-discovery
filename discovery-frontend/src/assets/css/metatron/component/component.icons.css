@@ -596,10 +596,6 @@ a.ddp-icon-board-edit:hover:before {background-position:-21px -19px;}
 
 .ddp-icon-drop-cluster {width:13px; height:12px; background-position:-251px top;}
 .ddp-icon-drop-guide {width:11px; height:13px; background-position:-265px top;}
-a.ddp-icon-more {position:relative; display:inline-block; padding:8px 4px; cursor:pointer; font-size:0;}
-
-a.ddp-icon-more:before {display:inline-block; content:''; width:15px; height:3px; background:url(../../../images/icon_more.png) no-repeat; transform:rotate(90deg);}
-a.ddp-icon-more:hover:before {background-position:0 -4px;}
 
 
 em.ddp-icon-searchview2  {display:inline-block; content:''; width:14px; height:14px; background:url(../../../images/icon_searchview.png) no-repeat; vertical-align: middle; background-position:-15px 0;}

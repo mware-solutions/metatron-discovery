@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects" : {
+  "projects": {
     "app": {
       "root": "",
       "sourceRoot": "src",
@@ -10,10 +10,10 @@
       "prefix": "app",
       "schematics": {},
       "architect": {
-        "build" : {
+        "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath" : "target/classes/resource",
+            "outputPath": "target/classes/resource",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -22,10 +22,19 @@
               "src/assets",
               "src/favicon.ico",
               {
-                "glob": "jquery.min.js", "input": "node_modules/jquery/dist/", "output": "assets/js/"
+                "glob": "jquery.min.js",
+                "input": "node_modules/jquery/dist/",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "node_modules/codemirror/lib/codemirror.css",
               "node_modules/codemirror/addon/hint/show-hint.css",
               "node_modules/codemirror/addon/hint/show-hint.js",
@@ -146,7 +155,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
-            "styles": [],
+            "styles": [
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+            ],
             "assets": [
               {
                 "glob": "**/*",

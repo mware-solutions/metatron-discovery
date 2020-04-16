@@ -20,10 +20,4 @@
 @import url('theme_dark/component/component.filtering.list.css'); /* ListFiltering */
 @import url('theme_dark/component/component.css');
 
-@import url('theme_dark/layout.css');
 
-
-/****************************************************************************
-  metatron dark
-*************************************************************************/
-@import url('theme_dark/metatron/page.css');
