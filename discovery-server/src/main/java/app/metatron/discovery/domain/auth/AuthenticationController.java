@@ -42,7 +42,11 @@ import org.springframework.security.saml.SAMLCredential;
 import org.springframework.security.saml.metadata.MetadataManager;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,6 +56,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +66,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import app.metatron.discovery.common.GlobalObjectMapper;
+import app.metatron.discovery.common.exception.BadRequestException;
 import app.metatron.discovery.common.exception.MetatronException;
 import app.metatron.discovery.common.oauth.CookieManager;
 import app.metatron.discovery.common.saml.SAMLAuthenticationInfo;
@@ -206,15 +213,22 @@ public class AuthenticationController {
     return ResponseEntity.noContent().build();
   }
 
-  @RequestMapping(value = "/oauth/{clientId}", method = RequestMethod.GET)
+  @GetMapping(value = "/oauth/{clientId}")
   public ResponseEntity<?> getClient(@PathVariable("clientId") String clientId) {
     return ResponseEntity.ok(jdbcClientDetailsService.loadClientByClientId(clientId));
   }
 
   @RequestMapping(value = "/oauth/generate")
-  public ResponseEntity<?> generateClient(@RequestParam("clientName") String clientName,
-                                          @RequestParam("redirectUri") String redirectUri,
+  public ResponseEntity<?> generateClient(@RequestBody OauthClientInformation oauthClientInformation,
                                           HttpServletRequest request) {
+
+    if (StringUtils.isEmpty(oauthClientInformation.getClientName())) {
+      throw new BadRequestException("clientName is empty");
+    }
+
+    if (StringUtils.isEmpty(oauthClientInformation.getRedirectUri())) {
+      throw new BadRequestException("redirectUri is empty");
+    }
 
     String userName = "UNKNOWN";
     Principal principal = request.getUserPrincipal();
@@ -230,32 +244,64 @@ public class AuthenticationController {
             "authorization_code,implicit,password,refresh_token,client_credentials", "ROLE_CLIENT", "");
     baseClientDetails.setClientSecret(clientSecret);
 
-    Set redirectUris = org.springframework.util.StringUtils.commaDelimitedListToSet(redirectUri);
+    Set redirectUris = org.springframework.util.StringUtils.commaDelimitedListToSet(oauthClientInformation.getRedirectUri());
     baseClientDetails.setRegisteredRedirectUri(redirectUris);
 
     Set autoApproveScopeList = org.springframework.util.StringUtils.commaDelimitedListToSet("read,write");
     baseClientDetails.setAutoApproveScopes(autoApproveScopeList);
 
     Map<String, String> additionalInformation = new HashMap<String, String>();
-    additionalInformation.put("clientName", clientName);
+    makeAdditionalInformation(oauthClientInformation, additionalInformation);
+
     additionalInformation.put("userName", userName);
     additionalInformation.put("dateTime", DateTime.now(DateTimeZone.UTC).toString());
     baseClientDetails.setAdditionalInformation(additionalInformation);
 
     jdbcClientDetailsService.addClientDetails(baseClientDetails);
+    LOGGER.info("Add ClientId {}", GlobalObjectMapper.writeValueAsString(baseClientDetails));
 
     Map<String, String> result = new HashMap<String, String>();
-    try{
-      result.put("clientName", clientName);
+    try {
+      result.put("additionalInformation", GlobalObjectMapper.writeValueAsString(additionalInformation));
       result.put("clientId", clientId);
       result.put("clientSecret", clientSecret);
       String token = clientId + ":" + clientSecret;
       result.put("basicHeader", new String(Base64.encode(token.getBytes("UTF-8")), "UTF-8"));
-    }catch (Exception e){
-      e.printStackTrace();
+    } catch (Exception e){
+      throw new MetatronException(e);
     }
 
     return ResponseEntity.ok(result);
+  }
+  @PostMapping(value = "/oauth/{clientId}")
+  public ResponseEntity<?> updateClient(@PathVariable("clientId") String clientId,
+                                        @RequestBody OauthClientInformation oauthClientInformation,
+                                          HttpServletRequest request) {
+    BaseClientDetails baseClientDetails = (BaseClientDetails)jdbcClientDetailsService.loadClientByClientId(clientId);
+    Map additionalInformation = new HashMap<String, String>();
+    if (baseClientDetails.getAdditionalInformation() != null) {
+      additionalInformation = new HashMap<>(baseClientDetails.getAdditionalInformation());
+    }
+    makeAdditionalInformation(oauthClientInformation, additionalInformation);
+    baseClientDetails.setAdditionalInformation(additionalInformation);
+    if (StringUtils.isNotEmpty(oauthClientInformation.getRedirectUri())) {
+      Set redirectUris = org.springframework.util.StringUtils.commaDelimitedListToSet(oauthClientInformation.getRedirectUri());
+      baseClientDetails.setRegisteredRedirectUri(redirectUris);
+    }
+    if (StringUtils.isNotEmpty(oauthClientInformation.getAutoApprove())) {
+      Set autoApproveScopeList = org.springframework.util.StringUtils.commaDelimitedListToSet(oauthClientInformation.getAutoApprove());
+      baseClientDetails.setAutoApproveScopes(autoApproveScopeList);
+    }
+    jdbcClientDetailsService.updateClientDetails(baseClientDetails);
+    LOGGER.info("Update ClientId {}", GlobalObjectMapper.writeValueAsString(baseClientDetails));
+    return ResponseEntity.noContent().build();
+  }
+
+  @DeleteMapping(value = "/oauth/{clientId}")
+  public ResponseEntity<?> deleteClient(@PathVariable("clientId") String clientId) {
+    jdbcClientDetailsService.removeClientDetails(clientId);
+    LOGGER.info("Delete ClientId {}", clientId);
+    return ResponseEntity.noContent().build();
   }
 
   @RequestMapping(value = "/oauth/client/login")
@@ -267,12 +313,33 @@ public class AuthenticationController {
       String clientSecret = clientDetails.getClientSecret();
       String token = clientId+":"+clientSecret;
       String basicHeader = new String(Base64.encode(token.getBytes("UTF-8")), "UTF-8");
-      String clientName = String.valueOf(clientDetails.getAdditionalInformation()
-                                                      .getOrDefault("clientName", "metatron Discovery"));
-      LOGGER.info("clientName {}", clientName);
-      LOGGER.info("basicHeader {}", basicHeader);
+      Map additionalInformation = clientDetails.getAdditionalInformation();
+      String clientName = String.valueOf(additionalInformation
+                                             .getOrDefault("clientName", "metatron Discovery"));
+      String faviconPath = String.valueOf(additionalInformation
+                                             .getOrDefault("faviconPath", ""));
+      String logoFilePath = String.valueOf(additionalInformation
+                                               .getOrDefault("logoFilePath", ""));
+      String backgroundFilePath = String.valueOf(additionalInformation
+                                                     .getOrDefault("backgroundFilePath", ""));
+      String smallLogoFilePath = String.valueOf(additionalInformation
+                                                    .getOrDefault("smallLogoFilePath", ""));
+      String smallLogoDesc = String.valueOf(additionalInformation
+                                                .getOrDefault("smallLogoDesc", ""));
+      String copyrightHtml = String.valueOf(additionalInformation
+                                                .getOrDefault("copyrightHtml"
+                                                                 , "Copyright © SK Telecom Co., Ltd. All rights reserved."));
+      LOGGER.info("Login ClientId {}, basicHeader {}", clientId, basicHeader);
+      LOGGER.debug("additionalInformation {}",
+                   GlobalObjectMapper.writeValueAsString(additionalInformation));
       mav.addObject("basicHeader", "Basic "+basicHeader);
       mav.addObject("clientName", clientName);
+      mav.addObject("faviconPath", faviconPath);
+      mav.addObject("logoFilePath", logoFilePath);
+      mav.addObject("backgroundFilePath", backgroundFilePath);
+      mav.addObject("smallLogoFilePath", smallLogoFilePath);
+      mav.addObject("smallLogoDesc", smallLogoDesc);
+      mav.addObject("copyrightHtml", copyrightHtml);
     } catch (Exception e) {
       throw new MetatronException(e);
     }
@@ -307,7 +374,30 @@ public class AuthenticationController {
     } catch (Exception e) {
       throw new MetatronException(e);
     }
+  }
 
+  private void makeAdditionalInformation(OauthClientInformation oauthClientInformation, Map additionalInformation) {
+    if (StringUtils.isNotEmpty(oauthClientInformation.getClientName())) {
+      additionalInformation.put("clientName", oauthClientInformation.getClientName());
+    }
+    if (StringUtils.isNotEmpty(oauthClientInformation.getFaviconPath())) {
+      additionalInformation.put("faviconPath", oauthClientInformation.getFaviconPath());
+    }
+    if (StringUtils.isNotEmpty(oauthClientInformation.getLogoFilePath())) {
+      additionalInformation.put("logoFilePath", oauthClientInformation.getLogoFilePath());
+    }
+    if (StringUtils.isNotEmpty(oauthClientInformation.getBackgroundFilePath())) {
+      additionalInformation.put("backgroundFilePath", oauthClientInformation.getBackgroundFilePath());
+    }
+    if (StringUtils.isNotEmpty(oauthClientInformation.getSmallLogoFilePath())) {
+      additionalInformation.put("smallLogoFilePath", oauthClientInformation.getSmallLogoFilePath());
+    }
+    if (StringUtils.isNotEmpty(oauthClientInformation.getSmallLogoDesc())) {
+      additionalInformation.put("smallLogoDesc", oauthClientInformation.getSmallLogoDesc());
+    }
+    if (StringUtils.isNotEmpty(oauthClientInformation.getCopyrightHtml())) {
+      additionalInformation.put("copyrightHtml", oauthClientInformation.getCopyrightHtml());
+    }
   }
 
 }

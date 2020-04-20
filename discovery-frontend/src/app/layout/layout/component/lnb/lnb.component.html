@@ -119,7 +119,7 @@
     </li>
     <!-- // EXPLOREDATA -->
 
-    <!-- MANAGEMENT -->
+    <!-- MANAGEMENTMANAGEMENT -->
     <li class="col-3" *ngIf="permission.management" [ngClass]="{'ddp-selected': lnbManager.management.fold == false}" >
       <div class="ddp-wrap-listmenu">
         <!-- tab title-->
@@ -226,6 +226,27 @@
                 </li>
                 <li>
                   <a href="javascript:" (click)="move('management/monitoring/audit')">{{'msg.comm.menu.manage.monitoring.audit' | translate}}</a>
+                </li>
+              </ul>
+            </li>
+            <li *ngIf="permission.managementEngineMonitoring" [ngClass]="{'ddp-selected': lnbManager.management.engineMonitoring.fold == false}">
+              <a href="javascript:" (click)="mgmtMenuClickListener('ENGINE_MONITORING')">
+                <em class="ddp-icon-dot"></em>
+                {{'msg.comm.menu.manage.engine.monitoring' | translate}}
+                <span class="ddp-tag-beta">Beta</span>
+              </a>
+              <ul class="ddp-list-sublnb-2depth">
+                <li>
+                  <a href="javascript:" (click)="move('management/engine-monitoring/overview', { queryParams: { keyword: '', status: ENGINE_OVERVIEW_MONITORING_STATUS.ALL } })">{{'msg.comm.menu.manage.engine.monitoring.overview' | translate}}</a>
+                </li>
+                <li>
+                  <a href="javascript:" (click)="move('management/engine-monitoring/ingestion')">{{'msg.comm.menu.manage.engine.monitoring.ingestion' | translate}}</a>
+                </li>
+                <li>
+                  <a href="javascript:" (click)="move('management/engine-monitoring/query')">{{'msg.comm.menu.manage.engine.monitoring.query' | translate}}</a>
+                </li>
+                <li>
+                  <a href="javascript:" (click)="move('management/engine-monitoring/datasource')">{{'msg.comm.menu.manage.storage.ds' | translate}}</a>
                 </li>
               </ul>
             </li>

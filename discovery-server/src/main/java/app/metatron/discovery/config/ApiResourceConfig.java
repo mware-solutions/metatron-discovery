@@ -26,6 +26,7 @@ import com.fasterxml.jackson.datatype.joda.JodaModule;
 import de.codecentric.boot.admin.jackson.ApplicationDeserializer;
 import de.codecentric.boot.admin.model.Application;
 
+import org.apache.commons.lang3.StringUtils;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.ApplicationHome;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.context.annotation.Configuration;
@@ -176,6 +178,9 @@ public class ApiResourceConfig extends WebMvcConfigurerAdapter {
   @Value("${polaris.resources.cache.cacheControl.max-age: 604800}")
   private Integer cacheControlMaxAge;
 
+  @Value("${polaris.static-path:}")
+  private String staticPath;
+
   /**
    * Maps all AngularJS routes to index so that they work with direct linking.
    */
@@ -227,6 +232,13 @@ public class ApiResourceConfig extends WebMvcConfigurerAdapter {
             .addResourceLocations("classpath:resource/assets/");
     registry.addResourceHandler("/webjars/**")
             .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+    ApplicationHome home = new ApplicationHome(MetatronDiscoveryApplication.class);
+    // LOGGER.info("Application Home : " + home.getDir().getAbsolutePath());
+    // LOGGER.info("staticPath {}", StringUtils.defaultIfBlank(staticPath, "file:" + home.getDir().getAbsolutePath() + "/static/"));
+
+    registry.addResourceHandler("/static/**")
+            .addResourceLocations("file:" + StringUtils.defaultIfBlank(staticPath, home.getDir().getAbsolutePath() + "/static/"));
 
     //add resource for extension
     // /plugins/plugin-id/**  -->  file:/plugin-path/classes/
