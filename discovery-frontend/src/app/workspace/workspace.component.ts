@@ -61,7 +61,7 @@ const DEFAULT_VIEW_TYPE = 'CARD';
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
-  styleUrls: ['./workspace.component.css']
+  styleUrls: ['./workspace.component.scss']
 })
 export class WorkspaceComponent extends AbstractComponent implements OnInit, OnDestroy {
 

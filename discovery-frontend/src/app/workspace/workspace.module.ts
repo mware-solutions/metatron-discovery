@@ -38,7 +38,8 @@ import { PermissionService } from '../user/service/permission.service';
 import { ChangeOwnerWorkspaceComponent } from './component/management/change-owner-workspace.component';
 import { WorkspacePermissionSchemaSetComponent } from './component/permission/workspace-permission-schema-set.component';
 import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
-import { WorkspaceSummaryComponent} from './component/workspace.summary.component'
+import { WorkspaceSummaryComponent} from './component/workspace.summary.component';
+import { WorkspaceFooterComponent} from './component/workspace.footer.component'
 
 const workspaceRoutes: Routes = [
   { path: '', component: WorkspaceComponent },
@@ -59,6 +60,7 @@ const workspaceRoutes: Routes = [
   declarations: [
     WorkspaceComponent,
     WorkspaceSummaryComponent,
+    WorkspaceFooterComponent,
     CreateWorkbookComponent,
     SharedMemberComponent,
     SharedMemberManageComponent,

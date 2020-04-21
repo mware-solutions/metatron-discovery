@@ -249,10 +249,9 @@
   <div *ngIf="workspace.id" class="ddp-ui-space-option ddp-clear">
 
     <!-- nodata -->
-    <div *ngIf="!getList() || 0 === getList().length"
-         class="ddp-ui-datanone">
-      <div class="ddp-view-datanone">
-        <em class="ddp-bg-img"></em>
+    <div *ngIf="!getList() || 0 === getList().length"  class=" row no-gutters ddp-ui-datanone">
+      <div class="ddp-view-datanone col-6 mx-auto" >
+        <div class="ddp-bg-img"></div>
         <span class="ddp-txt-datanon">{{'msg.space.ui.no.data' | translate}}</span>
       </div>
     </div>
@@ -628,126 +627,137 @@
   <!-- //list 타입 -->
 
   <!-- space bottom -->
-  <div class="ddp-ui-space-bottom">
-    <!-- left -->
-    <div class="ddp-bottom-left" *ngIf="permissionChecker && permissionChecker.isManageWorkspace()">
-      <!-- 전체선택 -->
-      <div class="ddp-ui-link">
+  <div class="ddp-ui-space-bottom row no-gutters mx-5 py-3">
+
+    <div class="col-" *ngIf="permissionChecker && permissionChecker.isManageWorkspace()">
+      <div class="row no-gutters">
+      <!-- Select all -->
+      <div class="ddp-ui-link col- border-right pr-2">
         <label class="ddp-label-checkbox ddp-checkboxtype" >
           <input type="checkbox" [checked]="isAllChecked" (click)="checkAllEvent()"/>
           <i class="ddp-icon-checkbox"></i>
           <span class="ddp-txt-checkbox">{{'msg.comm.ui.list.sel.all' | translate}}</span>
         </label>
       </div>
-      <!-- // 전체선택 -->
-      <!-- Clone Workbook -->
-      <div class="ddp-ui-link" [ngClass]="{'ddp-disabled' : checkBookCopyAvailable()}" (click)="cloneWorkbooks()">
-        <a draggable="false" href="javascript:">
-          <em class="ddp-icon-select-clone"></em>
-          {{'msg.space.ui.workbook.copy' | translate}}
+      <!-- Clone workbook -->
+      <div class="ddp-ui-link col- border-right" [ngClass]="{'ddp-disabled' : checkBookCopyAvailable()}" (click)="cloneWorkbooks()">
+        <a draggable="false" href="javascript:" class="d-flex">
+          <i nz-icon type="copy" theme="outline" class="pr-2"></i>
+          <span>{{'msg.space.ui.workbook.copy' | translate}}</span>
         </a>
       </div>
-      <!-- // Clone Workbook -->
-      <!-- Move Workbook -->
-      <div class="ddp-ui-link"
-           [ngClass]="{'ddp-selected' : moveSelectionFl, 'ddp-disabled' : isDisableMoveContent }"
-           (click)="openMoveContents()" (clickOutside)="moveSelectionFl=false">
-        <a draggable="false" href="javascript:">
-          <em class="ddp-icon-select-move"></em>
-          {{'msg.space.ui.sel.mov' | translate}}
-        </a>
 
-        <!-- popup -->
-        <div class="ddp-box-popup2">
-          <!-- Layer Title - move Workspace-->
-          <div *ngIf="isCheckedWorkbook && !moveCandidateLoc" class="ddp-box-title">{{'msg.comm.ui.list.workspace' | translate}}</div>
-          <a href="javascript:"
-             (click)="selectTarget($event, moveCandidateLoc.id, 'FOLDER')" class="ddp-link-space"
-             *ngIf="isCheckedWorkbook && moveCandidateLoc">
-            <em (click)="selectTargetLocation($event, moveCandidateLoc, true);" class="ddp-btn-back"></em>{{moveCandidateLoc.name}}
+      <!-- Move Selection -->
+      <div class="col- border-right px-2">
+        <div class="ddp-ui-link"
+             [ngClass]="{'ddp-selected' : moveSelectionFl, 'ddp-disabled' : isDisableMoveContent }"
+             (click)="openMoveContents()" (clickOutside)="moveSelectionFl=false">
+          <a draggable="false" href="javascript:" class="d-flex">
+            <i nz-icon type="diff" theme="outline" class="pr-2"></i>
+            <span>{{'msg.space.ui.sel.mov' | translate}}</span>
           </a>
-          <!-- // Layer Title - move Workspace-->
-          <!-- Layer Title - move other -->
-          <a href="javascript:"
-             (click)="selectTarget($event, 'ROOT', 'FOLDER' )"
-             class="ddp-link-space" [ngClass]="{'ddp-selected' : moveTargetFolderId === 'ROOT'}"
-             *ngIf="!isCheckedWorkbook && moveCandidateLoc && !moveCandidateLoc.hierarchies">
-            <em class="ddp-icon-user"></em>{{moveCandidateLoc.name}}
-          </a>
-          <a href="javascript:"
-             (click)="selectTarget($event, moveCandidateLoc.id, 'FOLDER')"
-             class="ddp-link-space" [ngClass]="{'ddp-selected' : moveTargetFolderId === moveCandidateLoc.id}"
-             *ngIf="!isCheckedWorkbook && moveCandidateLoc && moveCandidateLoc.hierarchies">
-            <em (click)="selectTargetLocation($event, moveCandidateLoc, true);" class="ddp-btn-back"></em>{{moveCandidateLoc.name}}
-          </a>
-          <!-- // Layer Title - move other -->
-          <!-- Layer List - Workspace -->
-          <ul class="ddp-list-folder" *ngIf="importAvailWorkspaces && !moveCandidateLoc" >
-            <li *ngFor="let wsItem of importAvailWorkspaces"
-                (click)="selectTarget($event, wsItem.id, 'WORKSPACE')"
-                [class.ddp-selected]="moveTargetWorkspaceId === wsItem.id">
-              <em [ngClass]="{'ddp-icon-user' : 'PRIVATE' === wsItem.publicType.toString(),
+          <!-- popup -->
+          <div class="ddp-box-popup2">
+            <!-- Layer Title - move Workspace-->
+            <div *ngIf="isCheckedWorkbook && !moveCandidateLoc" class="ddp-box-title">{{'msg.comm.ui.list.workspace' | translate}}</div>
+            <a href="javascript:"
+               (click)="selectTarget($event, moveCandidateLoc.id, 'FOLDER')" class="ddp-link-space"
+               *ngIf="isCheckedWorkbook && moveCandidateLoc">
+              <em (click)="selectTargetLocation($event, moveCandidateLoc, true);" class="ddp-btn-back"></em>{{moveCandidateLoc.name}}
+            </a>
+            <!-- // Layer Title - move Workspace-->
+            <!-- Layer Title - move other -->
+            <a href="javascript:"
+               (click)="selectTarget($event, 'ROOT', 'FOLDER' )"
+               class="ddp-link-space" [ngClass]="{'ddp-selected' : moveTargetFolderId === 'ROOT'}"
+               *ngIf="!isCheckedWorkbook && moveCandidateLoc && !moveCandidateLoc.hierarchies">
+              <em class="ddp-icon-user"></em>{{moveCandidateLoc.name}}
+            </a>
+            <a href="javascript:"
+               (click)="selectTarget($event, moveCandidateLoc.id, 'FOLDER')"
+               class="ddp-link-space" [ngClass]="{'ddp-selected' : moveTargetFolderId === moveCandidateLoc.id}"
+               *ngIf="!isCheckedWorkbook && moveCandidateLoc && moveCandidateLoc.hierarchies">
+              <em (click)="selectTargetLocation($event, moveCandidateLoc, true);" class="ddp-btn-back"></em>{{moveCandidateLoc.name}}
+            </a>
+            <!-- // Layer Title - move other -->
+            <!-- Layer List - Workspace -->
+            <ul class="ddp-list-folder" *ngIf="importAvailWorkspaces && !moveCandidateLoc" >
+              <li *ngFor="let wsItem of importAvailWorkspaces"
+                  (click)="selectTarget($event, wsItem.id, 'WORKSPACE')"
+                  [class.ddp-selected]="moveTargetWorkspaceId === wsItem.id">
+                <em [ngClass]="{'ddp-icon-user' : 'PRIVATE' === wsItem.publicType.toString(),
                               'ddp-icon-shape' : 'SHARED' === wsItem.publicType.toString()}"></em>
-              <span class="ddp-txt-name">{{wsItem.name}}</span>
-              <span class="ddp-btn-view" (click)="selectTargetLocation($event, wsItem)"></span>
-            </li>
-          </ul>
-          <!-- // Layer List - Workspace -->
-          <!-- Layer List - Folder -->
-          <ul class="ddp-list-folder" *ngIf="moveCandidateLoc">
-            <li *ngFor="let content of moveCandidateLoc.books | baseFilter : ['type','folder']"
-                (click)="selectTarget($event, content.id, 'FOLDER')"
-                [ngClass]="{
+                <span class="ddp-txt-name">{{wsItem.name}}</span>
+                <span class="ddp-btn-view" (click)="selectTargetLocation($event, wsItem)"></span>
+              </li>
+            </ul>
+            <!-- // Layer List - Workspace -->
+            <!-- Layer List - Folder -->
+            <ul class="ddp-list-folder" *ngIf="moveCandidateLoc">
+              <li *ngFor="let content of moveCandidateLoc.books | baseFilter : ['type','folder']"
+                  (click)="selectTarget($event, content.id, 'FOLDER')"
+                  [ngClass]="{
                   'ddp-selected' : moveTargetFolderId === content.id,
                   'ddp-disabled' : isDisableMove( content.id )
                 }" >
-              <em class="ddp-icon-folder2"></em>
-              <span class="ddp-txt-name">{{content.name}}</span>
-              <span class="ddp-btn-view" (click)="selectTargetLocation($event, content);"></span>
-            </li>
-          </ul>
-          <div *ngIf="importAvailWorkspaces && !moveCandidateLoc && pageAvailableSpaces.number < pageAvailableSpaces.totalPages -1 "
-               style="position: absolute;bottom: 50px;left: 0;right: 0;text-align: center;">
-            <a href="javascript:" class="ddp-btn-moretype"
-               (click)="$event.stopPropagation();loadWorkspaceImportAvailable(pageAvailableSpaces.number + 1)">More</a>
+                <em class="ddp-icon-folder2"></em>
+                <span class="ddp-txt-name">{{content.name}}</span>
+                <span class="ddp-btn-view" (click)="selectTargetLocation($event, content);"></span>
+              </li>
+            </ul>
+            <div *ngIf="importAvailWorkspaces && !moveCandidateLoc && pageAvailableSpaces.number < pageAvailableSpaces.totalPages -1 "
+                 style="position: absolute;bottom: 50px;left: 0;right: 0;text-align: center;">
+              <a href="javascript:" class="ddp-btn-moretype"
+                 (click)="$event.stopPropagation();loadWorkspaceImportAvailable(pageAvailableSpaces.number + 1)">More</a>
+            </div>
+            <!-- // Layer List - Folder -->
+            <!-- Layer Bottom -->
+            <div class="ddp-ui-buttons">
+              <a draggable="false" href="javascript:" (click)="moveSelectionFl = false; $event.stopPropagation();" class="ddp-btn-type-popup2">{{'msg.comm.btn.cancl' | translate}}</a>
+              <a draggable="false" href="javascript:" (click)="moveContents($event);" class="ddp-btn-type-popup2 ddp-bg-black">{{'msg.comm.btn.mov' | translate}}</a>
+            </div>
+            <!-- // Layer Bottom -->
           </div>
-          <!-- // Layer List - Folder -->
-          <!-- Layer Bottom -->
-          <div class="ddp-ui-buttons">
-            <a draggable="false" href="javascript:" (click)="moveSelectionFl = false; $event.stopPropagation();" class="ddp-btn-type-popup2">{{'msg.comm.btn.cancl' | translate}}</a>
-            <a draggable="false" href="javascript:" (click)="moveContents($event);" class="ddp-btn-type-popup2 ddp-bg-black">{{'msg.comm.btn.mov' | translate}}</a>
-          </div>
-          <!-- // Layer Bottom -->
+          <!-- //popup -->
         </div>
-        <!-- //popup -->
-      </div>
-      <!-- // Move Workbook -->
-      <!-- Delete Workbook -->
-      <div class="ddp-ui-link" [ngClass]="{'ddp-disabled' : checkContents.length < 1}" (click)="deleteMultiModalOpen()">
-        <a draggable="false" href="javascript:">
-          <em class="ddp-icon-select-delete"></em>
-          {{'msg.comm.ui.sel.del' | translate}}
-        </a>
-      </div>
-      <!-- // Delete Workbook -->
-    </div>
-    <!-- //left -->
 
+      </div>
+        <!-- Delete Selection -->
+        <div class="col- pl-2">
+          <div class="ddp-ui-link" [ngClass]="{'ddp-disabled' : checkContents.length < 1}" (click)="deleteMultiModalOpen()">
+            <a draggable="false" href="javascript:" class="d-flex">
+              <i nz-icon type="delete" theme="outline" class="pr-2"></i>
+              <span>{{'msg.comm.ui.sel.del' | translate}}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Create Buttons -->
-    <div class="ddp-bottom-right">
-      <a *ngIf="permissionChecker && permissionChecker.isWriteWorkbook()"
-         draggable="false" href="javascript:" class="ddp-btn-solid2 ddp-bg-black" (click)="createWorkbook()">
-        <em class="ddp-icon-btnplus"></em>{{'msg.space.btn.workbook' | translate}}
-      </a>
-      <a *ngIf="isSetNotebookServer && permissionChecker && permissionChecker.isWriteNotebook()"
-         draggable="false" href="javascript:" class="ddp-btn-solid2 ddp-bg-black" (click)="createNotebook()">
-        <em class="ddp-icon-btnplus"></em>{{'msg.space.btn.notebook' | translate}}
-      </a>
-      <a *ngIf="permissionChecker && permissionChecker.isWriteWorkbench()"
-         draggable="false" href="javascript:" class="ddp-btn-solid2 ddp-bg-black" (click)="createWorkbench()">
-        <em class="ddp-icon-btnplus"></em>{{'msg.space.btn.workbench' | translate}}
+<div class="col- ml-auto">
+  <div class="row no-gutters">
+    <div class="col- border-right px-3" *ngIf="permissionChecker && permissionChecker.isWriteWorkbook()">
+      <a draggable="false" href="javascript:" class="d-flex workbook" (click)="createWorkbook()">
+        <i nz-icon type="plus-square" theme="outline" class="pr-2"></i>
+        <span>{{'msg.space.btn.workbook' | translate}}</span>
       </a>
     </div>
+
+    <div class="col- border-right px-3" *ngIf="isSetNotebookServer && permissionChecker && permissionChecker.isWriteNotebook()">
+      <a draggable="false" href="javascript:" class="d-flex notebook" (click)="createNotebook()">
+        <i nz-icon type="plus-square" theme="outline" class="pr-2"></i>
+        <span>{{'msg.space.btn.notebook' | translate}}</span>
+      </a>
+    </div>
+
+    <div class="col- pl-3" *ngIf="permissionChecker && permissionChecker.isWriteWorkbench()">
+      <a draggable="false" href="javascript:" class="d-flex workbench" (click)="createWorkbench()">
+        <i nz-icon type="plus-square" theme="outline" class="pr-2"></i>
+        <span>{{'msg.space.btn.workbench' | translate}}</span>
+      </a>
+    </div>
+  </div>
+</div>
     <!-- // Create Buttons -->
 
   </div>
