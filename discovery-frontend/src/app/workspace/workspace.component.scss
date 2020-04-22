@@ -226,4 +226,64 @@ a.workbench  i{
   color: #5890FF;
   font-size: 20px;
 }
-/**/
+/* Boxes */
+.item{
+  &.workbookItem{
+    &:hover{
+      background:#F6F6F6;
+    }
+    &.selectedBook{
+      background:#F6F6F6;
+      .checkBox{
+        color: #21A79C;
+      }
+      .line{
+        height: 1px;
+        background: #21A79C;
+        width: 100%;
+      }
+
+    }
+    .green{
+      color: #21A79C;
+    }
+    .checkBox{
+      &:hover{
+        color: #21A79C;
+      }
+    }
+    .line{
+      height: 1px;
+      background: #c4c4c4;
+      width: 100%;
+    }
+    h2{
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+    p{
+      font-size: 14px;
+    }
+    .dateCreated{
+      font-size: 12px;
+      span:first-child{
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+    }
+    .new{
+      color: #21A79C;
+      position: absolute;
+      top: .5rem;
+      right: 1rem;
+      font-size: 12px;
+    }
+    i[type="delete"]{
+      &:hover{
+        color: #21A79C;
+      }
+      cursor: pointer;
+    }
+  }
+}
+
