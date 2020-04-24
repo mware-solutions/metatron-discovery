@@ -26,6 +26,7 @@ import { PopupInputNameDescComponent } from './component/popup-input-workbook/po
 import { DashboardShareModule } from '../dashboard/dashboard-share.module';
 import { CanDeactivateGuard } from '../common/gaurd/can.deactivate.guard';
 import { MetadataService } from '../meta-data-management/metadata/service/metadata.service';
+import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
 
 const workbookRoutes: Routes = [
   { path: ':workbookId', component: WorkbookComponent, canDeactivate:[CanDeactivateGuard] },
@@ -42,6 +43,7 @@ const workbookRoutes: Routes = [
     DashboardShareModule,
     DataPreviewModule,
     RouterModule.forChild(workbookRoutes),
+    NgZorroAntdModule,
   ],
   declarations: [
     WorkbookComponent,

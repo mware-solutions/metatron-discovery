@@ -283,11 +283,9 @@ ul.ddp-ui-tab.ddp-tab2 li {width:50%;}
 ul.ddp-ui-tab.ddp-type2 li a {border-top:1px solid #d7d8dd;}
 
 ul.ddp-list-tab2 {overflow:hidden;}
-ul.ddp-list-tab2 li {float:left; width:50%;}
-ul.ddp-list-tab2 li a {display:block; position:relative; padding:18px 0 18px 0; text-align:center; color:#d0d1d8; font-size:12px; font-weight:bold;}
-ul.ddp-list-tab2 li.ddp-selected a {color:#666eb2;}
-ul.ddp-list-tab2 li a:before {display:inline-block; position:absolute; top:50%; left:0; height:14px; margin-top:-7px; border-left:1px solid #eaebed; content:'';}
-ul.ddp-list-tab2 li:first-of-type a:before {display:none;}
+
+ul.ddp-list-tab2 li a {display:block; position:relative; text-align:center; color:#d0d1d8; font-size:12px;}
+
 
 
 /**************************************************************

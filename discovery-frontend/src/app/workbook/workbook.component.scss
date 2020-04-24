@@ -1,0 +1,70 @@
+.ddp-ui-toptitle{
+  i{
+    cursor: pointer;
+    &:hover{
+      color: #21A79C;
+    }
+  }
+
+}
+.ddp-list-tab2{
+  li{
+
+    a{
+      span{
+        font-size: 12px;
+      }
+      strong{
+        color: #E9E10A;
+        font-size: 14px;
+      }
+
+    }
+    i{
+      color: #E9E10A;
+      font-size: 16px;
+    }
+  }
+}
+.toggle{
+  position: absolute;
+  z-index: 99999999;
+  color: #E9E10A;
+  left: 285px;
+  top: 11px;
+  i{
+    font-size: 20px;
+    color: #333;
+  }
+  &:hover{
+    i{
+      color:#21A79C;
+    }
+  }
+}
+.ddp-close{
+  .toggle{
+    left: 0;
+    i{
+      font-size: 20px;
+    }
+  }
+}
+
+.dashboerdTitle{
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #333;
+}
+.ddp-data-selectbox{
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-width: 600;
+  i{
+    color: #E9E10A;
+  }
+  .ddp-wrap-selectbox{
+    cursor: pointer;
+  }
+}

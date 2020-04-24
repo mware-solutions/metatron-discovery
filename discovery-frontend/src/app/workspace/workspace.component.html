@@ -330,7 +330,7 @@
     <!-- 리스트 -->
     <!-- item box -->
     <div class="row no-gutters">
-      <div class="col-2 border mr-3 p-3 item"  *ngFor="let book of (getList()
+      <div class="col-2 border mr-3 p-3 item d-flex"  *ngFor="let book of (getList()
            | baseFilter:['type', 'folder', true]
            | baseFilter:['type', selectedContentFilter.key]
            | baseFilter:['name', srchText]
@@ -362,7 +362,7 @@
         <p class="py-3">{{book.description}}</p>
 
         <!-- box footer-->
-        <div class="row no-gutters border-top pt-3">
+        <div class="row no-gutters border-top pt-3 mt-auto">
           <!-- box footer workbench -->
           <div class="ddp-box-bottom" *ngIf="book.type === 'workbench'">
             <div class="ddp-data-connection">

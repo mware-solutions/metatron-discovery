@@ -3,7 +3,7 @@
 /***********************************************************************************************************
 	로그인
 ************************************************************************************************************/
-.ddp-wrap-login {height:100%; min-height:800px; background:url(../../images/login.jpg) no-repeat center center fixed; background-size:cover;}
+.ddp-wrap-login {height:100%; min-height:800px; background:#21A79C url(../../images/mainBg.png) no-repeat center center fixed; background-size:cover;}
 .ddp-wrap-login.let-it-snow {height:100%; min-height:auto; overflow:hidden; background:url(../../images/login_christmas.jpg) no-repeat center center fixed; background-size:cover;}
 .ddp-wrap-login.let-it-snow .ddp-bg-login,
 .ddp-wrap-login.let-it-snow .ddp-blur2 {display:none;}
@@ -691,10 +691,10 @@ ul.ddp-list-order li .ddp-data-name .ddp-chart-img {float:left;}
 /***********************************************************************************************************
 	PAGE : 워크북 대시보드 (LNB)
 ************************************************************************************************************/
-.ddp-lnb-dashboard {position:fixed; top:55px; left:0; bottom:0; width:289px; border-right:2px solid #eaeaea; background-color:#feffff; box-sizing:border-box;}
+.ddp-lnb-dashboard {position:fixed; top:107px; left:0; bottom:0; width:289px; border-right:2px solid #eaeaea; background-color:#333; box-sizing:border-box;}
 
-.ddp-lnb-dashboard.ddp-close {width:26px;}
-.ddp-lnb-dashboard .ddp-ui-toptitle {position:relative; padding:0 40px 0 55px; width:289px; border-bottom:1px solid #e7e7ea; border-right:2px solid #eaeaea; box-sizing:border-box; background-color:#fff;}
+.ddp-lnb-dashboard.ddp-close {width:0;}
+.ddp-lnb-dashboard .ddp-ui-toptitle {position:relative; width:289px;box-sizing:border-box; color:#fff}
 .ddp-lnb-dashboard .ddp-ui-toptitle em.ddp-icon-navi {display:inline-block; position:absolute; left:0; top:0; width:50px; height:47px; cursor: pointer;}
 .ddp-lnb-dashboard .ddp-ui-toptitle em.ddp-icon-navi:before {display:inline-block; content:''; position:absolute; top:50%; left:22px; margin-top:-8px; width:17px; height:16px; background:url(../../images/btn_back.png) no-repeat; vertical-align: middle;}
 
@@ -713,9 +713,7 @@ ul.ddp-list-order li .ddp-data-name .ddp-chart-img {float:left;}
 .ddp-lnb-dashboard ul.ddp-list-tab2 li a em.ddp-icon-new-r {display:inline-block; width:5px; height:5px; margin-left:5px; border-radius:50%; background-color:#707cc4; vertical-align: top;}
 .ddp-lnb-dashboard .ddp-list-tab2 {padding-right:53px;}
 .ddp-lnb-dashboard .ddp-btn-folding {display:inline-block; position:absolute; right:0; top:49px; width:53px; height:49px;}
-.ddp-lnb-dashboard .ddp-btn-folding:after {display:inline-block; content:''; position:absolute; top:50%; left:0; height:14px; margin-top:-7px; border-left:1px solid #eaebed;}
-.ddp-lnb-dashboard .ddp-btn-folding:before {display:block; position:absolute; top:50%; left:50%; margin:-6px 0 0 -7px; content:''; width:14px; height:12px; background:url(../../images/icon_folding2.png) no-repeat; background-position:-30px top;}
-.ddp-lnb-dashboard .ddp-btn-folding:hover:before {background-position:-45px top;}
+
 
 .ddp-lnb-dashboard .ddp-btn-folding .ddp-ui-tooltip-info.ddp-down {top:36px; right:10px; text-align:center;}
 .ddp-lnb-dashboard.ddp-close .ddp-wrap-tab2 {display:none;}
@@ -739,13 +737,13 @@ ul.ddp-list-order li .ddp-data-name .ddp-chart-img {float:left;}
 .ddp-ui-dash-contents.ddp-tooltip {z-index:199 !important; overflow:inherit;}
 .ddp-ui-dash-contents.ddp-tooltip .ddp-ui-widget {z-index:130;}
 .ddp-ui-dash-contents .ddp-loading-part {position:fixed; left:289px; top:102px; right:0; bottom:0; z-index:126;}
-.ddp-ui-dash-contents.ddp-close {left:26px;}
+.ddp-ui-dash-contents.ddp-close {left:0;}
 .ddp-ui-dash-contents.ddp-close .ddp-wrap-naviarea {}
 .ddp-ui-dash-contents .ddp-wrap-naviarea {z-index:126;}
 .ddp-wrap-popup2 .ddp-ui-date {padding:12px 13px; border-top:1px solid #e7e7ea;}
 .ddp-wrap-popup2 .ddp-ui-date span.ddp-data-date {display:block; color:#90969f; line-height:18px; font-size:12px;}
 .ddp-wrap-popup2 .ddp-ui-date span.ddp-data-date em {font-weight:normal;}
-.ddp-wrap-tab-dashboard .ddp-ui-setting {position:relative; height:33px; background-color:#f6f6f7;}
+.ddp-wrap-tab-dashboard .ddp-ui-setting {position:relative; height:33px;}
 .ddp-wrap-tab-dashboard .ddp-ui-setting .ddp-wrap-selectbox {float:left; position:relative; margin-top:9px; padding-left:15px; color:#b7b9c2; cursor: pointer;}
 .ddp-wrap-tab-dashboard .ddp-ui-setting .ddp-data-selectbox {opacity:0.6;}
 .ddp-wrap-tab-dashboard .ddp-ui-setting .ddp-data-selectbox:hover {opacity:1;}
@@ -2074,7 +2072,7 @@ ul.ddp-list-text li a .ddp-data-info span {display:block; color:#4b515b; font-si
 /***********************************************************************************************************
 	PAGE : 워크북 chat (CONTENTS)
 ************************************************************************************************************/
-.ddp-wrap-tab-chat .ddp-ui-chat {position:absolute; top:100px; left:0; right:0; bottom:111px; border-top:1px solid #f6f6f7; background-color:#fcfcfc; overflow-y:auto;}
+.ddp-wrap-tab-chat .ddp-ui-chat {position:absolute; top:100px; left:0; right:0; bottom:111px; border-top:1px solid #f6f6f7; background-color:#333; overflow-y:auto;}
 
 .ddp-ui-chat ul.ddp-list-chat li a {display:block; position:relative; padding-bottom:10px; border-bottom:1px solid #f6f6f7; cursor: default;}
 .ddp-ui-chat ul.ddp-list-chat li a .ddp-btn-control {display:none; position:absolute; top:16px; right:8px;}
@@ -2097,7 +2095,7 @@ ul.ddp-list-text li a .ddp-data-info span {display:block; color:#4b515b; font-si
 .ddp-ui-chat ul.ddp-list-chat li.ddp-data-me a {background-color:#f6f6f7; cursor: pointer;}
 
 .ddp-ui-writechat {position:absolute; bottom:0; left:0; right:0;}
-.ddp-ui-writechat textarea.ddp-textarea-chat {display:block; width:100%; height:111px; padding:8px 10px; color:#4b515b; font-size:14px; border:none; border-top:2px solid #e7e7ea; box-sizing:border-box;}
+.ddp-ui-writechat textarea.ddp-textarea-chat {display:block; width:100%; height:111px; padding:8px 10px; color:#fff; background:#333;font-size:14px; border:none; border-top:1px solid #e7e7ea; box-sizing:border-box;}
 .ddp-ui-writechat .ddp-wrap-popup2 {position:absolute; bottom:100%; left:0; white-space:nowrap;}
 
 .ddp-ui-writechat .ddp-wrap-popup2 ul.ddp-list-popup li a span.ddp-data-hash {color:#666eb2;}
@@ -2243,7 +2241,7 @@ ul.ddp-list-text li a .ddp-data-info span {display:block; color:#4b515b; font-si
 	PAGE : 워크북 대시보드 편집 (no-data)
 ************************************************************************************************************/
 .ddp-view-widget .ddp-box-data-none {position:absolute; top:-1px; right:-1px; bottom:-1px; left:-1px;}
-.ddp-box-data-none {position:absolute; top:5px; left:10px; right:10px; bottom:5px; background-color:#fff; border:2px solid #f6f6f7;}
+.ddp-box-data-none {position:absolute; top:65px; left:0; right:0; bottom:5px; background-color:#fff; border:2px solid #f6f6f7;}
 .ddp-ui-dash-contents .ddp-wrap-data-none .ddp-ui-data-none {font-size:14px;}
 .ddp-wrap-data-none {display:table; width:100%; height:100%;}
 
@@ -9679,8 +9677,9 @@ ul.ddp-list-setinfo li .ddp-setinfo-contents .ddp-ui-setinfo .ddp-txt-title {col
   left:50%;
   margin:-250px 0 0 -250px;
 }
-.ddp-sso-loading {position:absolute; top:50%; left:50%; margin:-250px 0 0 -250px; width:500px; height:500px; background-color:rgba(255,255,255,0.7); z-index:10;}
-.ddp-sso-loading .ddp-wrap-logo {padding:110px 0 60px 0; text-align:center;}
+.ddp-sso-loading {position:absolute; top:50%; left:50%; margin:-250px 0 0 -250px; width:500px; height:500px; background-color:#fff; z-index:10;}
+.ddp-sso-loading .ddp-wrap-logo {padding:70px 0 70px 0; text-align:center;}
+.ddp-sso-loading .ddp-wrap-logo p{font-size: 25px;text-transform: uppercase;padding-top: 10px;}
 .ddp-sso-loading em.ddp-icon-logo {display:inline-block; width:278px; height:35px; background:url(../../images/logo_login.png) no-repeat;}
 .ddp-sso-loading em.ddp-icon-logo .st0{fill:#1A274B;}
 .ddp-sso-loading em.ddp-icon-logo .st1{fill:#272950;}

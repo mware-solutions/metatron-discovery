@@ -13,92 +13,65 @@
   -->
 
 <div class="ddp-ui-contentsin" *ngIf="mode === 'VIEW' || mode === 'NO_DATA'">
-
   <!-- 워크북 lnb -->
-  <div class="ddp-lnb-dashboard" [class.ddp-close]="isCloseDashboardList">
+  <div class="ddp-lnb-dashboard py-3" [class.ddp-close]="isCloseDashboardList">
 
-    <!-- 로딩 영역 -->
+    <!-- loading -->
     <div *ngIf="isShowLnbLoading" class="ddp-loading-part">
       <div style="" class="lds-wedges">
         <div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div></div>
     </div>
-    <!-- // 로딩 영역 -->
 
-    <!-- 접기 Toggle -->
-    <a href="javascript:" class="ddp-btn-folding ddp-hover-tooltip" (click)="toggleFoldDashboardList()">
-      <div class="ddp-ui-tooltip-info ddp-down">
-        <em class="ddp-icon-view-top"></em>
-        {{(isCloseDashboardList ? 'msg.board.ui.unfold' : 'msg.board.ui.fold') | translate}}
-      </div>
-    </a>
-    <!-- // 접기 Toggle -->
-    <!-- 좌측 워크스페이스 제목 영역 -->
-    <div class="ddp-ui-toptitle">
-      <em class="ddp-icon-navi" (click)="gotoWorkspace()"></em>
-      <span class="ddp-data-name" title="{{workbook.name}}">
-          <em class="ddp-box-tag">{{'msg.space.ui.tag.workbook'| translate}}</em>{{workbook.name}}
-      </span>
-      <!-- more -->
-      <div *ngIf="isChangeAuthUser"
-           class="ddp-ui-more ddp-hover-tooltip" [ngClass]="{'ddp-selected' : isShowDetailMenu}"
-           (click)="toggleWorkbookDetailMenu($event)" >
-        <a href="javascript:" class="ddp-icon-more"></a>
+    <!--  Toggle -->
+    <div class="toggle">
+      <a href="javascript:"  (click)="toggleFoldDashboardList()">
+        <i *ngIf="!isCloseDashboardList" nz-icon type="left-square" theme="outline"></i>
+        <i *ngIf="isCloseDashboardList" nz-icon type="right-square" theme="outline"></i>
         <div class="ddp-ui-tooltip-info ddp-down">
           <em class="ddp-icon-view-top"></em>
-          {{'msg.comm.ui.more' | translate}}
+          {{(isCloseDashboardList ? 'msg.board.ui.unfold' : 'msg.board.ui.fold') | translate}}
         </div>
-      </div>
-      <!-- // more -->
+      </a>
     </div>
+
+
     <!-- // 좌측 워크스페이스 제목 영역 -->
-    <div class="ddp-wrap-tab2">
+    <div class="ddp-wrap-tab2 py-3">
       <!-- tab -->
-      <ul class="ddp-list-tab2">
-        <li [ngClass]="{'ddp-selected' : leftTab == 'DASHBOARD'}">
-          <a href="javascript:" (click)="changeTab('DASHBOARD')">
-            {{'msg.comm.ui.dashboard' | translate}}({{dashboardPage.totalElements ? dashboardPage.totalElements : '0' }})
+      <ul class="ddp-list-tab2 py-3 d-flex mx-2">
+        <li class="d-flex px-3 border-right" [ngClass]="{'ddp-selected' : leftTab == 'DASHBOARD'}">
+          <i nz-icon type="dashboard" theme="outline" class="pr-2"></i>
+          <a href="javascript:" (click)="changeTab('DASHBOARD')" class="d-flex">
+            <span>{{'msg.comm.ui.dashboard' | translate}}: </span>
+            <strong class="pl-1">{{dashboardPage.totalElements ? dashboardPage.totalElements : '0' }}</strong>
           </a>
         </li>
-        <li [ngClass]="{'ddp-selected' : leftTab == 'CHAT'}">
-          <a href="javascript:" (click)="changeTab('CHAT')">
-            {{'msg.comm.ui.comment' | translate}}({{comments && comments.comments ? comments.comments.length : '0'}})
+        <li class="d-flex pl-3" [ngClass]="{'ddp-selected' : leftTab == 'CHAT'}">
+          <i nz-icon type="message" theme="outline" class="pr-2"></i>
+          <a href="javascript:" (click)="changeTab('CHAT')" class="d-flex">
+            <span>{{'msg.comm.ui.comment' | translate}}: </span>
+            <strong class="pl-1">{{comments && comments.comments ? comments.comments.length : '0'}}</strong>
             <!-- new 아이콘 -->
             <em class="ddp-icon-new-r" *ngIf="isNewComment" ></em>
           </a>
         </li>
+
       </ul>
       <!-- //tab -->
       <div class="ddp-wrap-tab2-contents">
-
         <!-- dashboard tab contents -->
         <div class="ddp-ui-tab2-contents ddp-wrap-tab-dashboard" *ngIf="leftTab == 'DASHBOARD'">
           <!-- setting -->
           <div class="ddp-ui-setting ddp-clear">
-            <!-- 그리드뷰, 리스트뷰 -->
-            <ul class="ddp-list-tab-button">
-              <li [ngClass]="{'ddp-selected' : listType == 'CARD'}">
-                <a href="javascript:" (click)="changeListType('CARD')"><em class="ddp-icon-grid"></em></a>
-                <div class="ddp-ui-tooltip-info">
-                  <em class="ddp-icon-view-top"></em>
-                  {{'msg.comm.ui.list.thumbnail.view' | translate}}
-                </div>
-              </li>
-              <li [ngClass]="{'ddp-selected' : listType == 'LIST'}">
-                <a href="javascript:" (click)="changeListType('LIST')"><em class="ddp-icon-listgrid"></em></a>
-                <div class="ddp-ui-tooltip-info">
-                  <em class="ddp-icon-view-top"></em>
-                  {{'msg.comm.ui.list.list.view' | translate}}
-                </div>
-              </li>
-            </ul>
-            <!-- //그리드뷰, 리스트뷰 -->
 
+              <div class="ddp-data-selectbox d-flex px-4" (click)="toggleDatasourceLayer()" >
+                <i nz-icon type="database" theme="outline" class="pr-2"></i>
+                {{'msg.board.th.datasource' | translate}}
+                <i nz-icon type="caret-down" theme="outline" class="pl-1"></i>
+              </div>
             <!-- 데이터 베이스 수 -->
             <div class="ddp-wrap-selectbox" [class.ddp-selected]="isShowDatasourceMenu" *ngIf="datasources">
-              <div class="ddp-data-selectbox" (click)="toggleDatasourceLayer()" >
-                <em class="ddp-icon-database3"></em>
-                {{'msg.board.th.datasource' | translate}}
-              </div>
+
               <!-- 팝업 -->
               <div class="ddp-wrap-popup2" (clickOutside)="isShowDatasourceMenu=false"
                    [excludeBeforeClick]="true" [exclude]="'.ddp-data-selectbox'">
@@ -258,7 +231,7 @@
         <!-- chat tab contents -->
         <div class="ddp-ui-tab2-contents ddp-wrap-tab-chat" *ngIf="leftTab == 'CHAT'">
           <!-- chat -->
-          <div class="ddp-ui-chat">
+          <div class="ddp-ui-chat mx-3">
             <ul class="ddp-list-chat">
               <li *ngFor="let comment of comments.comments;" [ngClass]="{'ddp-data-me':username == comment.createdBy.fullName, 'ddp-box-edit': comment.isEdit}">
                 <a href="javascript:">
@@ -279,7 +252,7 @@
                   <div class="ddp-data-chatcontent" *ngIf="!comment.isEdit" >{{comment.contents}}</div>
                 </a>
                 <!-- 편집 -->
-                <div class="ddp-data-input" *ngIf="comment.isEdit">
+                <div class="ddp-data-input px-3" *ngIf="comment.isEdit">
                   <textarea rows="5" [(ngModel)]="comment.modifyContents" (keypress)="createComments($event, comment)"></textarea>
                 </div>
                 <!-- //편집 -->
@@ -289,7 +262,7 @@
           </div>
           <!-- // chat -->
           <!-- input -->
-          <div class="ddp-ui-writechat">
+          <div class="ddp-ui-writechat px-3">
             <textarea class="ddp-textarea-chat"[(ngModel)]="commentText" (keypress)="createComments($event)" placeholder="{{'msg.book.ui.comment.description' | translate}}"></textarea>
           </div>
           <!-- // input -->
@@ -417,7 +390,54 @@
   </div>
   <!-- // Dashboard navigation -->
 
-  <div class="ddp-ui-dash-contents page-dashboard" [class.ddp-close]="isCloseDashboardList" >
+  <!-- dashboard contents -->
+  <div class="ddp-ui-dash-contents page-dashboard mx-5" [class.ddp-close]="isCloseDashboardList" >
+    <!-- Title bar -->
+    <div class="row no-gutters py-3">
+      <div class="col- pr-2 border-right"><i (click)="gotoWorkspace()" nz-icon type="double-left" theme="outline"></i></div>
+      <div class="col- pl-3">
+        <svg _ngcontent-c4="" fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+          <path _ngcontent-c4="" d="M10 0H5.66669C5.48261 0 5.33336 0.149251 5.33336 0.333333V2.66667H0.333335C0.149252 2.66667 0 2.81592 0 3V19.6667C0 19.8507 0.149252 20 0.333335 20H10C10.1841 20 10.3334 19.8507 10.3334 19.6667V0.333333C10.3334 0.149251 10.1841 0 10 0ZM9.66671 17.3333H6.00003V16.6667H9.66671V17.3333ZM0.66667 5H5.33336V15H0.66667V5ZM9.66671 3.66667H6.00003V2.66667H9.66671V3.66667ZM0.66667 15.6667H5.33336V16.6667H0.66667V15.6667ZM6.00003 16V4.33333H9.66671V16H6.00003ZM9.66671 0.666667V2H6.00003V0.666667H9.66671ZM5.33336 3.33333V4.33333H0.66667V3.33333H5.33336ZM0.66667 17.3333H5.33336V19.3333H0.66667V17.3333ZM6.00003 19.3333V18H9.66671V19.3333H6.00003Z" fill="#21A79C"></path>
+          <path _ngcontent-c4="" d="M19.9893 18.2494L15.9893 2.91604C15.967 2.8301 15.9113 2.75669 15.8345 2.71194C15.7579 2.66734 15.6666 2.65513 15.5808 2.67808L10.5808 4.01141C10.4037 4.05862 10.2979 4.23993 10.3441 4.41734L14.3441 19.7507C14.3664 19.8366 14.4222 19.91 14.4991 19.9546C14.5757 19.999 14.667 20.0111 14.7526 19.988L19.7527 18.6546C19.9294 18.6074 20.0351 18.4265 19.9893 18.2494V18.2494ZM11.604 6.60598L15.96 5.44468L16.1167 6.04462L11.7611 7.2077L11.604 6.60598ZM16.285 6.69143L18.2183 14.1073L13.864 15.2691L11.9307 7.85272L16.285 6.69143ZM18.3881 14.7526L18.7294 16.0607L14.3734 17.222L14.0334 15.9144L18.3881 14.7526ZM15.4288 3.40839L15.7917 4.79999L11.4357 5.96096L11.0731 4.57001L15.4288 3.40839ZM14.9047 19.2583L14.5417 17.8667L18.8977 16.7051L19.2603 18.096L14.9047 19.2583Z" fill="#21A79C"></path>
+          <path _ngcontent-c4="" d="M4.33339 6H1.66671C1.48263 6 1.33337 6.14925 1.33337 6.33333V9C1.33337 9.18408 1.48263 9.33333 1.66671 9.33333H4.33339C4.51747 9.33333 4.66672 9.18408 4.66672 9V6.33333C4.66672 6.14925 4.51747 6 4.33339 6ZM4.00005 8.66667H2.00004V6.66667H4.00005V8.66667Z" fill="#21A79C"></path>
+        </svg>
+      </div>
+      <h2 class="col- px-2 border-right dashboerdTitle"  title="{{workbook.name}}"> <span>{{workbook.name}}</span></h2>
+      <!-- more -->
+      <div *ngIf="isChangeAuthUser"
+           class="ddp-ui-more ddp-hover-tooltip col- pl-2" [ngClass]="{'ddp-selected' : isShowDetailMenu}"
+           (click)="toggleWorkbookDetailMenu($event)" >
+        <i nz-icon type="ellipsis" theme="outline"></i>
+        <a href="javascript:" class="ddp-icon-more"></a>
+        <div class="ddp-ui-tooltip-info ddp-down">
+          <em class="ddp-icon-view-top"></em>
+          {{'msg.comm.ui.more' | translate}}
+        </div>
+      </div>
+      <!-- // more -->
+      <div class="col- ml-auto border-right px-2 ddp-hover-tooltip">
+        <div [ngClass]="{'ddp-selected' : listType == 'CARD'}">
+          <a href="javascript:" (click)="changeListType('CARD')">
+            <i nz-icon type="appstore" theme="outline"></i></a>
+          <div class="ddp-ui-tooltip-info ddp-down">
+            <em class="ddp-icon-view-top"></em>
+            {{'msg.comm.ui.list.thumbnail.view' | translate}}
+          </div>
+        </div>
+      </div>
+      <div class="col- px-2">
+        <div [ngClass]="{'ddp-selected' : listType == 'LIST'}" class="ddp-hover-tooltip">
+          <a href="javascript:" (click)="changeListType('LIST')">
+            <i nz-icon type="bars" theme="outline"></i>
+          </a>
+          <div class="ddp-ui-tooltip-info ddp-down">
+            <em class="ddp-icon-view-top"></em>
+            {{'msg.comm.ui.list.list.view' | translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- // Title bar -->
 
     <!-- 대시보드 없음 -->
     <div class="ddp-box-data-none" *ngIf="mode === 'NO_DATA'" >
@@ -480,7 +500,7 @@
     <app-dashboard [isManagementUser]="isChangeAuthUser" [dashboard]="selectedDashboard"
                    (dashboardEvent)="onDashboardEvent($event)" ></app-dashboard>
   </div>
-
+  <!-- // dashboard contents -->
 </div>
 
 <!-- 워크북 부가메뉴 레이어 -->

@@ -59,6 +59,7 @@ declare let $;
 @Component({
   selector: 'app-workbook',
   templateUrl: './workbook.component.html',
+  styleUrls:['./workbook.component.scss'],
   providers: [DragDropService, DragDropConfig, SortableContainer, DragDropSortableService, MomentPipe, MomentDatePipe]
 })
 export class WorkbookComponent extends AbstractComponent implements OnInit, OnDestroy {

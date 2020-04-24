@@ -228,6 +228,7 @@ a.workbench  i{
 }
 /* Boxes */
 .item{
+  flex-direction: column;
   &.workbookItem{
     &:hover{
       background:#F6F6F6;
@@ -260,6 +261,7 @@ a.workbench  i{
     h2{
       font-size: 18px;
       text-transform: uppercase;
+      flex: none;
     }
     p{
       font-size: 14px;

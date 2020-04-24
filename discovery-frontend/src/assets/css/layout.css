@@ -754,7 +754,7 @@ ul.ddp-list-folder-nav li a:hover {background-color:#e7e7ea}
 .ddp-wrap-naviarea .ddp-ui-navidata span.ddp-data-source:before {display:inline-block; content:'';position:absolute; top:15px; left:0; height:17px; border-left:1px solid #d0d1d8;}
 .ddp-wrap-naviarea .ddp-ui-navidata span.ddp-data-source a.ddp-icon-source3 {margin-right:0; background-position:-34px -16px;}
 .ddp-wrap-naviarea .ddp-ui-navidata span.ddp-data-source a.ddp-icon-source3:hover {background-position:-17px -16px;}
-.ddp-wrap-naviarea .ddp-ui-navidata span.ddp-data-source .ddp-ui-tooltip-info {top:37px; right:11px;}
+.ddp-wrap-naviarea .ddp-ui-navidata span.ddp-data-source .ddp-ui-tooltip-info {top:37px; right:11px; }
 .ddp-wrap-naviarea .ddp-ui-navidata span.ddp-data-sec {float:left; padding:15px 20px 16px 0; }
 .ddp-wrap-naviarea .ddp-ui-navidata span.ddp-data-sec a {color:#646b72; font-size:12px;}
 .ddp-wrap-naviarea .ddp-ui-navidata span.ddp-data-sec a em.ddp-icon-redo {display:inline-block; width:18px; height:16px; background:url(../images/icon_redo2.png) no-repeat;}
