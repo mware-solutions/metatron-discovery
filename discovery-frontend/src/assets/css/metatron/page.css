@@ -3,11 +3,11 @@
 /***********************************************************************************************************
 	로그인
 ************************************************************************************************************/
-.ddp-wrap-login {height:100%; min-height:800px; background:#21A79C url(../../images/mainBg.png) no-repeat center center fixed; background-size:cover;}
+.ddp-wrap-login {height:100%; background:#21A79C url(../../images/mainBg.png) no-repeat center center fixed; background-size:cover;}
 .ddp-wrap-login.let-it-snow {height:100%; min-height:auto; overflow:hidden; background:url(../../images/login_christmas.jpg) no-repeat center center fixed; background-size:cover;}
 .ddp-wrap-login.let-it-snow .ddp-bg-login,
 .ddp-wrap-login.let-it-snow .ddp-blur2 {display:none;}
-.ddp-ui-login {position:relative;width:410px; height:100%; padding:192px 0 0 0; background-color:rgba(255,255,255,0.7); z-index:1; box-sizing:border-box;}
+.ddp-ui-login {position:relative;width:410px; height:100%; padding:192px 0 0 0; background-color:#fff; z-index:1; box-sizing:border-box; margin: 0 auto;}
 .ddp-wrap-login .ddp-blur2{display:block;background:url(../../images/login.jpg) no-repeat fixed;; background-size:cover; overflow:hidden; content:'';
   filter: blur(5px);
   position: absolute;
@@ -17,40 +17,6 @@
   width: 410px;
 }
 
-.ddp-ui-login .ddp-box-login {width:278px; margin:0 auto;}
-.ddp-ui-login .ddp-ui-logo {height:36px; padding-bottom:20px;}
-.ddp-ui-login .ddp-ui-logo .st0{fill:#1A274B;}
-.ddp-ui-login .ddp-ui-logo .st1{fill:#272950;}
-.ddp-ui-login .ddp-ui-logo .st2{fill:#47DBF4;}
-.ddp-ui-login .ddp-ui-logo .st3{fill:#7575EA;}
-
-.ddp-form-login .ddp-form-input {position:relative; width:100%; box-sizing:border-box;}
-.ddp-form-login .ddp-form-input label {display:block; padding:30px 0 0 0; color:rgba(39,41,80,0.7); font-size:13px;}
-.ddp-form-login .ddp-form-input span.ddp-input-type {display:block; width:100%; border:none; background:transparent;}
-.ddp-form-login .ddp-form-input span.ddp-input-type input {width:100%; padding:8px 0; border:none;border-bottom:1px solid #b5b5cc; background-color:transparent; color:#272950; font-size:18px;}
-.ddp-form-login .ddp-form-input span.ddp-input-type input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px white inset;}
-.ddp-form-login .ddp-form-input span.ddp-input-type input:focus {border-bottom:1px solid #272950;}
-.ddp-form-login .ddp-ui-login-option {min-width:360px; max-width:fit-content; margin:26px 0 40px 0; white-space:nowrap; overflow:hidden;}
-.ddp-form-login .ddp-ui-login-option .ddp-wrap-input-checkbox {position:relative; float:left; margin-right:20px; padding-left:20px;}
-.ddp-form-login .ddp-ui-login-option .ddp-wrap-input-checkbox label {position:relative; font-size:14px; color:#272950;}
-
-.ddp-form-login .ddp-ui-login-option .ddp-wrap-input-checkbox input[type="checkbox"] {position:absolute; top:50%; left:0; margin-top:-6px; opacity: 0; z-index:1;}
-.ddp-form-login .ddp-ui-login-option .ddp-wrap-input-checkbox i {display:inline-block; width:12px; height:12px; position:absolute; top:50%; left:0; margin-top:-6px; background:url(../../images/icon_checkbox2.png) no-repeat;}
-.ddp-form-login .ddp-ui-login-option .ddp-wrap-input-checkbox input[type="checkbox"]:checked + i {background-position:-26px -13px;}
-.ddp-form-login .ddp-ui-login-option .ddp-wrap-input-checkbox input[type="checkbox"]:checked + i + label {font-weight: bold;}
-
-.ddp-form-login a.ddp-link-search {color:#272950; font-size:13px; font-weight: 300;}
-.ddp-form-login a.ddp-link-sign  {position:relative; margin-left:12px; padding-left:12px; color:#272950; font-size:13px;font-weight: 300;}
-.ddp-form-login a.ddp-link-sign:before {display:inline-block; height:13px;  position:absolute; top:50%; left:0; margin-top:-7px; border-left:1px solid #585879; content:'';}
-.ddp-form-login a.ddp-link-search:hover {text-decoration: underline;}
-.ddp-form-login a.ddp-link-sign:hover  {text-decoration: underline;}
-
-.ddp-ui-login a.ddp-link-request {color:#fff; font-size:14px; text-decoration:underline;}
-.ddp-ui-login-buttons {padding-bottom:15px;}
-.ddp-ui-login-buttons a.ddp-btn {display:inline-block; width:100%; color:#fff; font-size:14px; text-align:center; line-height:38px; font-weight:bold;border-radius:3px; background-color:#272950;}
-.ddp-ui-login-buttons a.ddp-btn:hover {background-color:#7575ea; }
-.metatron-login .ddp-bg-login {display:inline-block; background:url(../../images/login.jpg) no-repeat; background-size:100% 100%;}
 
 /***********************************************************************************************************
 	로그인 footer
@@ -108,7 +74,7 @@
 .ddp-ui-input-form {position:relative; padding-bottom:35px;}
 .ddp-ui-input-form .ddp-ui-error {display:block; position:absolute; bottom:15px;  color:#eb5f58; font-size:12px;}
 .ddp-ui-input-form .ddp-ui-error em.ddp-icon-error {display:none; position:relative; top:-1px; margin-right:5px; width:11px; height:11px; background:url(../../images/icon_info.png) no-repeat; background-position:-16px 0; vertical-align:middle;}
-.ddp-ui-input-form .ddp-input-check {position:relative; padding-right:20px; border-bottom:1px solid #ddd;}
+.ddp-ui-input-form .ddp-input-check {position:relative; padding-right:20px; }
 .ddp-ui-input-form .ddp-input-check input {border-bottom:none;}
 .ddp-ui-input-form .ddp-input-check em.ddp-icon-ok,
 .ddp-ui-input-form .ddp-input-check em.ddp-icon-error {display:inline-block; position:absolute; top:50%; right:0; background:url(../../images/icon_message.png) no-repeat;}

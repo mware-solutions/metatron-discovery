@@ -31,6 +31,7 @@ import { CommonUtil } from '../../common/util/common.util';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls:['./login.component.scss'],
 })
 export class LoginComponent extends AbstractComponent implements OnInit, OnDestroy {
 

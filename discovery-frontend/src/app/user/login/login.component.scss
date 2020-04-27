@@ -1,0 +1,134 @@
+.ddp-ui-input-form .ddp-input-check input{
+  border-bottom: 1px solid #E9E10A;
+}
+.ddp-form-input {
+  position:relative;
+  box-sizing:border-box;}
+
+.login{
+  background: #333;
+  height: 60%;
+}
+.welcome{
+  background: #fff;
+  height: 50%;
+}
+.logoTag{
+  position: absolute;
+  left:-50px;
+  top:5px;
+}
+.ddp-ui-input-form{
+  padding: 0;
+}
+.ddp-ui-input-form .ddp-input-check{
+  padding: 0;
+}
+h1{
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #E9E10A;
+  font-weight: 200;
+}
+
+.ant-input-affix-wrapper{
+  .anticon{
+    color: #c4c4c4;
+  }
+  .ant-input{
+    height: 40px;
+    color: #c4c4c4;
+    border:1px solid #E9E10A;
+    &.ant-input:focus{
+      border:1px solid #E9E10A ;
+    }
+    &.ant-input:hover{
+      border:1px solid #E9E10A ;
+    }
+  }
+}
+
+.copyright{
+  color: #c4c4c4;
+  font-size: 12px;
+}
+.ddp-ui-login-buttons{
+  a{
+    display: block;
+    border: 1px solid #E9E10A;
+    position: relative;
+    color: #C4C4C4;
+    font-size: 16px;
+    padding: .5rem;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all .5s;
+    &:after{
+      content: " ";
+       background:#E9E10A;
+      width: 15px;
+      height: 10px;
+      position: absolute;
+      left: 0;
+      right:0;
+      top:0;
+      margin: 0 auto;
+    }
+    &:hover{
+      background:#E9E10A;
+      color: #333;
+      &:after{
+        background: #333;
+      }
+    }
+  }
+}
+.options{
+  font-size: 14px;
+  color: #c4c4c4;
+  .col-{
+    a{
+      color: #E9E10A;
+    }
+    label{
+      color: #c4c4c4;
+    }
+  }
+
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus{
+  background: #fff;
+}
+.signUp{
+    a{
+      display: block;
+      border: 1px solid #21A79C;
+      position: relative;
+      color: #333;
+      font-size: 16px;
+      padding: .5rem;
+      text-align: center;
+      text-transform: uppercase;
+      transition: all .5s;
+      &:after{
+        content: " ";
+        background:#21A79C;
+        width: 15px;
+        height: 10px;
+        position: absolute;
+        left: 0;
+        right:0;
+        top:0;
+        margin: 0 auto;
+      }
+      &:hover{
+        background:#21A79C;
+        color: #333;
+        &:after{
+          background: #333;
+        }
+      }
+    }
+}

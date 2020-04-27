@@ -28,6 +28,8 @@ import { KorPolicyComponent } from './login/kor-policy.component';
 import { EngPolicyComponent } from './login/eng-policy.component';
 import { PermissionService } from './service/permission.service';
 import {LoginLogoComponent} from "./login/component/logo/login-logo.component";
+import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
+
 
 const userRoutes: Routes = [
   {
@@ -39,6 +41,7 @@ const userRoutes: Routes = [
   imports: [
     CommonModule,
     FileModule,
+    NgZorroAntdModule,
     RouterModule.forChild(userRoutes),
   ],
   declarations: [

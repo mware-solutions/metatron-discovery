@@ -16,83 +16,78 @@
 <div class="ddp-wrap-login metatron-login">
   <!--<em class="ddp-bg-login"></em>-->
   <!-- login -->
-  <div class="ddp-ui-login">
-    <div class="ddp-box-login">
-      <div class="ddp-ui-logo">
-        <login-logo></login-logo>
-      </div>
-
-      <!-- login form -->
-      <div class="ddp-form-login">
-        <!-- ID 입력 -->
-        <div class="ddp-form-input ddp-ui-input-form" [ngClass]="{'ddp-type-error': loginFailMsg}" style="padding-bottom:0px;">
-          <label class="ddp-label-type">{{'msg.comm.usr.name.title' | translate}}</label>
-          <div class="ddp-input-check">
-            <span class="ddp-input-type">
-              <input type="text" [(ngModel)]="user.username" placeholder="{{'msg.comm.usr.name.title.ph' | translate}}"
-                     (focus)="loginFailMsg='';" style="border-bottom:none;"/>
-            </span>
-            <em class="ddp-icon-error" (click)="user.username='';loginFailMsg='';" *ngIf="loginFailMsg"></em>
+  <div class="row no-gutters h-100">
+    <div class="col-6 mx-auto">
+      <div class="row no-gutters d-flex align-items-center h-100">
+        <div class="col-6 login p-5  mt-5">
+          <h1 class="py-5 text-center">Sign In to your account</h1>
+          <!-- login form -->
+          <!-- User -->
+          <div class="ddp-form-input ddp-ui-input-form px-5" [ngClass]="{'ddp-type-error': loginFailMsg}">
+            <div class="ddp-input-check">
+              <div class="logoTag">
+                <svg width="30" height="34" viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27.9603 13.5209C28.6031 13.8411 29.1374 14.3409 29.4972 14.9587C29.857 15.5766 30.0267 16.2854 29.9852 16.9977C30.0505 17.694 29.8988 18.3933 29.5506 19.0013C29.2024 19.6093 28.6745 20.0966 28.0382 20.3973L6.54363 33.0683C4.8303 34.15 3.50636 34.3045 2.41605 33.4547C1.85128 32.9247 1.35432 32.3279 0.936353 31.6776C0.464645 30.9502 0.146708 30.1354 0.00180583 29.2825C-0.0155215 28.8248 0.0921093 28.371 0.313321 27.969C0.90708 27.232 1.64991 26.6267 2.49393 26.192L18.0697 17.075L2.49393 7.95803C1.8709 7.49446 1.4815 7.18541 1.16999 6.95362C0.842608 6.72666 0.573434 6.42669 0.384081 6.07782C0.194728 5.72895 0.0904716 5.34089 0.0796847 4.9448C0.152487 4.08653 0.44758 3.26149 0.936353 2.54966C1.94878 0.849887 2.9612 0 3.81787 0C4.79383 0.0609185 5.73531 0.381156 6.54363 0.92715L27.9603 13.5209Z" fill="#E9E10A"/>
+              </svg>
+              </div>
+               <nz-input-group [nzPrefix]="prefixUser">
+                <input nz-input placeholder="{{'msg.comm.usr.name.title' | translate}}" [(ngModel)]="user.username" (focus)="loginFailMsg='';">
+                <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+              </nz-input-group>
+              <em class="ddp-icon-error" (click)="user.username='';loginFailMsg='';" *ngIf="loginFailMsg"></em>
+            </div>
           </div>
-        </div>
-        <!-- // ID 입력 -->
-
-        <!-- Password 입력 -->
-        <div class="ddp-form-input ddp-ui-input-form" [ngClass]="{'ddp-type-error': loginFailMsg}" style="padding-bottom:0px;">
-          <label class="ddp-label-type">{{'msg.comm.usr.pw.title' | translate}}</label>
-          <div class="ddp-input-check">
-            <span class="ddp-input-type">
-              <input type="password" placeholder="{{'msg.comm.usr.pw.title.ph' | translate}}"
-                     [(ngModel)]="user.password" (keyup)="$event.keyCode == 13 ? login() : null;"
-                     (focus)="loginFailMsg='';" style="border-bottom:none;" />
-            </span>
-            <em class="ddp-icon-error" (click)="user.password='';loginFailMsg='';" *ngIf="loginFailMsg"></em>
+          <!-- Password 입력 -->
+          <div class="ddp-form-input ddp-ui-input-form px-5" [ngClass]="{'ddp-type-error': loginFailMsg}" >
+            <label class="ddp-label-type">{{'msg.comm.usr.pw.title' | translate}}</label>
+            <div class="ddp-input-check">
+              <nz-input-group [nzPrefix]="prefixLock">
+                <input type="password" nz-input placeholder="{{'msg.comm.usr.pw.title.ph' | translate}}"
+                       [(ngModel)]="user.password" (keyup)="$event.keyCode == 13 ? login() : null;"
+                       (focus)="loginFailMsg='';">
+                <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+              </nz-input-group>
+              <em class="ddp-icon-error" (click)="user.password='';loginFailMsg='';" *ngIf="loginFailMsg"></em>
+            </div>
+            <!-- error 메시지 -->
+            <span class="ddp-ui-error" *ngIf="loginFailMsg">{{ loginFailMsg }}</span>
+            <!-- //error 메시지 -->
           </div>
-          <!-- error 메시지 -->
-          <span class="ddp-ui-error" style="bottom:-45px;" *ngIf="loginFailMsg">{{ loginFailMsg }}</span>
-          <!-- //error 메시지 -->
-        </div>
-        <!-- // Password 입력 -->
-
-        <!-- option -->
-        <div class="ddp-ui-login-option" style="margin-top: 55px;">
-          <div class="ddp-wrap-input-checkbox">
-            <input type="checkbox" id="ID_REMEMBER" [(ngModel)]="isRemember"/>
-            <i></i>
-            <label class="ddp-txt-option" for="ID_REMEMBER">{{'msg.comm.usr.login.remember.id' | translate}}</label>
+          <!-- // Password 입력 -->
+          <!-- button -->
+          <div class="ddp-ui-login-buttons px-5 mt-4">
+            <a href="javascript:" (click)="login()">{{'msg.comm.usr.login' | translate}}</a>
           </div>
+          <!-- //button -->
+          <!-- remember -->
+          <div class="row no-gutters px-5 mt-3 options">
+            <div class="col-"><label nz-checkbox id="ID_REMEMBER" [(ngModel)]="isRemember">{{'msg.comm.usr.login.remember.id' | translate}}</label></div>
+            <div class="col- ml-auto"><a href="javascript:"  (click)="resetPassword()">{{'msg.comm.usr.login.find.passwd' | translate}}</a></div>
+          </div>
+          <div  class="col- mt-4 text-center" (click)="isShowTerms=true"> or <a href="javascript:">{{'msg.comm.ui.site.access' | translate}}</a></div>
+          <div class="col-12 copyright mt-1">{{'msg.comm.ui.copyright' | translate}}</div>
+          <!-- //login form -->
         </div>
-        <!--// option -->
+        <div class="col-6 welcome p-5 mt-2">
+          <div class="col-12 text-center">
+            <svg width="193" height="193" viewBox="0 0 193 193" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M120.393 21.0611C120.626 23.2727 122.267 24.3101 123.24 24.929C124.864 25.9585 128.668 28.371 128.668 40.2081V64.341C128.668 66.5605 129.995 68.2089 132.214 68.2089C132.343 68.3216 132.528 68.6432 132.673 68.9647C132.487 72.6962 130.646 78.4138 129.488 81.5659C127.132 83.134 124.647 86.4712 124.647 92.4783C124.647 97.0379 123.087 99.0885 121.704 100.898C121.366 101.348 121.06 101.758 120.803 102.136C119.573 103.986 120.071 106.479 121.921 107.717C123.754 108.939 126.255 108.457 127.494 106.607L128.097 105.779C129.817 103.528 132.688 99.7557 132.688 92.4783C132.688 89.6315 133.541 88.4573 133.661 88.3367C134.916 88.031 135.937 87.1305 136.419 85.9321C136.87 84.8303 140.73 74.9715 140.73 68.3529C140.73 68.0231 140.69 67.7015 140.609 67.38C140.175 65.611 138.937 63.0375 136.709 61.5255V40.207C136.709 27.2518 132.752 21.9364 128.579 18.8563C127.799 12.6174 121.109 0 96.5008 0C71.5876 0 56.2924 23.4175 56.2924 40.2085V61.527C54.0649 63.039 52.8346 65.6204 52.392 67.3815C52.3117 67.6951 52.2714 68.025 52.2714 68.3544C52.2714 74.9726 56.1393 84.8318 56.5819 85.9336C57.0644 87.132 57.7719 87.9281 59.0264 88.2417C59.4686 88.4588 60.3129 89.633 60.3129 92.4798C60.3129 100.12 66.0468 108.611 72.2066 114.257C71.3622 119.524 67.4377 133.412 59.0505 136.918L23.3617 148.812C14.1863 151.868 7.3107 159.298 4.95436 168.691L0.121446 188.006C-0.41722 190.161 0.88553 192.341 3.04849 192.879C3.37832 192.96 3.69986 193 4.0214 193C5.83078 193 7.47128 191.786 7.91344 189.944L12.7464 170.628C14.4189 163.921 19.3404 158.606 25.8945 156.426L61.857 144.428C75.7771 138.63 80.417 117.681 80.417 112.575C80.417 111.377 79.8783 110.243 78.9533 109.479C73.6861 105.121 68.3545 97.883 68.3545 92.4711C68.3545 86.464 65.8696 83.1348 63.5133 81.5587C62.3632 78.4145 60.5056 72.6728 60.3288 68.9334C60.4332 68.6277 60.5056 68.3544 60.3126 68.3544C62.5321 68.3544 64.3335 66.553 64.3335 64.3335V40.2085C64.3335 27.0924 76.8706 8.04192 96.5001 8.04192C115.173 8.04192 119.998 16.3089 120.561 19.4934C120.409 20.04 120.336 20.5865 120.393 21.0611Z" fill="#21A79C"/>
+              <path d="M188.481 136.539H184.461V132.519C184.461 116.998 171.835 104.373 156.315 104.373C140.794 104.373 128.169 116.998 128.169 132.519V136.539H124.148C121.928 136.539 120.127 138.341 120.127 140.56V188.81C120.127 191.03 121.928 192.831 124.148 192.831H188.481C190.701 192.831 192.502 191.03 192.502 188.81V140.56C192.502 138.341 190.701 136.539 188.481 136.539ZM136.211 132.519C136.211 121.437 145.226 112.414 156.315 112.414C167.404 112.414 176.419 121.437 176.419 132.519V136.539H136.211V132.519ZM184.461 184.789H128.169V144.581H184.461V184.789H184.461Z" fill="#21A79C"/>
+              <path d="M152.294 167.476V172.727C152.294 174.947 154.095 176.748 156.315 176.748C158.534 176.748 160.336 174.947 160.336 172.727V167.476C162.7 166.077 164.357 163.608 164.357 160.665C164.357 156.226 160.754 152.623 156.315 152.623C151.876 152.623 148.274 156.226 148.274 160.665C148.273 163.608 149.938 166.077 152.294 167.476Z" fill="#21A79C"/>
+            </svg>
+          </div>
+          <div class="col-12 mt-4 text-center">
+            <login-logo></login-logo>
+          </div>
+          <div class="col-8 mx-auto mt-4 text-center signUp">
+            <a href="javascript:"  (click)="join()">{{'msg.comm.usr.login.join' | translate}}</a>
+          </div>
 
-        <!-- button -->
-        <div class="ddp-ui-login-buttons">
-          <a href="javascript:" class="ddp-btn" (click)="login()">{{'msg.comm.usr.login' | translate}}</a>
-        </div>
-        <!-- //button -->
-
-        <div class="ddp-help">
-          <a href="javascript:" class="ddp-link-search" (click)="resetPassword()">{{'msg.comm.usr.login.find.passwd' | translate}}</a>
-          <a href="javascript:" class="ddp-link-sign" (click)="join()">{{'msg.comm.usr.login.join' | translate}}</a>
-        </div>
-
-      </div>
-      <!-- //login form -->
-    </div>
-
-    <!-- footer -->
-    <div class="ddp-layout-footer">
-      <div class="ddp-ui-footer" >
-        <ul class="ddp-list-footer">
-          <li (click)="isShowTerms=true"><a href="javascript:">{{'msg.comm.ui.site.access' | translate}}</a></li>
-        </ul>
-        <span class="ddp-ui-copy">{{'msg.comm.ui.copyright' | translate}}</span>
       </div>
     </div>
-    <!-- // footer -->
 
   </div>
   <!-- //login -->
-
 </div>
 
 <app-join (joinComplete)="joinComplete($event)"></app-join>
