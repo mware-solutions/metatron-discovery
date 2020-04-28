@@ -14,7 +14,12 @@
 
 <!-- header -->
 <div class="ddp-layout-header row no-gutters mx-5">
-  <div class="col-2 border-bottom pt-3"> <lnb-logo></lnb-logo></div>
+  <div class="col-2 border-bottom pt-3">
+    <a (click)="goMain()">
+      <lnb-logo></lnb-logo>
+    </a>
+
+  </div>
   <div class="col-10 border-bottom"> <app-gnb></app-gnb> </div>
 </div>
 

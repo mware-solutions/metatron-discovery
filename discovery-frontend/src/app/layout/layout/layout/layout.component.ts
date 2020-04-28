@@ -16,13 +16,15 @@ import { Component, ElementRef, Injector, OnDestroy, OnInit } from '@angular/cor
 import { AbstractComponent } from '../../../common/component/abstract.component';
 import { EventBroadcaster } from '../../../common/event/event.broadcaster';
 import {Alert} from "../../../common/util/alert.util";
+import {CookieConstant} from "../../../common/constant/cookie.constant";
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent extends AbstractComponent implements OnInit, OnDestroy {
-
+  public isShow = false;
+  public isShowFolderNavi: boolean = false;
   constructor(private broadCaster: EventBroadcaster,
               protected elementRef: ElementRef,
               protected  injector: Injector) {
@@ -42,6 +44,20 @@ export class LayoutComponent extends AbstractComponent implements OnInit, OnDest
   ngOnDestroy() {
     super.ngOnDestroy();
   }
+  private _closeLNB() {
+    this.isShow = false;
+    this.isShowFolderNavi = false;
+  } // function - _closeLNB
+
+  public goMain() {
+    this.cookieService.delete(CookieConstant.KEY.CURRENT_WORKSPACE, '/');  // 쿠키 삭제
+    if ('/workspace' === this.router.url) {
+      this.broadCaster.broadcast('moveFromLnb', 'my');
+    } else {
+      this.router.navigate(['/workspace']).then(); // 이동
+    }
+    this._closeLNB();
+  } // function - goMain
 
   /**
    * 얼럿창에서 번역이 필요한 부분 세팅
@@ -52,6 +68,5 @@ export class LayoutComponent extends AbstractComponent implements OnInit, OnDest
     Alert.MORE_BTN_DESC = this.translateService.instant('msg.comm.alert.error.btn');
     Alert.CLOSE_BTN = this.translateService.instant('msg.comm.btn.close');
   }
-
 }
 
