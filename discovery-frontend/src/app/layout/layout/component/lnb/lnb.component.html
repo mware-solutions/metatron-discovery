@@ -21,9 +21,9 @@
     </svg>
   </a>
 
-  <ul class="ddp-list-lnb d-flex">
-    <!-- WORKSPACE -->
-    <li [ngClass]="{'ddp-selected': lnbManager.workspace.fold == false}" *ngIf="permission.workspace">
+  <ul class="ddp-list-lnb d-flex row no-gutters">
+    <!-- WORKSPACE Tab -->
+    <li class="col-3" [ngClass]="{'ddp-selected': lnbManager.workspace.fold == false}" *ngIf="permission.workspace">
       <div class="ddp-wrap-listmenu">
         <!-- Workspace title -->
         <a class="d-flex row no-gutters align-items-center pr-2 tabTitle" href="javascript:" (click)="depth1Menu1ClickListener( 'WORKSPACE' ); $event.stopImmediatePropagation()">
@@ -33,58 +33,57 @@
         <!-- // Workspace title -->
         <!-- sub -->
         <div class="ddp-list-sub">
-          <!-- 개인 워크스페이스 -->
+          <!-- private workspace -->
           <div *ngIf="permission.myWorkspace" class="ddp-txt-title d-flex row no-gutters align-items-center" (click)="moveToWorkspace()" >
             <span class="col-">{{privateWorkspace.name}}</span>
             <i class="col- ml-auto" nz-icon type="caret-right" theme="outline" (click)="onOffFolderNavigation($event)"></i>
           </div>
-          <!-- // 개인 워크스페이스 -->
-
+          <!-- // private workspace -->
           <!-- favorites - exist list -->
           <div class="ddp-wrap-favorites" *ngIf="sharedWorkspace.length > 0">
             <h2>{{ 'msg.comm.ui.list.favorite' | translate }}</h2>
-
-
-            <ul class="ddp-list-submenu" >
+            <ul class="ddp-list-submenu">
               <li *ngFor="let workspace of sharedWorkspace"  [class.ddp-disabled]="!workspace.active" >
-                <a href="javascript:" (click)="moveToWorkspace(workspace)">
-                  <span [class.ddp-new]="workspace.createdTime | moment: 'isNew'">
+                <a href="javascript:" (click)="moveToWorkspace(workspace)" class="row d-flex no-gutters">
+                  <span class="col-" [class.ddp-new]="workspace.createdTime | moment: 'isNew'">
                     {{workspace.name}} <em class="ddp-icon-new" *ngIf="workspace.createdTime | moment: 'isNew'">NEW</em>
                   </span>
-                  <em class="ddp-icon-view" (click)="onOffFolderNavigation($event, workspace)"></em>
+                  <i class="col- ml-auto" nz-icon type="caret-right" theme="outline" (click)="onOffFolderNavigation($event, workspace)"></i>
                 </a>
               </li>
             </ul>
-
-
-            <div class="ddp-link-type">
-              <a  (click)="workspaceList(); $event.stopImmediatePropagation()" href="javascript:">{{ 'msg.lnb.btn.workspace-list' | translate }}</a>
+            <!-- // favorites - exist list -->
+            <div class="ddp-link-type row no-gutters mt-2" (click)="workspaceList(); $event.stopImmediatePropagation()">
+              <i class="col- pr-2" nz-icon type="ordered-list" theme="outline"></i>
+              <span class="col-">{{ 'msg.lnb.btn.workspace-list' | translate }}</span>
+              <i class="col- ml-auto" nz-icon type="caret-right" theme="outline"></i>
             </div>
           </div>
           <!-- // favorites - exist list -->
-
-          <!-- favorites - empty list -->
+          <!-- favorites - empty list  -->
           <div class="ddp-wrap-favorites" *ngIf="0 === sharedWorkspace.length">
-            <span class="ddp-label-type">{{ 'msg.comm.ui.list.favorite' | translate }}</span>
-            <div class="ddp-txt-info">{{ 'msg.lnb.label.set-favorite-workspace' | translate }}
-              <div class="ddp-link-type">
-                <a  (click)="workspaceList(); $event.stopImmediatePropagation()" href="javascript:">{{ 'msg.lnb.btn.workspace-list' | translate }}</a>
+            <h2>{{ 'msg.comm.ui.list.favorite' | translate }}</h2>
+            <div class="ddp-txt-info">
+              {{ 'msg.lnb.label.set-favorite-workspace' | translate }}
+              <div class="ddp-link-type row no-gutters mt-2" (click)="workspaceList(); $event.stopImmediatePropagation()">
+                <i class="col- pr-2" nz-icon type="ordered-list" theme="outline"></i>
+                <span class="col-">{{ 'msg.lnb.btn.workspace-list' | translate }}</span>
+                <i class="col- ml-auto" nz-icon type="caret-right" theme="outline"></i>
               </div>
             </div>
           </div>
           <!-- // favorites - empty list -->
-
         </div>
         <!-- //sub -->
       </div>
     </li>
-    <!-- //WORKSPACE -->
+    <!-- //WORKSPACE TAB -->
 
     <!-- EXPLOREDATA -->
-    <li *ngIf="permission.exploreData" [ngClass]="{'ddp-selected': lnbManager.exploreData.fold == false}" >
+    <li class="col-3" *ngIf="permission.exploreData" [ngClass]="{'ddp-selected': lnbManager.exploreData.fold == false}" >
       <div class="ddp-wrap-listmenu">
         <!-- tab title -->
-        <a class="d-flex row no-gutters align-items-center pr-2 tabTitle" href="javascript:" (click)="depth1Menu1ClickListener( 'EXPLOREDATA' )">
+        <a class="d-flex row no-gutters align-items-center pr-2 tabTitle justify-content-between" href="javascript:" (click)="depth1Menu1ClickListener( 'EXPLOREDATA' )">
           <span class="col-">{{'msg.comm.menu.title.explore-data' | translate}}</span>
           <span class="ddp-tag-beta col-">Beta</span>
           <i class="col- ml-auto" nz-icon type="down" theme="outline"></i>
@@ -95,18 +94,21 @@
           <!-- submenu -->
           <ul class="ddp-list-sublnb">
             <li [ngClass]="{'ddp-selected': lnbManager.exploreData.data.fold == false}" *ngIf="permission.exploreDataView">
-              <a href="javascript:" (click)=" move('exploredata/view')">
-                <em class="ddp-icon-data"></em>{{'msg.comm.menu.explore-data.data' | translate}}
+              <a class="row no-gutters" href="javascript:" (click)=" move('exploredata/view')">
+                <i class="col- pr-2" nz-icon type="database" theme="outline"></i>
+                <span class="col-">{{'msg.comm.menu.explore-data.data' | translate}}</span>
               </a>
             </li>
             <li [ngClass]="{'ddp-selected': lnbManager.exploreData.data.fold == false}" *ngIf="permission.exploreData">
-              <a href="javascript:" (click)="move('exploredata/favorite/data')">
-                <em class="ddp-icon-data"></em>{{'msg.comm.menu.explore-data.my.favorite.data' | translate}}
+              <a class="row no-gutters" href="javascript:" (click)="move('exploredata/favorite/data')">
+                <i class="col- pr-2" nz-icon type="database" theme="outline"></i>
+                <span class="col-">{{'msg.comm.menu.explore-data.my.favorite.data' | translate}}</span>
               </a>
             </li>
             <li [ngClass]="{'ddp-selected': lnbManager.exploreData.data.fold == false}" *ngIf="permission.exploreFavorite">
-              <a href="javascript:" (click)=" move('exploredata/favorite/creator')">
-                <em class="ddp-icon-data"></em>{{'msg.comm.menu.explore-data.favorite.creator' | translate}}
+              <a class="row no-gutters" href="javascript:" (click)=" move('exploredata/favorite/creator')">
+                <i class="col- pr-2" nz-icon type="database" theme="outline"></i>
+                <span class="col-">{{'msg.comm.menu.explore-data.favorite.creator' | translate}}</span>
               </a>
             </li>
           </ul>
@@ -118,7 +120,7 @@
     <!-- // EXPLOREDATA -->
 
     <!-- MANAGEMENT -->
-    <li *ngIf="permission.management" [ngClass]="{'ddp-selected': lnbManager.management.fold == false}" >
+    <li class="col-3" *ngIf="permission.management" [ngClass]="{'ddp-selected': lnbManager.management.fold == false}" >
       <div class="ddp-wrap-listmenu">
         <!-- tab title-->
         <a class="d-flex row no-gutters align-items-center pr-2 tabTitle" href="javascript:" (click)="depth1Menu1ClickListener( 'MANAGEMENT' )">
@@ -131,9 +133,10 @@
           <!-- submenu -->
           <ul class="ddp-list-sublnb">
             <li *ngIf="permission.managementMetadata" [ngClass]="{'ddp-selected': lnbManager.management.metadata.fold == false}">
-              <a href="javascript:" (click)="mgmtMenuClickListener('METADATA')">
-                <em class="ddp-icon-dot"></em>
-                {{'msg.comm.menu.manage.metadata' | translate}}
+              <a class="row no-gutters" href="javascript:" (click)="mgmtMenuClickListener('METADATA')">
+                <i class="col- pr-2" nz-icon type="plus" theme="outline"></i>
+                <i class="col- pr-2" nz-icon type="minus" theme="outline"></i>
+                <span class="col-">{{'msg.comm.menu.manage.metadata' | translate}}</span>
               </a>
               <ul class="ddp-list-sublnb-2depth">
                 <li>
@@ -164,9 +167,10 @@
               </ul>
             </li>
             <li *ngIf="permission.managementDatasource" [ngClass]="{'ddp-selected': lnbManager.management.dataStorage.fold == false}">
-              <a href="javascript:" (click)="mgmtMenuClickListener('DATASTORAGE')">
-                <em class="ddp-icon-dot"></em>
-                {{'msg.comm.menu.manage.storage' | translate}}
+              <a class="row no-gutters" href="javascript:" (click)="mgmtMenuClickListener('DATASTORAGE')">
+                <i class="col- pr-2" nz-icon type="plus" theme="outline"></i>
+                <i class="col- pr-2" nz-icon type="minus" theme="outline"></i>
+                <span class="col-">{{'msg.comm.menu.manage.storage' | translate}}</span>
               </a>
               <ul class="ddp-list-sublnb-2depth">
                 <li>
@@ -178,9 +182,10 @@
               </ul>
             </li>
             <li *ngIf="permission.managementDatasource" [ngClass]="{'ddp-selected': lnbManager.management.dataPreparation.fold == false}">
-              <a href="javascript:" (click)="mgmtMenuClickListener('DATAPREPARATION')">
-                <em class="ddp-icon-dot"></em>
-                {{'msg.comm.menu.manage.prep' | translate}}
+              <a class="row no-gutters" href="javascript:" (click)="mgmtMenuClickListener('DATAPREPARATION')">
+                <i class="col- pr-2" nz-icon type="plus" theme="outline"></i>
+                <i class="col- pr-2" nz-icon type="minus" theme="outline"></i>
+                <span class="col-">{{'msg.comm.menu.manage.prep' | translate}}</span>
               </a>
               <ul class="ddp-list-sublnb-2depth">
                 <li>
@@ -195,9 +200,10 @@
               </ul>
             </li>
             <li *ngIf="permission.managementDatasource" [ngClass]="{'ddp-selected': lnbManager.management.modelManager.fold == false}">
-              <a href="javascript:" (click)="mgmtMenuClickListener('MODELMANAGER')">
-                <em class="ddp-icon-dot"></em>
-                {{'msg.comm.menu.manage.model' | translate}}
+              <a class="row no-gutters" href="javascript:" (click)="mgmtMenuClickListener('MODELMANAGER')">
+                <i class="col- pr-2" nz-icon type="plus" theme="outline"></i>
+                <i class="col- pr-2" nz-icon type="minus" theme="outline"></i>
+                <span class="col-"> {{'msg.comm.menu.manage.model' | translate}}</span>
               </a>
               <ul class="ddp-list-sublnb-2depth">
                 <!--<li>-->
@@ -209,9 +215,10 @@
               </ul>
             </li>
             <li *ngIf="permission.managementDatasource" [ngClass]="{'ddp-selected': lnbManager.management.dataMonitoring.fold == false}">
-              <a href="javascript:" (click)="mgmtMenuClickListener('DATAMONITORING')">
-                <em class="ddp-icon-dot"></em>
-                {{'msg.comm.menu.manage.monitoring' | translate}}
+              <a class="row no-gutters" href="javascript:" (click)="mgmtMenuClickListener('DATAMONITORING')">
+                <i class="col- pr-2" nz-icon type="plus" theme="outline"></i>
+                <i class="col- pr-2" nz-icon type="minus" theme="outline"></i>
+                <span class="col-">{{'msg.comm.menu.manage.monitoring' | translate}}</span>
               </a>
               <ul class="ddp-list-sublnb-2depth">
                 <li>
@@ -224,8 +231,10 @@
             </li>
             <ng-container *ngFor="let item of getExtensions('management')">
               <li [ngClass]="{'ddp-selected': isExtensionSelected('management', item.name)}" *ngIf="extensionPermission(item)">
-                <a href="javascript:" (click)="mgmtMenuClickListener(item.name)">
-                  <em class="ddp-icon-dot"></em> {{item.name}}
+                <a class="row no-gutters" href="javascript:" (click)="mgmtMenuClickListener(item.name)">
+                  <i class="col- pr-2" nz-icon type="plus" theme="outline"></i>
+                  <i class="col- pr-2" nz-icon type="minus" theme="outline"></i>
+                  <span class="col-">{{item.name}}</span>
                 </a>
                 <ul class="ddp-list-sublnb-2depth">
                   <li *ngFor="let subKey of ObjectKeys(item.subContents)">
@@ -242,7 +251,7 @@
     </li>
     <!-- //MANAGEMENT -->
     <!-- ADMINSTRATION -->
-    <li [ngClass]="{'ddp-selected': lnbManager.administration.fold == false}" *ngIf="permission.userAdmin || permission.workspaceAdmin">
+    <li class="col-3" [ngClass]="{'ddp-selected': lnbManager.administration.fold == false}" *ngIf="permission.userAdmin || permission.workspaceAdmin">
       <div class="ddp-wrap-listmenu">
         <a class="d-flex row no-gutters align-items-center pr-2 tabTitle" href="javascript:" (click)="depth1Menu1ClickListener( 'ADMINISTRATION' )">
           <span class="col-">{{'msg.comm.menu.title.administration' | translate}}</span>
@@ -253,8 +262,10 @@
           <!-- submenu -->
           <ul class="ddp-list-sublnb">
             <li [ngClass]="{'ddp-selected': lnbManager.administration.users.fold == false}" *ngIf="permission.userAdmin" >
-              <a (click)="adminMenuClickListener('USER')" href="javascript:">
-                <em class="ddp-icon-dot"></em> {{ 'msg.comm.menu.admin.user' | translate }}
+              <a class="row no-gutters" (click)="adminMenuClickListener('USER')" href="javascript:">
+                <i class="col- pr-2" nz-icon type="plus" theme="outline"></i>
+                <i class="col- pr-2" nz-icon type="minus" theme="outline"></i>
+                <span class="col-">{{ 'msg.comm.menu.admin.user' | translate }}</span>
               </a>
               <ul class="ddp-list-sublnb-2depth">
                 <li >
@@ -272,8 +283,10 @@
               </ul>
             </li>
             <li [ngClass]="{'ddp-selected': lnbManager.administration.workspaces.fold == false}" *ngIf="permission.workspaceAdmin" >
-              <a (click)="adminMenuClickListener('WORKSPACE')" href="javascript:">
-                <em class="ddp-icon-dot"></em> {{'msg.comm.menu.admin.workspace' | translate}}
+              <a class="row no-gutters" (click)="adminMenuClickListener('WORKSPACE')" href="javascript:">
+                <i class="col- pr-2" nz-icon type="plus" theme="outline"></i>
+                <i class="col- pr-2" nz-icon type="minus" theme="outline"></i>
+                <span class="col-">{{'msg.comm.menu.admin.workspace' | translate}}</span>
               </a>
               <ul class="ddp-list-sublnb-2depth">
                 <li>
@@ -287,8 +300,10 @@
 
             <ng-container *ngFor="let item of getExtensions('administration')">
               <li [ngClass]="{'ddp-selected': isExtensionSelected('administration', item.name)}" *ngIf="extensionPermission(item)">
-                <a href="javascript:" (click)="adminMenuClickListener(item.name)">
-                  <em class="ddp-icon-dot"></em> {{item.name}}
+                <a class="row no-gutters" href="javascript:" (click)="adminMenuClickListener(item.name)">
+                  <i class="col- pr-2" nz-icon type="plus" theme="outline"></i>
+                  <i class="col- pr-2" nz-icon type="minus" theme="outline"></i>
+                  <span class="col-">{{item.name}}</span>
                 </a>
                 <ul class="ddp-list-sublnb-2depth">
                   <li *ngFor="let subKey of ObjectKeys(item.subContents)">
@@ -306,7 +321,7 @@
     </li>
     <!-- //ADMINSTRATION -->
     <ng-container *ngFor="let item of getExtensions('ROOT')">
-      <li [ngClass]="{'ddp-selected': lnbManager[item.name]['fold'] == false}" *ngIf="extensionPermission(item)">
+      <li class="col-3" [ngClass]="{'ddp-selected': lnbManager[item.name]['fold'] == false}" *ngIf="extensionPermission(item)">
         <div class="ddp-wrap-listmenu">
           <a class="d-flex row no-gutters align-items-center pr-2" href="javascript:" (click)="depth1Menu1ClickListener(item.name)">
             <span class="col-">{{item.name}}</span>
@@ -339,26 +354,32 @@
   </ul>
 
   <!-- help -->
-  <div class="ddp-ui-help">
-    <span class="ddp-label-type ddp-clear">
-      <span class="ddp-txt-label"> {{'msg.lnb.label.help' | translate }} </span>
-      <a (click)="downloadManual()" href="javascript:" class="ddp-btn-box">
-        <em class="ddp-icon-manual"></em>{{'msg.lnb.btn.manual' | translate}}
-      </a>
-      <a (click)="popupManual();" href="javascript:" class="ddp-btn-box">
-        <em class="ddp-icon-global"></em>{{'msg.lnb.btn.manual.web' | translate}}
-      </a>
-    </span>
-    <div class="ddp-data-help">
-      <span class="ddp-label-type">{{'msg.lnb.label.contact' | translate }}</span>
-      <dl>
-        <dt>{{ 'msg.lnb.label.admin' | translate }}</dt>
-        <dd><a href="mailto:metatron@sk.com">metatron@sk.com</a></dd>
-      </dl>
+  <div class="ddp-ui-help row no-gutters p-3">
+    <div class="col- border-right px-3">
+      <h3>{{'msg.lnb.label.help' | translate }} </h3>
+      <div class="row no-gutters">
+        <a (click)="downloadManual()" href="javascript:" class="col- ">
+          <span class="col-">{{'msg.lnb.btn.manual' | translate}}</span>.
+        </a>
+
+        <a (click)="popupManual();" href="javascript:" class="col- pl-2">
+          <span class="col-">{{'msg.lnb.btn.manual.web' | translate}}</span>
+        </a>
+      </div>
+
     </div>
-    <div *ngIf="buildInfo.appVersion !== 'STABLE'" class="ddp-data-version">
+
+    <div class="col- px-3">
+      <h3>{{'msg.lnb.label.contact' | translate }} {{ 'msg.lnb.label.admin' | translate }}</h3>
+      <a href="mailto:metatron@sk.com">contact@bigconnect.io</a>
+    </div>
+
+    <div *ngIf="buildInfo.appVersion !== 'STABLE'" class="col- ml-auto d-flex mt-auto">
       {{ 'msg.cluster.ui.create.version' | translate }}   {{buildInfo.appVersion}}
     </div>
+
+
+
   </div>
   <!-- //help -->
 
