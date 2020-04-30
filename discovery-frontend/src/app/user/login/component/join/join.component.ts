@@ -29,6 +29,7 @@ import { isUndefined } from 'util';
 @Component({
   selector: 'app-join',
   templateUrl: './join.component.html',
+  styleUrls:['./join.component.scss'],
 })
 export class JoinComponent extends AbstractComponent implements OnInit, OnDestroy {
 

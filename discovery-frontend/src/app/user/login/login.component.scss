@@ -1,6 +1,4 @@
-.ddp-ui-input-form .ddp-input-check input{
-  border-bottom: 1px solid #E9E10A;
-}
+
 .ddp-form-input {
   position:relative;
   box-sizing:border-box;}
@@ -38,9 +36,10 @@ h1{
   .ant-input{
     height: 40px;
     color: #c4c4c4;
-    border:1px solid #E9E10A;
+    border:1px solid #C4C4C4;
     &.ant-input:focus{
       border:1px solid #E9E10A ;
+      box-shadow: 0px 0px 0px 2px rgba(233,225,10,0.2);
     }
     &.ant-input:hover{
       border:1px solid #E9E10A ;
@@ -51,6 +50,7 @@ h1{
 .copyright{
   color: #c4c4c4;
   font-size: 12px;
+  flex: none;
 }
 .ddp-ui-login-buttons{
   a{
@@ -58,16 +58,16 @@ h1{
     border: 1px solid #E9E10A;
     position: relative;
     color: #C4C4C4;
-    font-size: 16px;
-    padding: .5rem;
+    font-size: 14px;
+    padding: .7rem .5rem;
     text-align: center;
     text-transform: uppercase;
     transition: all .5s;
     &:after{
       content: " ";
-       background:#E9E10A;
+      background:#E9E10A;
       width: 15px;
-      height: 10px;
+      height: 7px;
       position: absolute;
       left: 0;
       right:0;
@@ -107,8 +107,8 @@ input:-webkit-autofill:focus{
       border: 1px solid #21A79C;
       position: relative;
       color: #333;
-      font-size: 16px;
-      padding: .5rem;
+      font-size: 14px;
+      padding:.7rem .5rem;
       text-align: center;
       text-transform: uppercase;
       transition: all .5s;
@@ -116,7 +116,7 @@ input:-webkit-autofill:focus{
         content: " ";
         background:#21A79C;
         width: 15px;
-        height: 10px;
+        height: 7px;
         position: absolute;
         left: 0;
         right:0;
@@ -125,9 +125,9 @@ input:-webkit-autofill:focus{
       }
       &:hover{
         background:#21A79C;
-        color: #333;
+        color: #E9E10A;
         &:after{
-          background: #333;
+          background: #E9E10A;
         }
       }
     }

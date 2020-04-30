@@ -23,37 +23,48 @@
       <!-- contents -->
       <div class="ddp-ui-user-contet">
         <!-- User Name 입력 -->
-        <div [ngClass]="{'ddp-type-ok': '' !== user.username && joinValidation.username, 'ddp-type-error': false === joinValidation.username}"
-             class="ddp-ui-input-form" >
-          <label class="ddp-label-type">{{'msg.login.join.name' | translate}} </label>
-          <div class="ddp-input-check">
-            <input type="text" class="ddp-input-type" placeholder="{{'msg.login.join.name.ph' | translate}}"  (keydown)="joinValidation.usernameMessage? hideError('username') :null" [(ngModel)]="user.username" (blur)="validation('username')">
-            <em class="ddp-icon-ok" *ngIf="joinValidation.username"></em>
-            <em class="ddp-icon-error" *ngIf="joinValidation.username == false" (click)="user.username = ''; joinValidation.username = undefined;"></em>
+        <div class="ddp-ui-input-form px-4" [ngClass]="{'ddp-type-ok': '' !== user.username && joinValidation.username, 'ddp-type-error': false === joinValidation.username}">
+          <div class="svg">
+            <svg width="30" height="34" viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M27.9603 13.5209C28.6031 13.8411 29.1374 14.3409 29.4972 14.9587C29.857 15.5766 30.0267 16.2854 29.9852 16.9977C30.0505 17.694 29.8988 18.3933 29.5506 19.0013C29.2024 19.6093 28.6745 20.0966 28.0382 20.3973L6.54363 33.0683C4.8303 34.15 3.50636 34.3045 2.41605 33.4547C1.85128 32.9247 1.35432 32.3279 0.936353 31.6776C0.464645 30.9502 0.146708 30.1354 0.00180583 29.2825C-0.0155215 28.8248 0.0921093 28.371 0.313321 27.969C0.90708 27.232 1.64991 26.6267 2.49393 26.192L18.0697 17.075L2.49393 7.95803C1.8709 7.49446 1.4815 7.18541 1.16999 6.95362C0.842608 6.72666 0.573434 6.42669 0.384081 6.07782C0.194728 5.72895 0.0904716 5.34089 0.0796847 4.9448C0.152487 4.08653 0.44758 3.26149 0.936353 2.54966C1.94878 0.849887 2.9612 0 3.81787 0C4.79383 0.0609185 5.73531 0.381156 6.54363 0.92715L27.9603 13.5209Z" fill="#21A79C"/>
+            </svg>
           </div>
-          <!-- error 메시지 -->
-          <span class="ddp-ui-error" *ngIf="joinValidation.username == false">
-            {{ joinValidation.usernameMessage }}
-          </span>
+          <nz-input-group [nzPrefix]="prefixUser">
+            <input nz-input placeholder="{{'msg.login.join.name.ph' | translate}}" (keydown)="joinValidation.usernameMessage? hideError('username') :null" [(ngModel)]="user.username" (blur)="validation('username')">
+            <ng-template #prefixUser><i nz-icon type="user-add" theme="outline"></i></ng-template>
+          </nz-input-group>
+          <div class="ok" *ngIf="joinValidation.username"><i nz-icon type="check" theme="outline" ></i></div>
+          <div class="row no-gutters mt-2" *ngIf="joinValidation.username == false">
+            <div class="ddp-ui-error col- pt-1" >
+              {{ joinValidation.usernameMessage }}
+            </div>
+            <div *ngIf="joinValidation.username == false" class="ddp-input-check col- ml-auto">
+              <i nz-icon type="close" theme="outline"  (click)="user.username = ''; joinValidation.username = undefined;"></i>
+            </div>
+            <!-- error 메시지 -->
+          </div>
           <!-- //error 메시지 -->
         </div>
         <!-- // User Name 입력 -->
 
         <!-- Full Name 입력 -->
-        <div class="ddp-ui-input-form">
-          <label class="ddp-label-type">{{'msg.login.join.fullname' | translate}}
+        <div class="ddp-ui-input-form px-4">
+          <label class="ddp-label-type">
             <!-- tooltip -->
             <div class="ddp-ui-tooltip">
-              <em class="ddp-icon-question"></em>
+              <i nz-icon type="info-circle" theme="outline"></i>
               <div class="ddp-ui-tooltip-info">
                 <em class="ddp-icon-view-left"></em>
                 {{'msg.login.join.name.description' | translate}}
               </div>
             </div>
-            <!-- //tooltip -->
           </label>
+            <!-- //tooltip -->
+          <nz-input-group [nzPrefix]="prefixUserName">
+            <input nz-input placeholder="{{'msg.login.join.fullname.ph' | translate}}" [(ngModel)]="user.fullName" (blur)="validation('fullName')" maxlength="50">
+            <ng-template #prefixUserName><i nz-icon type="user"></i></ng-template>
+          </nz-input-group>
           <div class="ddp-input-check">
-            <input type="text" class="ddp-input-type" placeholder="{{'msg.login.join.fullname.ph' | translate}}" [(ngModel)]="user.fullName" (blur)="validation('fullName')" maxlength="50">
             <!--<em class="ddp-icon-ok" ></em>-->
             <!--<em class="ddp-icon-error"></em>-->
           </div>
@@ -63,84 +74,86 @@
         <!-- // Full Name 입력 -->
 
         <!-- E-Mail 입력 -->
-        <div [ngClass]="{'ddp-type-ok': '' !== user.email && joinValidation.email, 'ddp-type-error': false === joinValidation.email }"
-             class="ddp-ui-input-form" >
-          <label class="ddp-label-type">{{'msg.login.join.email' | translate}}
+        <div class="ddp-ui-input-form px-4" [ngClass]="{'ddp-type-ok': '' !== user.email && joinValidation.email, 'ddp-type-error': false === joinValidation.email }">
             <!-- tooltip -->
+          <label class="ddp-label-type">
             <div class="ddp-ui-tooltip">
-              <em class="ddp-icon-question"></em>
+              <i nz-icon type="info-circle" theme="outline"></i>
               <div class="ddp-ui-tooltip-info">
                 <em class="ddp-icon-view-left"></em>
                 {{'msg.login.join.email.description' | translate}}
               </div>
             </div>
+          </label>
             <!-- //tooltip -->
 
-          </label>
-          <div class="ddp-input-check">
-            <input type="text" class="ddp-input-type" placeholder="{{'msg.login.join.email.ph' | translate}}" (keydown)="joinValidation.emailMessage? hideError('email') :null" [(ngModel)]="user.email" (blur)="validation('email')">
-            <em class="ddp-icon-ok" *ngIf="joinValidation.email"></em>
-            <em class="ddp-icon-error" *ngIf="joinValidation.email == false" (click)="user.email = '';joinValidation.email = undefined;"></em>
+          <nz-input-group [nzPrefix]="prefixEmail">
+            <input nz-input placeholder="{{'msg.login.join.email.ph' | translate}}" (keydown)="joinValidation.emailMessage? hideError('email') :null" [(ngModel)]="user.email" (blur)="validation('email')">
+            <ng-template #prefixEmail><i nz-icon type="mail" theme="outline"></i></ng-template>
+          </nz-input-group>
+          <div class="ok" *ngIf="joinValidation.email" ><i nz-icon type="check" theme="outline"></i></div>
+          <div class="row no-gutters mt-2" *ngIf="joinValidation.email == false">
+            <!-- error 메시지 -->
+            <div class="ddp-ui-error col-" >
+              {{ joinValidation.emailMessage }}
           </div>
-          <!-- error 메시지 -->
-          <span class="ddp-ui-error" *ngIf="joinValidation.email == false">
-              <em class="ddp-icon-error"></em>{{ joinValidation.emailMessage }}
-          </span>
-          <!-- //error 메시지 -->
+            <div class="ddp-input-check ml-auto col-">
+              <i (click)="user.email = '';joinValidation.email = undefined;" nz-icon type="close" theme="outline"></i>
+            </div>
+            <!-- //error 메시지 -->
+          </div>
         </div>
         <!-- // E-Mail 입력 -->
 
         <!-- Password 입력 -->
-        <div class="ddp-wrap-overflow ddp-clear">
-          <div class="ddp-ui-fleft ">
-            <!-- error 일때 ddp-type-error 추가 -->
-            <div [ngClass]="{'ddp-type-ok': '' !== user.password && joinValidation.password, 'ddp-type-error': false === joinValidation.password }"
-                 class="ddp-ui-input-form" >
-              <label class="ddp-label-type">{{'msg.login.join.passwd' | translate}}
+        <div class="ddp-ui-input-form px-4" [ngClass]="{'ddp-type-ok': '' !== user.password && joinValidation.password, 'ddp-type-error': false === joinValidation.password }"
+                  >
                 <!-- tooltip -->
+              <label class="ddp-label-type">
                 <div class="ddp-ui-tooltip">
-                  <em class="ddp-icon-question"></em>
+                  <i nz-icon type="info-circle" theme="outline"></i>
                   <div class="ddp-ui-tooltip-info">
                     <em class="ddp-icon-view-left"></em>
                     {{'msg.login.join.passwd.description' | translate}}
                   </div>
                 </div>
-                <!-- //tooltip -->
               </label>
-
-              <div class="ddp-input-check">
-                <input type="password" class="ddp-input-type" placeholder="{{'msg.login.join.passwd.ph' | translate}}" [(ngModel)]="user.password" (keydown)="joinValidation.passwordMessage? hideError('password') :null" (blur)="validation('password')">
-                <em class="ddp-icon-ok" *ngIf="joinValidation.password"></em>
-                <em class="ddp-icon-error" *ngIf="joinValidation.password == false" (click)="user.password = ''; joinValidation.password = undefined;"></em>
-              </div>
-              <!-- error 메시지 -->
-              <span class="ddp-ui-error" *ngIf="joinValidation.password == false">
+                <!-- //tooltip -->
+              <nz-input-group [nzPrefix]="prefixPass">
+                <input type="password" nz-input placeholder="{{'msg.login.join.passwd.ph' | translate}}" [(ngModel)]="user.password" (keydown)="joinValidation.passwordMessage? hideError('password') :null" (blur)="validation('password')">
+                <ng-template #prefixPass><i nz-icon type="lock" theme="outline"></i></ng-template>
+              </nz-input-group>
+              <div class="ok" *ngIf="joinValidation.password"><i nz-icon type="check" theme="outline" ></i></div>
+              <div class="row no-gutters mt-2" *ngIf="joinValidation.password == false">
+                <!-- error 메시지 -->
+                <div class="ddp-ui-error col-">
                   <em class="ddp-icon-error"></em>{{ joinValidation.passwordMessage }}
-              </span>
-              <!-- //error 메시지 -->
-            </div>
-
-          </div>
-          <div class="ddp-ui-fright">
-            <!-- error 일때 ddp-type-error 추가 -->
-            <div [ngClass]="{'ddp-type-ok': '' !== user.confirmPassword && joinValidation.confirmPassword, 'ddp-type-error': false === joinValidation.confirmPassword }"
-                 class="ddp-ui-input-form" >
-              <label class="ddp-label-type">{{'msg.login.join.confirm-passwd' | translate}} </label>
-
-              <div class="ddp-input-check">
-                <input type="password" class="ddp-input-type" placeholder="{{'msg.login.join.confirm-passwd.ph' | translate}}" (keydown)="joinValidation.confirmPasswordMessage? hideError('confirmPassword') :null" [(ngModel)]="user.confirmPassword" (blur)="validation('confirmPassword')">
-                <em class="ddp-icon-ok" *ngIf="joinValidation.confirmPassword"></em>
-                <em class="ddp-icon-error" *ngIf="joinValidation.confirmPassword == false" (click)="user.confirmPassword = ''; joinValidation.confirmPassword = undefined;"></em>
+                </div>
+                <!-- //error 메시지 -->
+                <div class="ddp-input-check col- ml-auto">
+                  <i  (click)="user.password = ''; joinValidation.password = undefined;" nz-icon type="close" theme="outline"></i>
+                </div>
               </div>
-              <!-- error 메시지 -->
-              <span class="ddp-ui-error" *ngIf="joinValidation.confirmPassword == false">
-                  <em class="ddp-icon-error"></em>{{ joinValidation.confirmPasswordMessage }}
-              </span>
-              <!-- //error 메시지 -->
             </div>
-
+        <!-- error 일때 ddp-type-error 추가 -->
+        <div class="ddp-ui-input-form px-4" [ngClass]="{'ddp-type-ok': '' !== user.confirmPassword && joinValidation.confirmPassword, 'ddp-type-error': false === joinValidation.confirmPassword }">
+          <nz-input-group [nzPrefix]="prefixPass">
+            <input type="password" nz-input placeholder="{{'msg.login.join.confirm-passwd.ph' | translate}}" (keydown)="joinValidation.confirmPasswordMessage? hideError('confirmPassword') :null" [(ngModel)]="user.confirmPassword" (blur)="validation('confirmPassword')">
+            <ng-template #prefixPass><i nz-icon type="lock" theme="outline"></i></ng-template>
+          </nz-input-group>
+          <div class="ok" *ngIf="joinValidation.confirmPassword"><i nz-icon type="check" theme="outline" ></i></div>
+          <div class="row no-gutters mt-2">
+            <!-- error 메시지 -->
+            <div class="ddp-ui-error col-" *ngIf="joinValidation.confirmPassword == false">
+              {{ joinValidation.confirmPasswordMessage }}
+            </div>
+            <!-- //error 메시지 -->
+            <div *ngIf="joinValidation.confirmPassword == false" class="ddp-input-check col ml-auto">
+              <i (click)="user.confirmPassword = ''; joinValidation.confirmPassword = undefined;"  nz-icon type="close" theme="outline"></i>
+            </div>
           </div>
         </div>
+
         <!-- // Password 입력 -->
 
         <!-- input form -->
@@ -186,15 +199,13 @@
             <!--<a href="javascript:" class="ddp-btn-sbutton ddp-bg-gray" (click)="removeProfileImage()">{{'msg.comm.btn.del' | translate}}</a>-->
           <!--</div>-->
           <!--&lt;!&ndash; //button &ndash;&gt;-->
-
-
         <!--</div>-->
         <!-- //프로필 사진 -->
       </div>
       <!-- //contents -->
       <!-- buttons -->
-      <div class="ddp-ui-buttons2">
-        <a href="javascript:" class="ddp-btn-type-popup ddp-bg-black" (click)="join()">{{'msg.login.join.btn.join' | translate}}</a>
+      <div class="ddp-ui-buttons2 px-5">
+        <a href="javascript:" class="ddp-btn-type-popup ddp-bg-black mx-5" (click)="join()">{{'msg.login.join.btn.join' | translate}}</a>
       </div>
       <!-- //buttons -->
     </div>
