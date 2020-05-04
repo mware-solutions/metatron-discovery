@@ -27,7 +27,8 @@ import {EventBroadcaster} from "../../common/event/event.broadcaster";
 
 @Component({
   selector: 'component-explore-lnb',
-  templateUrl: 'explore-data-lnb.component.html'
+  templateUrl: 'explore-data-lnb.component.html',
+  styleUrls: ['./explore-data.component.scss']
 })
 export class ExploreDataLnbComponent extends AbstractComponent {
 

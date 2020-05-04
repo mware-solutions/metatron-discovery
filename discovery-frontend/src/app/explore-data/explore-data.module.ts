@@ -57,6 +57,7 @@ import {UpdatedTimeRadioFilter} from "./explore-data/component/updated-time-radi
 import {DataStorageCriteriaModule} from "../data-storage/data-storage-criteria.module";
 import {MetadataDataCreatorDataListComponent} from "./explore-data/popup/metadata-data-creator-data-list.component";
 import {DataCreatorDetailComponent} from "./favorite/data-creator-detail.component";
+import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import {DataCreatorDetailComponent} from "./favorite/data-creator-detail.compone
       {path: 'favorite/creator/:username', component: DataCreatorDetailComponent}
     ]),
     DataStorageCriteriaModule,
+    NgZorroAntdModule
   ],
   declarations: [
     ExploreDataInformationComponent,

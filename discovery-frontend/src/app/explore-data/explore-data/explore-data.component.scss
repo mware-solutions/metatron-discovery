@@ -1,0 +1,125 @@
+//left menu
+.ddp-wrap-catalogs{
+  background: #333;
+  border:none;
+  .ddp-wrap-folding{
+    height: unset;
+    width: unset;
+    border:none;
+    a{
+      margin: 0;
+      padding: 0;
+      height: auto;
+      width: auto;
+      &:hover{
+        margin: 0;
+        padding: 0;
+        height: auto;
+        width: auto;
+        i{
+          color: #21A79C;
+        }
+      }
+    }
+    .ddp-btn-folding{
+      &:before{
+        content: none;
+      }
+    }
+  }
+}
+.ddp-wrap-folding{
+  right: -20px!important;
+  display: unset;
+}
+ul.ddp-ui-tab {
+  li{
+    a{
+      text-decoration: none;
+      color: #fff;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 200;
+      &:hover{
+        background:#E9E10A;
+        color: #333;
+      }
+
+    }
+    &.ddp-selected {
+      a{
+        background:#E9E10A;
+        color: #333;
+        border:none;
+        &:hover{
+          background:#E9E10A;
+          color: #333;
+        }
+
+        &:before{
+          content: none;
+        }
+        &:after{
+          content: none;
+        }
+      }
+    }
+  }
+}
+.type-dropdown-data{
+  color: #fff;
+  font-weight: 400;
+  i{
+    font-size: 12px;
+  }
+  .ddp-label-down{
+    border:none;
+    font-weight: 400;
+    color: #fff;
+    &:before{
+      content:none;
+    }
+    &:after{
+      content:none;
+    }
+  }
+  &.ddp-selected{
+    .ddp-label-down{
+      &:after{
+        border:none;
+        width: 10px;
+        height: 15px;
+        background:#E9E10A;
+        right: 0;
+        top:0;
+        bottom:0;
+        margin: auto 0;
+        content: " ";
+      }
+      color: #E9E10A;
+    }
+    font-weight: 400;
+    i{
+      color: #E9E10A;
+    }
+  }
+}
+.ddp-ui-tree{
+  border: none;
+}
+.ddp-favorite-nodata{
+  color: #fff;
+  font-weight: 200;
+  border: none;
+}
+.ddp-ui-favorite{
+  border:none!important;
+}
+.ddp-view-catalog.ddp-close .ddp-wrap-catalogs {
+  width: 0!important;
+}
+//banner
+.ddp-ui-banner{
+  border-radius: 0;
+  box-shadow: none;
+}

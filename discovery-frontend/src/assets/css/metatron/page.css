@@ -9865,8 +9865,9 @@ table.ddp-table-type2 tbody tr > td .ddp-wrap-catalogs2 span {float:inherit;}
 .ddp-wrap-meatadata .ddp-clear {margin:0 -8px;}
 
 .ddp-view-catalog.ddp-close .ddp-ui-contents-list {padding-left:56px !important;}
-.ddp-view-catalog.ddp-close .ddp-wrap-catalogs {width:26px;}
-.ddp-view-catalog.ddp-close .ddp-wrap-catalogs * {display:none;}
+.ddp-view-catalog.ddp-close .ddp-wrap-catalogs {width:0px;}
+.ddp-view-catalog.ddp-close .ddp-wrap-catalogs * {}
+.ddp-view-catalog.ddp-close ul.ddp-ui-tab{display: none;}
 .ddp-view-catalog.ddp-close .ddp-wrap-catalogs .ddp-btn-folding {display:block; right:6px;}
 .ddp-view-catalog.ddp-close .ddp-wrap-catalogs .ddp-btn-folding .ddp-ui-tooltip-info {left:100%; right:initial; top:-12px; margin-left:9px;white-space:nowrap;}
 .ddp-view-catalog.ddp-close .ddp-wrap-catalogs .ddp-btn-folding .ddp-ui-tooltip-info em.ddp-icon-view-top {left:0; right:initial; top:9px; transform:rotate(0);}
@@ -10121,7 +10122,6 @@ table.ddp-table-line tbody tr td .ddp-ui-popularity .ddp-bar {float:left;}
 .ddp-layout-meta .ddp-wrap-catalogs.ddp-close .ddp-btn-folding * {display:block;}
 
 .ddp-layout-meta .ddp-wrap-catalogs .ddp-wrap-tabs {position:relative;}
-.ddp-layout-meta .ddp-wrap-catalogs .ddp-wrap-tabs:before {display:block; position:absolute; bottom:0; left:0; right:0;border-bottom:1px solid #d7d8dd; content:'';}
 .ddp-layout-meta .ddp-wrap-catalogs .ddp-wrap-folding {display:block ; position:absolute; top:0; right:0; width:25px; height:41px; border-left:1px solid #ddd;}
 .ddp-layout-meta .ddp-view-catalog.ddp-close .ddp-wrap-catalogs .ddp-wrap-folding {border-left:none;}
 .ddp-layout-meta .ddp-wrap-catalogs .ddp-wrap-folding .ddp-btn-folding:hover * {display:block;}

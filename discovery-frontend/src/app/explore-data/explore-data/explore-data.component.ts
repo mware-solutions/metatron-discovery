@@ -130,7 +130,7 @@ export class ExploreDataComponent extends AbstractComponent implements OnInit, O
   // Destroy
   public ngOnDestroy() {
     super.ngOnDestroy();
-    this.$layoutContentsClass.removeClass( 'ddp-layout-meta' );
+    //this.$layoutContentsClass.removeClass( 'ddp-layout-meta' );
     this.$layoutContentsClass.css('height', this.originalHeight);
     this.subscription.unsubscribe();
   }

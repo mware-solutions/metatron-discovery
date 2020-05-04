@@ -24,6 +24,7 @@ import {EventBroadcaster} from "../../common/event/event.broadcaster";
 @Component({
   selector: 'explore-data-main',
   templateUrl: './explore-data-main.component.html',
+  styleUrls: ['./explore-data.component.scss']
 })
 export class ExploreDataMainComponent extends AbstractComponent {
 
