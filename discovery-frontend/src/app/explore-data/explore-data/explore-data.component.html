@@ -1,19 +1,23 @@
  <div class="ddp-ui-contents-in ddp-scroll">
     <!-- top -->
-    <div class="ddp-ui-contents-top">
-      <div class="ddp-ui-title ddp-cursor" (click)="goToExploreMain()">
+    <div class="ddp-ui-contents-top row no-gutters mx-5 d-flex align-items-center py-3">
+      <div class="ddp-ui-title ddp-cursor col-" (click)="goToExploreMain()">
         {{'msg.explore.ui.title' | translate}}
       </div>
       <!-- tag -->
-      <div class="ddp-ui-tag">
-        <div class="ddp-box-tag-value ddp-datasource" [class.ddp-disabled]="sourceTypeCount === 0">{{'msg.comm.th.ds'| translate}} {{sourceTypeCount}} </div>
-        <div class="ddp-box-tag-value ddp-database" [class.ddp-disabled]="databaseTypeCount === 0">{{'msg.storage.li.db'| translate}}  {{databaseTypeCount}}</div>
-        <div class="ddp-box-tag-value ddp-stagingdb" [class.ddp-disabled]="stagingTypeCount === 0">{{'msg.storage.li.hive'| translate}} {{stagingTypeCount}}</div>
-        <div class="ddp-box-tag-value ddp-dataset" [class.ddp-disabled]="datasetTypeCount === 0">{{'msg.storage.li.dataset'| translate}} {{datasetTypeCount}}</div>
+      <div class="ddp-ui-tag col- ml-2">
+        <div class="row no-gutters">
+          <div class="ddp-box-tag-value ddp-datasource col-" [class.ddp-disabled]="sourceTypeCount === 0">{{'msg.comm.th.ds'| translate}} {{sourceTypeCount}} </div>
+          <div class="ddp-box-tag-value ddp-database col-" [class.ddp-disabled]="databaseTypeCount === 0">{{'msg.storage.li.db'| translate}}  {{databaseTypeCount}}</div>
+          <div class="ddp-box-tag-value ddp-stagingdb col-" [class.ddp-disabled]="stagingTypeCount === 0">{{'msg.storage.li.hive'| translate}} {{stagingTypeCount}}</div>
+          <div class="ddp-box-tag-value ddp-dataset col-" [class.ddp-disabled]="datasetTypeCount === 0">{{'msg.storage.li.dataset'| translate}} {{datasetTypeCount}}</div>
+        </div>
       </div>
       <!-- //tag -->
       <!-- search -->
-      <component-explore-search (changedSearch)="onChangedSearch()" #searchComponent></component-explore-search>
+      <div class="col- ml-auto">
+        <component-explore-search (changedSearch)="onChangedSearch()" #searchComponent></component-explore-search>
+      </div>
       <!-- //search -->
     </div>
     <!-- //top -->
