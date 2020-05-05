@@ -1,10 +1,9 @@
 <!-- contents -->
-<em class="ddp-bg-back type-bg"></em>
 <div class="ddp-ui-contents-in ddp-pad0 ddp-scroll">
   <!-- top -->
-  <div class="ddp-layout-top-menu ddp-clear">
+  <div class="ddp-layout-top-menu ddp-clear mx-5">
     <!-- label -->
-    <div class="ddp-top-label">
+    <div class="ddp-top-label my-3">
       {{ 'msg.comm.menu.explore-data.my.favorite.data' | translate }}
     </div>
     <!-- //label -->
@@ -48,7 +47,7 @@
       </div>
       <!-- //top option -->
       <div class="ddp-meta-list">
-        <div class="ddp-box-list">
+        <div class="ddp-box-list border mx-5">
           <div class="ddp-data-total" [innerHTML]="getTotalElementsGuide()">
           </div>
           <div class="ddp-no-data" *ngIf="isEmptyMetadataList()">

@@ -9058,11 +9058,8 @@ ul.ddp-list-owner li {padding:6px 0;}
 **************************************************************/
 .ddp-layout-contents .ddp-ui-contents-in {position:Relative; height:100%;}
 
-.ddp-layout-top-menu {background-color: #fff; /* layer fill content */
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,.15); /* drop shadow */
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.15); /* drop shadow */
-  box-shadow: 0 1px 3px rgba(0,0,0,.15); /* drop shadow */}
-.ddp-layout-top-menu .ddp-top-label {float:left; padding:13px 57px 13px 20px; font-size:22px; color:#b6b9c2;}
+.ddp-layout-top-menu {background-color: #fff; }
+.ddp-layout-top-menu .ddp-top-label {font-size:22px; color:#b6b9c2;}
 .ddp-layout-top-menu .ddp-top-menu {float:left;}
 
 .ddp-layout-top-menu .ddp-top-menu li {float:left; padding-right:28px;}
@@ -9750,7 +9747,7 @@ table.ddp-table-type2 tbody tr td table.ddp-table-code tr td {background:none; c
 .ddp-list-creator li .ddp-txt-ellipsis .ddp-data-date {margin-left:3px; color:#90969f; font-size:12px;}
 
 .ddp-wrap-data-list .ddp-type-top-option {padding:10px 0;}
-.ddp-wrap-data-list .ddp-box-list {padding:0 20px 31px 20px;background-color:#fff; border-radius:4px; box-shadow: 0 2px 6px 2px rgba(102, 110, 178, 0.15);}
+.ddp-wrap-data-list .ddp-box-list {padding:0 20px 31px 20px;background-color:#fff; }
 .ddp-wrap-data-list .ddp-box-list .ddp-data-total {padding:16px 0 18px 0;color:#4b515b; font-size:13px;}
 .ddp-wrap-data-list .ddp-box-list .ddp-no-data {padding:42px 0; color:#b5b9c2; border-top:1px solid #e7e7ea; text-align:center;}
 
