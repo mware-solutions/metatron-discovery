@@ -15,13 +15,13 @@
 <em class="ddp-bg-back"></em>
 <div class="ddp-ui-contents-in ddp-scroll">
   <!-- top -->
-  <div class="ddp-ui-contents-top">
-    <div class="ddp-ui-title">
+  <div class="ddp-ui-contents-top mx-5">
+    <div class="ddp-ui-title my-3">
       {{'msg.comm.menu.manage.users' | translate}}
     </div>
 
     <!-- tab -->
-    <ul class="ddp-list-top-tab">
+    <ul class="ddp-list-top-tab border-bottom">
       <li [ngClass]="{'ddp-selected': tabId == 'approval'}">
         <a (click)="gotoTab('approval')" href="javascript:">{{'msg.comm.menu.admin.user.approval' | translate}}</a>
       </li>

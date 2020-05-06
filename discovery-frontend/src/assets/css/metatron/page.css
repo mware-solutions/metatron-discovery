@@ -6290,16 +6290,22 @@ ul.ddp-list-detail.ddp-list-model {margin-top:10px;}
 ul.ddp-list-detail.ddp-list-model li .ddp-wrap-detailname {text-overflow:ellipsis;}
 
 /**********************************************************************************
-	모델 매니저리스트
+	모델 매니저리스트 //tabs
 **********************************************************************************/
 .ddp-ui-contents-top {position:fixed; left:0; right:0; top:85px;z-index:20;
   background-color: #fff; /* layer fill content */}
 .ddp-ui-contents-top .ddp-ui-title {color:#4b515b; font-weight:bold; font-size:22px;}
 ul.ddp-list-top-tab {overflow:hidden;}
-ul.ddp-list-top-tab li {float:left; padding:0 20px;}
-ul.ddp-list-top-tab li:first-of-type {padding-left:0;}
-ul.ddp-list-top-tab li a {display:block; padding:10px 0; color:#90969f; font-size:14px; border-bottom:3px solid #fff;}
-ul.ddp-list-top-tab li.ddp-selected a {border-bottom:3px solid #666eb2; color:#666eb2;}
+ul.ddp-list-top-tab li {float:left; padding:0 15px; position:relative;}
+ul.ddp-list-top-tab li a{padding-left: 15px;}
+ul.ddp-list-top-tab li:hover a:before{position: absolute; content:" "; background: #21A79C; width: 10px; height: 10px; left:0; top:0; bottom:0; margin: auto 0;}
+ul.ddp-list-top-tab li a {text-decoration:none;display:block; padding:10px 0; color:#c4c4c4; font-size:12px; text-transform:uppercase;}
+ul.ddp-list-top-tab li a:hover{color:#21A79C;}
+ul.ddp-list-top-tab li.ddp-selected{ }
+ul.ddp-list-top-tab li.ddp-selected a { color:#21A79C;border-bottom:1px solid #21A79C;}
+
+ul.ddp-list-top-tab li.ddp-selected a:before{
+  position: absolute; content:" "; background: #21A79C; width: 10px; height: 10px; left:0; top:0; bottom:0; margin: auto 0;}
 
 .ddp-ui-contents-list {position:relative; padding-top:113px; padding-bottom:54px;}
 .ddp-ui-contents-list .ddp-wrap-option {float:left; width:100%; padding-top:10px; margin-bottom:13px;}
@@ -9722,7 +9728,7 @@ table.ddp-table-type2 tbody tr td table.ddp-table-code tr td {background:none; c
 /**********************************************************************************
 	메타데이터 (my favorite)
 **********************************************************************************/
-.ddp-wrap-list-create {padding:31px 0; margin:-5px;}
+.ddp-wrap-list-create {padding:31px 0;}
 .ddp-wrap-list-create .ddp-box-create {float:left; width: 420px; padding:20px; margin:5px 5px; border-radius: 2px; box-shadow: 0 2px 6px 2px rgba(102, 110, 178, 0.15); background-color: #fff; cursor:pointer;}
 .ddp-wrap-list-create .ddp-box-create .ddp-data-top {margin-bottom:16px;overflow:hidden;}
 .ddp-wrap-list-create .ddp-box-create .ddp-data-top .ddp-data-photo {float:left; position:relative; width:50px; height:50px; margin-right:9px; border-radius:50%; overflow:hidden;background:url(../../images/img_profile.png) no-repeat; background-position:left -82px;}
