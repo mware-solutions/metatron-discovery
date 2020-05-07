@@ -3,15 +3,15 @@
 /**************************************************************
   top Filtering
 **************************************************************/
-.ddp-wrap-top-filtering {position:relative; min-height:54px; margin:0 -80px; padding:0 80px;background-color:#dbdce0; z-index:10;}
+.ddp-wrap-top-filtering {position:relative; min-height:54px; margin:0 -80px; padding:0 80px; z-index:10;}
 
 .ddp-wrap-top-filtering .ddp-filter-more {position:relative; float:left; margin-right:-7px;}
 .ddp-wrap-top-filtering .ddp-filter-more .ddp-wrap-popup2 {display:none; position:absolute; top:45px; left:0; min-width:134px;}
 .ddp-wrap-top-filtering .ddp-filter-more .ddp-box-result.ddp-selected .ddp-wrap-popup2 {display:block; top:28px;}
-.ddp-wrap-top-filtering .ddp-btn-filter-more {display:inline-block; position:relative; width:30px; height:30px; border-radius:3px; background-color:#c8cad1;}
-.ddp-wrap-top-filtering .ddp-btn-filter-more:hover {background-color:#b6b9c2;}
-.ddp-wrap-top-filtering .ddp-btn-filter-more:before {display:inline-block; width:12px; height:12px; position:absolute; top:50%; left:50%; margin:-6px 0 0 -6px;background:url(../../../images/icon_add.png) no-repeat; background-position:left -77px; content:'';}
-.ddp-wrap-top-filtering .ddp-btn-filter-more:hover:before {background-position-x:-13px;}
+.ddp-wrap-top-filtering .ddp-btn-filter-more {background-color:#21A79C;display:block; position:relative; width:20px; height:20px; font-weight: 300;}
+.ddp-wrap-top-filtering .ddp-btn-filter-more:hover {background-color:#E9E10A; color: #333}
+.ddp-wrap-top-filtering .ddp-btn-filter-more:before { color:#fff;display:block; width:13px; height:18px; position:absolute; top:0; left:0; bottom:0; right:0; margin:auto;content:'+'; font-size: 30px;}
+.ddp-wrap-top-filtering .ddp-btn-filter-more:hover:before {color: #333;}
 .ddp-wrap-top-filtering .ddp-form-filtering {display:inline-block; position:relative; vertical-align:top; margin-left: 20px;}
 .ddp-wrap-top-filtering .ddp-form-filtering .ddp-result-filtering { margin-left:20px; padding:5px 0; cursor:pointer;}
 .ddp-wrap-top-filtering .ddp-wrap-form-filtering {padding:14px 0 15px 0; box-sizing:border-box;}
@@ -22,7 +22,7 @@
 .ddp-wrap-top-filtering .ddp-form-filtering .ddp-result-filtering .ddp-btn-del {display:inline-block; width:14px; height:14px; margin-left:4px; background:url(../../../images/btn_sclose.png) no-repeat; background-position:left -131px;}
 .ddp-wrap-top-filtering .ddp-form-filtering .ddp-result-filtering .ddp-box-result {display:inline-block; position:relative; margin-left:4px;max-width:250px; padding-right:15px; cursor:pointer; box-sizing:border-box; vertical-align:top;}
 
-.ddp-wrap-top-filtering .ddp-form-filtering .ddp-result-filtering .ddp-box-result .ddp-txt-result {display:block;white-space:nowrap; text-overflow:ellipsis; overflow:Hidden;}
+.ddp-wrap-top-filtering .ddp-form-filtering .ddp-result-filtering .ddp-box-result .ddp-txt-result {display:block;white-space:nowrap; text-overflow:ellipsis; overflow:Hidden; font-size: 12px;}
 .ddp-wrap-top-filtering .ddp-form-filtering .ddp-result-filtering .ddp-box-result:before {display:inline-block; position:absolute; top:50%; right:0; width:8px; height:4px; margin-top:-2px; background:url(../../../images/icon_select.png) no-repeat; background-position:-16px top; content:'';}
 .ddp-wrap-top-filtering .ddp-form-filtering .ddp-wrap-popup2 {display:none; position:absolute; top:24px; left:0;  min-width:180px; max-width:250px; max-height:250px; overflow:auto;}
 .ddp-wrap-top-filtering .ddp-result-filtering.ddp-selected .ddp-wrap-popup2 {display:block; top:31px;}
@@ -51,11 +51,11 @@
 
 .ddp-wrap-top-filtering .ddp-filter-search .ddp-form-filter-search.type-auto input:focus + .ddp-text-placeholder {width:175px; white-space:nowrap;}
 .ddp-wrap-top-filtering .ddp-filter-search .ddp-form-filter-search.type-auto input:focus + .ddp-text-placeholder + .ddp-btn-delete {display:block;}
-.ddp-wrap-top-filtering .ddp-filter-search .ddp-form-filter-search input {display:block; padding:18px 0; width:100%; font-size:13px; box-sizing:border-box; background:none; border:none;}
-.ddp-wrap-top-filtering .ddp-filter-search .ddp-form-filter-search:before {display:inline-block; position:absolute; top:50%; left:0; margin-top:-7px; width:14px; height:14px; background:url(../../../images/icon_search.png) no-repeat; background-position:-15px -12px; content:'';}
+.ddp-wrap-top-filtering .ddp-filter-search .ddp-form-filter-search input {display:block; padding:10px 0 10px 15px; width:100%; font-size:13px; box-sizing:border-box; background:none; border:none;}
+.ddp-wrap-top-filtering .ddp-filter-search .ddp-form-filter-search:before {display:inline-block; position:absolute; top:50%; left:10px; margin-top:-7px; width:14px; height:14px; background:url(../../../images/icon_search.png) no-repeat; background-position:-15px -12px; content:'';}
 .ddp-wrap-top-filtering .ddp-filter-search .ddp-btn-delete {display:none; position:absolute; top:50%; right:0; margin-top:-7px; width:14px; height:14px; background:url(../../../images/btn_sclose.png) no-repeat; background-position:left -131px;}
 .ddp-wrap-top-filtering .ddp-filter-search .ddp-type-search { width:195px;float:left;}
-.ddp-wrap-top-filtering .ddp-filter-search .ddp-btn-selection {float:left; margin:10px 0 0 0;}
+.ddp-wrap-top-filtering .ddp-filter-search .ddp-btn-selection {float:left; margin:7px 0 0 0;}
 .ddp-filter-option {padding:18px 0 11px 0; text-align:right;}
 .ddp-filter-option .ddp-btn-pop {padding:8px 9px;}
 .ddp-filter-option .ddp-data-total {position:relative; top:8px; float:left;}

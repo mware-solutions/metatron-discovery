@@ -3,7 +3,7 @@
 /***************************************************************************
 	달력
 *************************************************************************/
-.ddp-ui-calen .ddp-box-calen {position:relative; float:left; width:48%; border-radius:2px; border:1px solid #d0d1d9; background-color:#fff; box-sizing:border-box;}
+.ddp-ui-calen .ddp-box-calen {position:relative; float:left; width:48%; border:1px solid #d0d1d9; background-color:#fff; box-sizing:border-box;}
 .ddp-ui-calen .ddp-box-calen.ddp-disabled:before {display:inline-block; content:''; position:absolute; top:0; left:0; right:0; bottom:0; background-color:rgba(240,240,240,0.3);}
 .ddp-ui-calen .ddp-input-typebasic,
 .ddp-ui-calen .ddp-input-typebasic:focus {border:none; padding: 7px 13px 6px 13px}

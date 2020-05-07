@@ -13,8 +13,8 @@
   ~ limitations under the License.
 -->
 
-<div class="ddp-form-filtering">
-  <div class="ddp-result-filtering" [class.ddp-selected]="isShowList" (click)="onClickShowList($event)">
+<div class="ddp-form-filtering border-right pr-3">
+  <div class="ddp-result-filtering d-flex" [class.ddp-selected]="isShowList" (click)="onClickShowList($event)">
     <span class="ddp-txt-label" *ngIf="isEnableFilterTitle()">{{filterTitle}}:</span>
     <div class="ddp-box-result">
       <span class="ddp-txt-result" title="{{selectedItemsLabel}}">{{selectedItemsLabel}}</span>
