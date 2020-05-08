@@ -20,9 +20,6 @@
     box-tag
 **************************************************************/
 .ddp-box-tag {display:inline-block; float:left; padding:1px 3px 1px 3px; margin-right:8px; border-radius:1px; font-size:10px; font-weight:normal; vertical-align: top; box-sizing:border-box;}
-.ddp-box-tag.ddp-workbook {border:1px solid #90969f; color:#565c65;}
-.ddp-box-tag.ddp-notebook {border:1px solid #5ecfea; color:#5ecfea;}
-.ddp-box-tag.ddp-workbench {border:1px solid #bac1e5; color:#8c97d3;}
 .ddp-box-tag.ddp-wargled {min-width:54px; border:1px solid #ee5398; color:#ee5398; text-align:center; }
 .ddp-box-tag.ddp-imported {min-width:54px; border:1px solid #50549a; color:#50549a; text-align:center;}
 .ddp-box-tag.ddp-personal {width:52px; border:1px solid #cd2287; color:#cd2287; text-align:center;}

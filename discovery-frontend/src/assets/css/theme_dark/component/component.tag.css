@@ -99,11 +99,6 @@
     box-sizing: border-box;
 }
 
-.theme-dark .ddp-box-tag.ddp-workbook {
-    border: 1px solid #7e8aa5;
-    color: #565c65;
-}
-
 .theme-dark .ddp-box-tag.ddp-notebook {
     border: 1px solid #5ecfea;
     color: #5ecfea;

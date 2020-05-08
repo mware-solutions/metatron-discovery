@@ -168,10 +168,11 @@ a.ddp-btn-line.ddp-type:hover {background-color:#d0d1d8;}
 
 a.ddp-btn-line-s {
   display:inline-block;
-  padding:8px 20px;
-  background-color:#21A79C;
+  padding:7px 20px;
+  background-color:#fff;
+  border: 1px solid #21A79C;
   font-size:14px;
-  color:#fff;
+  color:#333;
   text-align:center;
   box-sizing:border-box;
   vertical-align: middle;
@@ -180,7 +181,7 @@ a.ddp-btn-line-s {
 }
 a.ddp-btn-line-s:before{
   content:" ";
-  background:#E9E10A;
+  background:#21A79C;
   position: absolute;
   width: 10px;
   height: 5px;
@@ -190,7 +191,10 @@ a.ddp-btn-line-s:before{
   right: 0;
   margin:0 auto;
 }
-a.ddp-btn-line-s:hover {color:#fff; background: #333}
+a.ddp-btn-line-s:hover:before{
+  background:#E9E10A;
+}
+a.ddp-btn-line-s:hover {color:#fff; background: #333; border: 1px solid #333}
 a.ddp-btn-line-s.ddp-disabled,
 a.ddp-btn-line-s.ddp-disabled:hover {border:1px solid #e7e7ea; color:#d0d1d8; cursor: no-drop;}
 a.ddp-btn-line-s em {margin-right:5px; vertical-align:middle;}
