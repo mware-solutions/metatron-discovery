@@ -253,16 +253,7 @@ a.workbench  i{
         color: #21A79C;
       }
     }
-    .line{
-      height: 1px;
-      background: #c4c4c4;
-      width: 100%;
-    }
-    h2{
-      font-size: 18px;
-      text-transform: uppercase;
-      flex: none;
-    }
+
     p{
       font-size: 14px;
     }
@@ -275,10 +266,6 @@ a.workbench  i{
     }
     .new{
       color: #21A79C;
-      position: absolute;
-      top: .5rem;
-      right: 1rem;
-      font-size: 12px;
     }
     i[type="delete"]{
       &:hover{
@@ -287,5 +274,62 @@ a.workbench  i{
       cursor: pointer;
     }
   }
-}
+  &.workbenchItem{
+    .new{
+      color: #5890FF;
+    }
+    i[type="delete"]{
+      &:hover{
+        color: #5890FF;
+      }
+      cursor: pointer;
+    }
+    &.selectedBook{
+      background:#F6F6F6;
+      .checkBox{
+        color: #5890FF;
+      }
+      .line{
+        height: 1px;
+        background: #5890FF;
+        width: 100%;
+      }
 
+    }
+  }
+  h2{
+    font-size: 18px;
+    text-transform: uppercase;
+    flex: none;
+  }
+  .new{
+    position: absolute;
+    top: .5rem;
+    right: 1rem;
+    font-size: 12px;
+  }
+  .line{
+    height: 1px;
+    background: #c4c4c4;
+    width: 100%;
+  }
+}
+.ddp-icon-new{
+  color: #21A79C;
+  &:before{
+   content: none;
+  }
+}
+.ddp-wrap-name{
+  text-transform: uppercase;
+  font-size: 12px;
+}
+ul.ddp-list-workspace li a .ddp-box-tag, ul.ddp-list-workspace li a .ddp-box-tag-value{
+  position: static;
+}
+.ddp-data-num{
+  font-size: 14px;
+  strong{
+    font-weight: 700;
+  }
+}

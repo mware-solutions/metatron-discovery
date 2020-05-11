@@ -2879,7 +2879,7 @@ ul.ddp-list-workspace li.ddp-disabled a:hover .ddp-ui-data-list  {background:non
 ul.ddp-list-workspace li.ddp-list-back:hover a em.ddp-icon-folder-back {background-color:#4c515a;}
 ul.ddp-list-workspace li.ddp-txt a {cursor:default;}
 ul.ddp-list-workspace li.ddp-txt a:hover {background:none;}
-ul.ddp-list-workspace li a {position:relative; padding:12px 30px 12px 30px; border-top:1px solid #ddd;}
+ul.ddp-list-workspace li a {position:relative; padding:15px; border-top:1px solid #ddd;}
 ul.ddp-list-workspace li a:hover {background-color:#f6f6f7;}
 
 ul.ddp-list-workspace li.ddp-selected a {background-color:#f6f6f7;}
@@ -2914,10 +2914,9 @@ ul.ddp-list-workspace li.ddp-box-edit a .ddp-data-input {display:block;}
 ul.ddp-list-workspace li.ddp-box-edit a .ddp-btn-control {display:block;}
 ul.ddp-list-workspace li.ddp-box-edit a:hover {background:none;}
 
-ul.ddp-list-workspace li a .ddp-ui-checkbox {display:inline-block; top:0; left:0; bottom:0; width:40px; z-index:5;}
+ul.ddp-list-workspace li a .ddp-ui-checkbox {display:inline-block; top:0; left:0; bottom:0; width:20px; z-index:5;}
 ul.ddp-list-workspace li a .ddp-ui-checkbox input[type="checkbox"] {display:block; position:absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%; z-index:3;}
 ul.ddp-list-workspace li a .ddp-ui-checkbox i.ddp-icon-checkbox {position:absolute; top:50%; left:50%; margin:-6px 0 0 -6px;}
-ul.ddp-list-workspace li a .ddp-btn-control {display:none; position:absolute; top:50%; right:12px; margin-top:-10px; z-index:2;}
 ul.ddp-list-workspace li a:hover .ddp-btn-control {display:block;}
 
 ul.ddp-list-workspace li a .ddp-box-tag,
