@@ -485,7 +485,7 @@
 }
 
 .theme-dark .ddp-wrap-edit3 label.ddp-label-type .ddp-type-necessary {
-    color: #666eb2;
+    color: #21A79C;
 }
 
 .theme-dark .ddp-wrap-edit3.ddp-type .ddp-label-type {
@@ -1043,7 +1043,7 @@
     position: relative;
     margin-top: 10px;
     padding-left: 17px;
-    color: #666eb2;
+    color: #21A79C;
     font-size: 12px;
     font-style: italic;
 }
@@ -1763,7 +1763,7 @@ table.ddp-table-form.ddp-inherit .ddp-box-layout4 .ddp-table-code tr td {
 .theme-dark .ddp-box-layout4 .ddp-link-view {
     display: inline-block;
     margin-top: 20px;
-    color: #666eb2;
+    color: #21A79C;
     font-weight: 300;
     font-size: 12px;
 }

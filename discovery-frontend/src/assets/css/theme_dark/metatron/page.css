@@ -16917,7 +16917,7 @@
 }
 
 .theme-dark ul.ddp-list-layer-option li a .ddp-data-result.ddp-type {
-    color: #666eb2;
+    color: #21A79C;
 }
 
 
@@ -46077,7 +46077,7 @@
     height: 22px;
     border-radius: 3px;
     background-color: #f2f1f8;
-    color: #666eb2;
+    color: #21A79C;
     font-size: 13px;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -46102,7 +46102,7 @@
 }
 
 .theme-dark table.ddp-table-form tr td .ddp-tag-more {
-    color: #666eb2;
+    color: #21A79C;
     vertical-align: middle;
 }
 

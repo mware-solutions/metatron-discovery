@@ -11,15 +11,15 @@
 ~ See the License for the specific language governing permissions and
 ~ limitations under the License.
 -->
-<em class="ddp-bg-back"></em>
+
 <div class="ddp-ui-contents-in ddp-scroll">
   <!-- top -->
   <div class="ddp-ui-contents-top">
-    <div class="ddp-ui-title mx-5 my-3">
+    <div class="ddp-ui-title">
       {{'msg.comm.menu.manage.storage' | translate}}
     </div>
     <!-- tab -->
-    <ul class="ddp-list-top-tab mx-5 border-bottom">
+    <ul class="ddp-list-top-tab">
       <li>
         <a [routerLink]="['/management/storage/datasource']">{{'msg.comm.menu.manage.storage.ds' | translate}}</a>
       </li>
@@ -30,11 +30,11 @@
     <!-- //tab -->
   </div>
   <!-- //top -->
-  <div class="ddp-ui-contents-list mx-5">
+  <div class="ddp-ui-contents-list">
     <div class="ddp-wrap-top-filtering">
       <!-- filter search -->
       <div class="ddp-filter-search ddp-fright">
-        <div class="ddp-form-filter-search border px-3 my-2" style="width:315px;">
+        <div class="ddp-form-filter-search" style="width:215px;">
           <component-input
             [autoFocus]="false"
             [isEnableDelete]="true"

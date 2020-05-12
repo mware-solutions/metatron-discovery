@@ -1,20 +1,18 @@
-<div class="ddp-wrap-catalogs">
+<div class="ddp-wrap-catalogs ">
   <div class="ddp-wrap-tabs ddp-clear">
-    <ul class="ddp-ui-tab row no-gutters">
-      <li class="col-6" [class.ddp-selected]="isSelectedCatalogTab()" (click)="onChangeLnbTab(EXPLORE_LNB_MODE.CATALOG)">
+    <ul class="ddp-ui-tab">
+      <li [class.ddp-selected]="isSelectedCatalogTab()" (click)="onChangeLnbTab(EXPLORE_LNB_MODE.CATALOG)">
         <a href="javascript:">{{'msg.explore.ui.tab.catalogs' | translate}}</a>
       </li>
-      <li class="col-6" [class.ddp-selected]="isSelectedTagTab()" (click)="onChangeLnbTab(EXPLORE_LNB_MODE.TAG)">
+      <li [class.ddp-selected]="isSelectedTagTab()" (click)="onChangeLnbTab(EXPLORE_LNB_MODE.TAG)">
         <a href="javascript:">{{'msg.explore.ui.tab.tags' | translate}}</a>
       </li>
     </ul>
   </div>
   <!-- //tab -->
   <div class="ddp-wrap-folding">
-    <!--  show/hide icon  -->
-    <a href="javascript:" class="ddp-hover-tooltip" (click)="onChangeFoldingNavigation()">
-      <i *ngIf="!isFoldingNavigation" nz-icon type="menu-fold" theme="outline"></i>
-      <i *ngIf="isFoldingNavigation" nz-icon type="menu-unfold" theme="outline"></i>
+    <!-- 폴딩 -->
+    <a href="javascript:" class="ddp-btn-folding ddp-hover-tooltip" (click)="onChangeFoldingNavigation()">
       <!-- tooltip -->
       <div *ngIf="isFoldingNavigation" class="ddp-ui-tooltip-info ddp-down">
         <em class="ddp-icon-view-top"></em>
@@ -26,14 +24,14 @@
       </div>
       <!-- //tooltip -->
     </a>
-    <!-- //show/hide icon -->
+    <!-- //폴딩 -->
   </div>
   <div class="ddp-wrap-tab-contents">
     <!-- catalog -->
     <div class="ddp-ui-tab-contents" *ngIf="isSelectedCatalogTab()">
       <div class="ddp-ui-catalog-contents ddp-type">
         <!-- search -->
-        <div class="ddp-wrap-searching p-4">
+        <div class="ddp-wrap-searching">
           <div class="ddp-ui-searching"
                [class.type-search]="!isEmptyCatalogSearchKeyword() && isNotEmptyCatalogContents()">
             <em class="ddp-icon-search"></em>
@@ -49,15 +47,12 @@
         <!-- favorite -->
         <!-- 클릭시 ddp-selected 추가 -->
         <div class="ddp-ui-favorite type-dropdown-data" [class.ddp-selected]="isShowFavoriteCatalog">
-          <i *ngIf="!isShowFavoriteCatalog" nz-icon type="down" theme="outline" class="pt-3 px-3 float-left"></i>
-          <i *ngIf="isShowFavoriteCatalog" nz-icon type="up" theme="outline" class="pt-3 px-3 float-left"></i>
           <!-- label -->
-          <div class="ddp-label-down pt-2 pr-2" (click)="onToggleIsShowFavoriteCatalog()">
+          <div class="ddp-label-down" (click)="onToggleIsShowFavoriteCatalog()">
             Favorite({{ favoriteCatalogList.length }})
-
-            <div class="ddp-favorite-nodata" *ngIf="favoriteCatalogList.length === 0">
+            <span class="ddp-favorite-nodata" *ngIf="favoriteCatalogList.length === 0">
               No favorite data
-            </div>
+            </span>
           </div>
           <!-- //label -->
           <div class="ddp-down-contents">
@@ -86,10 +81,7 @@
         <!-- 클릭시 ddp-selected 추가 -->
         <div class="ddp-ui-tree type-dropdown-data" [class.ddp-selected]="!isShowFavoriteCatalog">
           <!-- label -->
-          <div class="px-0 ddp-label-down" (click)="onToggleIsShowFavoriteCatalog()">
-
-            <i *ngIf="!isShowFavoriteCatalog" nz-icon type="down" theme="outline" class="pt-1 px-3 float-left"></i>
-            <i *ngIf="isShowFavoriteCatalog" nz-icon type="up" theme="outline" class="pt-1S px-3 float-left"></i>
+          <div class="ddp-label-down" (click)="onToggleIsShowFavoriteCatalog()">
             All Catalog
           </div>
           <!-- //label -->
@@ -116,7 +108,7 @@
     <!-- tags -->
     <div class="ddp-ui-tab-contents" *ngIf="isSelectedTagTab()">
       <!-- search -->
-      <div class="ddp-wrap-searching p-4">
+      <div class="ddp-wrap-searching">
         <div class="ddp-ui-searching" [class.type-search]="!isEmptyTagSearchKeyword() && isNotEmptyTagContents()">
           <em class="ddp-icon-search"></em>
           <component-input [placeHolder]="'msg.explore.ph.tab.tags.search' | translate"

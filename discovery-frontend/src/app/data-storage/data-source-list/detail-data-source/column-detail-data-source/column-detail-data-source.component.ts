@@ -483,7 +483,7 @@ export class ColumnDetailDataSourceComponent extends AbstractComponent implement
         {
           type: 'bar',
           barWidth: '70%',
-          itemStyle: { normal: { color: '#c1cef1' }, emphasis : {color : '#666eb2'}},
+          itemStyle: { normal: { color: '#c1cef1' }, emphasis : {color : '#21A79C'}},
           data: []
         }
       ]

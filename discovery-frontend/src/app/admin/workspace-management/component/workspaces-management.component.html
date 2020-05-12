@@ -12,16 +12,15 @@
   ~ limitations under the License.
   -->
 
-<em class="ddp-bg-back"></em>
 <div class="ddp-ui-contents-in">
   <!-- top -->
   <div class="ddp-ui-contents-top">
-    <div class="ddp-ui-title mx-5 my-3">
+    <div class="ddp-ui-title">
       {{'msg.comm.menu.admin.workspace' | translate}}
     </div>
 
     <!-- tab -->
-    <ul class="ddp-list-top-tab mx-5 border-bottom">
+    <ul class="ddp-list-top-tab">
       <li [ngClass]="{'ddp-selected': tabId == 'shared'}">
         <a (click)="gotoTab('shared')" href="javascript:">{{'msg.comm.menu.admin.workspace.shared' | translate}}</a>
       </li>

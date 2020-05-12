@@ -80,7 +80,7 @@ export class EditRuleGridComponent extends AbstractComponent implements OnInit, 
 
   private readonly _HISTOGRAM_DEFAULT_COLOR: string = '#c1cef1';
   private readonly _HISTOGRAM_HOVER_COLOR: string = '#9aa5c1';
-  private readonly _HISTOGRAM_CLICK_COLOR: string = '#666eb2';
+  private readonly _HISTOGRAM_CLICK_COLOR: string = '#21A79C';
 
   // Bar chart
   private _barCharts: any = [];

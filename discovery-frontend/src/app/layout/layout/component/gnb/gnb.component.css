@@ -11,7 +11,7 @@ ul.topRightMenu li a:hover i{color:#21A79C}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li {position:relative; float:inherit;}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li a {display:block; position:relative; width:100%; height:inherit; padding:10px 0 10px 27px; margin:0; color:#444; font-size:14px; line-height:1.3em; overflow:inherit; box-sizing:border-box;}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li:hover a { font-weight:bold; background:none;}
-.ddp-ui-sub-myinfo .ddp-list-sub-myinfo > li:hover > a:before {display:inline-block; position:absolute; top:50%; left:0; margin-top:-10px; height:20px; width:3px; background:#666eb2; content:'';}
+.ddp-ui-sub-myinfo .ddp-list-sub-myinfo > li:hover > a:before {display:inline-block; position:absolute; top:50%; left:0; margin-top:-10px; height:20px; width:3px; background:#21A79C; content:'';}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li .ddp-hover-status {position:absolute; top:12px; right:30px;}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li .ddp-hover-status .ddp-status-active {font-weight:normal;}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li ul.ddp-list-popup li {padding:0;}
@@ -24,14 +24,14 @@ ul.topRightMenu li a:hover i{color:#21A79C}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li a .ddp-icon-info-theme {width:11px; height:13px; margin-top:-7px; background-position:left -26px;}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li .ddp-theme-check {position:absolute; top:50%; right:32px; margin-top:-8px;}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li .ddp-theme-check label {float:left; margin-left:8px;cursor:pointer;}
-.ddp-ui-sub-myinfo .ddp-list-sub-myinfo li .ddp-theme-check label i {display:inline-block; position:relative; width:16px; height:16px; background-color:#666eb2;}
+.ddp-ui-sub-myinfo .ddp-list-sub-myinfo li .ddp-theme-check label i {display:inline-block; position:relative; width:16px; height:16px; background-color:#21A79C;}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li .ddp-theme-check label.type-dark i {background-color:#4b515b;}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li .ddp-theme-check label input {display:none;}
 .ddp-ui-sub-myinfo .ddp-list-sub-myinfo li .ddp-theme-check label input[type='checkbox']:checked + i:before {display:inline-block; width:11px;height:8px; position:absolute; top:50%; left:50%; background:url(../../../../../assets/images/icon_select2.png) no-repeat; background-position:-27px top; margin:-4px 0 0 -6px; content:'';}
 .ddp-ui-sub-myinfo .ddp-ui-part {border-top:1px solid #e7e7ea;}
 .ddp-ui-sub-myinfo .ddp-ui-part a {position:relative; display:block; padding:15px 27px; color:#4b515b; font-size:14px;}
 .ddp-ui-sub-myinfo .ddp-ui-part a:hover {font-weight:bold;}
-.ddp-ui-sub-myinfo .ddp-ui-part a:hover:before {display:inline-block; position:absolute; top:50%; left:0; margin-top:-10px; height:20px; width:3px; background:#666eb2; content:'';}
+.ddp-ui-sub-myinfo .ddp-ui-part a:hover:before {display:inline-block; position:absolute; top:50%; left:0; margin-top:-10px; height:20px; width:3px; background:#21A79C; content:'';}
 .ddp-layout-header .ddp-wrap-myinfo.ddp-selected .ddp-ui-sub-myinfo {display:block;}
 
 

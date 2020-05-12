@@ -43,7 +43,6 @@ import {StringUtil} from "../../../../common/util/string.util";
 @Component({
   selector: 'app-lnb',
   templateUrl: './lnb.component.html',
-  styleUrls: ['./lnb.component.scss']
 })
 export class LNBComponent extends AbstractComponent implements OnInit, OnDestroy {
 

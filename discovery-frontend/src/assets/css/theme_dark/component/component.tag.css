@@ -100,13 +100,13 @@
 }
 
 .theme-dark .ddp-box-tag.ddp-notebook {
-    border: 1px solid #5ecfea;
-    color: #5ecfea;
+    border: 1px solid #E46E2E;
+    color: #E46E2E;
 }
 
 .theme-dark .ddp-box-tag.ddp-workbench {
-    border: 1px solid #8c97d3;
-    color: #8c97d3;
+    border: 1px solid #5890FF;
+    color: #5890FF;
 }
 
 .theme-dark .ddp-box-tag.ddp-wargled {

@@ -121,16 +121,16 @@
 }
 .pivot-view .pivot-axis-x:hover,
 .pivot-view .pivot-axis-y:hover {
-    border: 1px solid #666eb2 !important;
+    border: 1px solid #21A79C !important;
 }
 .pivot-view .pivot-axis-selected-body, .pivot-axis-selected-body div,
 .pivot-view .pivot-body-hover, .pivot-body-hover div {
     background-color : #e7e7ea !important;
-    color: #666eb2 !important;
+    color: #21A79C !important;
 }
 .pivot-view .pivot-body-selected, .pivot-body-selected div,
 .pivot-view .pivot-axis-selected {
-    background-color: #666eb2 !important;
+    background-color: #21A79C !important;
     color: #FFFFFF !important;
 }
 /* Add Click Event Style - by eltriny */

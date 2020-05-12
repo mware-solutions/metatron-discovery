@@ -272,7 +272,7 @@ export class TaskDetailComponent extends AbstractComponent implements OnInit, On
             sampling: 'max',
             itemStyle: {
               normal: {
-                color: '#666eb2'
+                color: '#21A79C'
               }
             },
             smooth: true

@@ -582,8 +582,8 @@ export class CreateBoardDsNetworkComponent extends AbstractComponent implements 
           color: {
             border: '#fff',
             background: '#fff',
-            highlight: { border: '#666eb2', background: '#f0f4ff' },
-            hover: { border: '#666eb2', background: '#f0f4ff' }
+            highlight: { border: '#21A79C', background: '#f0f4ff' },
+            hover: { border: '#21A79C', background: '#f0f4ff' }
           },
           heightConstraint: {
             minimum: 45

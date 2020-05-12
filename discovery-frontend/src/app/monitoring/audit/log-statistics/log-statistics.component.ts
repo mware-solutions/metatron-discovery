@@ -304,7 +304,7 @@ export class LogStatisticsComponent extends AbstractComponent implements OnInit,
           series: [{
             type: 'bar',
             data: values,
-            itemStyle: { normal: { color: '#666eb2' } }
+            itemStyle: { normal: { color: '#21A79C' } }
           }]
         });
         // use configuration item and data specified to show chart

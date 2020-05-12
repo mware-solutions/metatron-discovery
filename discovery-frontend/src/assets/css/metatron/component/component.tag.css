@@ -20,6 +20,9 @@
     box-tag
 **************************************************************/
 .ddp-box-tag {display:inline-block; float:left; padding:1px 3px 1px 3px; margin-right:8px; border-radius:1px; font-size:10px; font-weight:normal; vertical-align: top; box-sizing:border-box;}
+.ddp-box-tag.ddp-workbook {border:1px solid #21A79C; color:#21A79C;}
+.ddp-box-tag.ddp-notebook {border:1px solid #E46E2E; color:#E46E2E;}
+.ddp-box-tag.ddp-workbench {border:1px solid #5890FF; color:#5890FF;}
 .ddp-box-tag.ddp-wargled {min-width:54px; border:1px solid #ee5398; color:#ee5398; text-align:center; }
 .ddp-box-tag.ddp-imported {min-width:54px; border:1px solid #50549a; color:#50549a; text-align:center;}
 .ddp-box-tag.ddp-personal {width:52px; border:1px solid #cd2287; color:#cd2287; text-align:center;}
@@ -44,8 +47,8 @@
 /**************************************************************
 	new
 **************************************************************/
-.ddp-icon-new {color:#707cc4; font-size:10px !important;}
-.ddp-icon-new:before {display:inline-block; content:''; width:5px; height:5px; margin-right:5px; border-radius:50%; background-color:#707cc4;}
+.ddp-icon-new {color:#21A79C; font-size:10px !important;}
+.ddp-icon-new:before {display:inline-block; content:''; width:5px; height:5px; margin-right:5px; border-radius:50%; background-color:#21A79C;}
 
 
 /**************************************************************

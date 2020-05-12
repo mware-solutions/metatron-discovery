@@ -532,7 +532,7 @@ ul.ddp-list-typebasic.ddp-view li.ddp-selected a .ddp-icon-plus {display:block;}
 **************************************************************/
 .datepicker { z-index: 99999 !important; }
 .datepicker--cell.-selected- {background-color:#a9bef4;}
-.datepicker--day-name {color:#666eb2;}
+.datepicker--day-name {color:#21A79C;}
 
 /**************************************************************
   gradation
@@ -671,7 +671,7 @@ ul.ddp-list-typebasic.ddp-view li.ddp-selected a .ddp-icon-plus {display:block;}
 **************************************************************/
 .datepicker--cell.-selected-,
 .datepicker--cell.-selected-.-current- {background-color:#a9bef4;}
-.datepicker--day-name {color:#666eb2;}
+.datepicker--day-name {color:#21A79C;}
 
 /**************************************************************
     background multi
