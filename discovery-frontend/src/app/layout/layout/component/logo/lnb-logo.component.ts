@@ -22,7 +22,6 @@ import {AbstractComponent} from '../../../../common/component/abstract.component
 @Component({
   selector: 'lnb-logo',
   templateUrl: './lnb-logo.component.html',
-  styleUrls: ['./lnb-logo.component.css']
 })
 export class LNBLogoComponent extends AbstractComponent implements OnInit, OnDestroy {
 
