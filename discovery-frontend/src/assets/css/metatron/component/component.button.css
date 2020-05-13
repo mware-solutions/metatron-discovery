@@ -180,8 +180,8 @@ a.ddp-btn-solid.ddp-bg-black:hover {border:1px solid #35393f;background-color:#3
 
 .ddp-btn-solid2 {display:inline-block; min-width:110px; padding:6px 10px; border:1px solid #8f949d; background-color:#8f949d; border-radius:2px; color:#fff; font-size:13px; text-align:center; box-sizing:border-box;}
 .ddp-btn-solid2:hover {background-color:#4b525b; color:#fff;}
-.ddp-btn-solid2.ddp-dark {border:1px solid #516197; background-color:#516197;}
-.ddp-btn-solid2.ddp-dark:hover {border:1px solid #34416d; background-color:#34416d;}
+.ddp-btn-solid2.ddp-dark {border:1px solid #21A79C; background-color:#21A79C;}
+.ddp-btn-solid2.ddp-dark:hover {border:1px solid #34416d; background-color:#333;}
 
 a.ddp-btn-solid2.ddp-disabled,
 a.ddp-btn-solid2.ddp-disabled:hover {border:1px solid #d0d1d8; background-color:#d0d1d8; cursor:no-drop;}

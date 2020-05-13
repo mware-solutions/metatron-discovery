@@ -474,7 +474,7 @@ em.ddp-icon-control-cut:hover:before {background-position:-13px -14px;}
 em.ddp-icon-control-info:hover:before {background-position:-14px -28px;}
 em.ddp-icon-control-fav:hover:before {background-position:-13px -42px;}
 em.ddp-icon-control-plus:hover:before {background-position:-12px -218px;}
-em.ddp-icon-control-fav.ddp-selected:before {background-position:-26px -42px;}
+em.ddp-icon-control-fav.ddp-selected:before { font-family: "FontAwesome";content: "\f005"; font-size: 16px; background: none; color: #21A79C}
 em.ddp-icon-control-user:before {width:9px; height:9px; background-position:left -55px;}
 em.ddp-icon-control-filter:before {width:12px; height:9px; background-position:left -65px;}
 em.ddp-icon-control-parameter:before {width:11px; height:9px; background-position:left -87px;}
