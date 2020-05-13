@@ -112,15 +112,15 @@
           },
           "configurations": {
             "production": {
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
-              "extractLicenses": false,
+              "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
