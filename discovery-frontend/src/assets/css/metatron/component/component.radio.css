@@ -14,8 +14,8 @@
 .ddp-label-radio span.ddp-txt-radio span.ddp-txt-det {color:#808dcd; font-style:italic;}
 
 .ddp-label-radio span.ddp-txt-radio .ddp-box-tag-value {display:inline-block; padding:2px; border-radius:2px; }
-.ddp-label-radio span.ddp-txt-radio .ddp-box-tag-value.ddp-dimension {border:1px solid #439fe5;color:#439fe5; font-size:12px;}
-.ddp-label-radio span.ddp-txt-radio .ddp-box-tag-value.ddp-measure {border:1px solid #5fd7a5;color:#5fd7a5; font-size:12px;}
+.ddp-label-radio span.ddp-txt-radio .ddp-box-tag-value.ddp-dimension {border:1px solid #2187A7;color:#2187A7; font-size:12px;}
+.ddp-label-radio span.ddp-txt-radio .ddp-box-tag-value.ddp-measure {border:1px solid #21A79C;color:#21A79C; font-size:12px;}
 
 
 .ddp-label-radio input[type="radio"] {position:absolute; top:50%; left:0; margin-top:-6px; opacity:0;}

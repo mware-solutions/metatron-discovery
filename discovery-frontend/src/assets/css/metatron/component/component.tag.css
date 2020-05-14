@@ -23,7 +23,7 @@
 .ddp-box-tag.ddp-workbook {border:1px solid #21A79C; color:#21A79C;}
 .ddp-box-tag.ddp-notebook {border:1px solid #E46E2E; color:#E46E2E;}
 .ddp-box-tag.ddp-workbench {border:1px solid #5890FF; color:#5890FF;}
-.ddp-box-tag.ddp-wargled {min-width:54px; border:1px solid #ee5398; color:#ee5398; text-align:center; }
+.ddp-box-tag.ddp-wargled {min-width:54px; border:1px solid #F63700; color:#F63700; text-align:center; }
 .ddp-box-tag.ddp-imported {min-width:54px; border:1px solid #A1A1A1; color:#A1A1A1; text-align:center;}
 .ddp-box-tag.ddp-personal {width:52px; border:1px solid #F63700; color:#F63700; text-align:center;}
 .ddp-box-tag.ddp-shared {width:52px; border:1px solid #333; color:#333; text-align:center;}
@@ -81,7 +81,7 @@
 .ddp-data-state.ddp-inprogress:hover .ddp-ui-tooltip-info {display:block; font-weight:normal;}
 
 .ddp-data-status.ddp-fail {font-size:11px; color:#dc494f; font-weight:bold;}
-.ddp-data-status.ddp-enabled {font-size:11px; color:#10bf83; font-weight:bold;}
+.ddp-data-status.ddp-enabled {font-size:11px; color:#21A79C; font-weight:bold;}
 .ddp-data-status.ddp-preparing{font-size:11px; color:#ffb700; font-weight:bold;}
 .ddp-data-status.ddp-disabled{font-size:11px; color:#b7b9c2; font-weight:bold;}
 

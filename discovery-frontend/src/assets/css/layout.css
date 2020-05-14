@@ -187,9 +187,9 @@ textarea:-ms-input-placeholder {color: #a7adb2;}
 .ddp-layout-contents .ddp-ui-contents-in.ddp-scroll .ddp-ui-contents-list {position:absolute; top:113px; left:0; right:0; bottom:0; padding:0 60px 50px 60px; box-sizing:border-box; overflow:auto;}
 .ddp-layout-contents .ddp-ui-contents-in.ddp-scroll .ddp-ui-contents-list.type-list {top:54px;}
 .ddp-layout-contents .ddp-ui-contents-in.ddp-scroll .ddp-ui-contents-list .ddp-type-top-option .ddp-type-search input::placeholder {color:#90969f;}
-.ddp-layout-contents2 {position:relative; width:100%; height:100%; padding:47px 0 0 0; margin-top:-48px; box-sizing:border-box;}
+.ddp-layout-contents2 {position:relative; width:100%; height:100%; padding:47px 0 0 0; box-sizing:border-box;}
 .ddp-layout-contents-in {position:relative;}
-.ddp-ui-contentsin {position:absolute;top:54px;left:0;right:0;bottom:0;}
+.ddp-ui-contentsin {position:absolute;top:85px;left:0;right:0;bottom:0;}
 .ddp-ui-contentsin.ddp-full {top:48px;}
 .ddp-layout-contents.ddp-type {padding-top:0px; z-index:65;}
 .ddp-layout-contents.ddp-type .ddp-ui-contentsin{top:0;z-index: 127;}

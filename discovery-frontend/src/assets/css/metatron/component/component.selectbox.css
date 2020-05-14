@@ -295,9 +295,9 @@ table.ddp-table-detail2 tr td .ddp-icon-type-txt {display:inline-block; position
 
 /* list command */
 .ddp-type-selectbox ul.ddp-list-command li.ddp-data-select {padding:6px 10px; color:#adb0bb; font-size:11px;}
-.ddp-type-selectbox ul.ddp-list-command li.ddp-data-select strong {color:#656eb2;}
-.ddp-type-selectbox ul.ddp-list-command li a em.ddp-ui-round {display:inline-block; padding:2px 2px 1px 2px; margin-left:2px; margin-right:5px; border-radius:50%; border:1px solid #656eb2; color:#656eb2; font-size:9px;}
-.ddp-type-selectbox ul.ddp-list-command li a span.ddp-ui-type {display:block; color:#656eb2; font-size:12px;}
+.ddp-type-selectbox ul.ddp-list-command li.ddp-data-select strong {color:#90D3CD;}
+.ddp-type-selectbox ul.ddp-list-command li a em.ddp-ui-round {display:inline-block; padding:2px 2px 1px 2px; margin-left:2px; margin-right:5px; border-radius:50%; border:1px solid #90D3CD; color:#656eb2; font-size:9px;}
+.ddp-type-selectbox ul.ddp-list-command li a span.ddp-ui-type {display:block; color:#90D3CD; font-size:12px;}
 .ddp-type-selectbox ul.ddp-list-command li a span.ddp-ui-code {display:block; padding:0 0 0 29px; color:#b7b9c2; font-size:12px;}
 .ddp-box-command .ddp-type-selectbox ul.ddp-list-selectbox.ddp-list-command {max-height:344px;}
 .ddp-box-command .ddp-type-selectbox ul.ddp-list-selectbox.ddp-list-command li a:hover {background:none;}
