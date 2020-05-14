@@ -10988,3 +10988,10 @@ table.ddp-table-detail tbody tr td .ddp-txt-logical [class*="ddp-icon-type-"]{po
 .ddp-wrap-table-detail .ddp-table-solid-bg {width:50%;}
 table.ddp-table-solid-bg tr th {padding:3px 15px;color:#90969f; font-weight:normal; font-size:13px; background-color:#f6f6f7; text-align:left;}
 table.ddp-table-solid-bg tr td {padding:5px 15px; font-size:13px; color:#4b515b;}
+.options .ant-checkbox-checked .ant-checkbox-inner{
+  background-color: #E9E10A!important;
+  border-color: #E9E10A!important;
+}
+.options .ant-checkbox-checked .ant-checkbox-inner:after{
+  border-color: #333;
+}

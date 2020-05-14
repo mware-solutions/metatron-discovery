@@ -24,8 +24,8 @@
           <!-- login form -->
           <!-- User -->
           <div class="ddp-form-input ddp-ui-input-form px-5" [ngClass]="{'ddp-type-error': loginFailMsg}">
-            <div class="ddp-input-check">
-              <div class="logoTag">
+            <div>
+              <div class="logoTag pl-5">
                 <svg width="30" height="34" viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M27.9603 13.5209C28.6031 13.8411 29.1374 14.3409 29.4972 14.9587C29.857 15.5766 30.0267 16.2854 29.9852 16.9977C30.0505 17.694 29.8988 18.3933 29.5506 19.0013C29.2024 19.6093 28.6745 20.0966 28.0382 20.3973L6.54363 33.0683C4.8303 34.15 3.50636 34.3045 2.41605 33.4547C1.85128 32.9247 1.35432 32.3279 0.936353 31.6776C0.464645 30.9502 0.146708 30.1354 0.00180583 29.2825C-0.0155215 28.8248 0.0921093 28.371 0.313321 27.969C0.90708 27.232 1.64991 26.6267 2.49393 26.192L18.0697 17.075L2.49393 7.95803C1.8709 7.49446 1.4815 7.18541 1.16999 6.95362C0.842608 6.72666 0.573434 6.42669 0.384081 6.07782C0.194728 5.72895 0.0904716 5.34089 0.0796847 4.9448C0.152487 4.08653 0.44758 3.26149 0.936353 2.54966C1.94878 0.849887 2.9612 0 3.81787 0C4.79383 0.0609185 5.73531 0.381156 6.54363 0.92715L27.9603 13.5209Z" fill="#E9E10A"/>
               </svg>
@@ -39,8 +39,8 @@
           </div>
           <!-- Password 입력 -->
           <div class="ddp-form-input ddp-ui-input-form px-5" [ngClass]="{'ddp-type-error': loginFailMsg}" >
-            <label class="ddp-label-type">{{'msg.comm.usr.pw.title' | translate}}</label>
-            <div class="ddp-input-check">
+            <label class="ddp-label-type d-none">{{'msg.comm.usr.pw.title' | translate}}</label>
+            <div class="mt-3">
               <nz-input-group [nzPrefix]="prefixLock">
                 <input type="password" nz-input placeholder="{{'msg.comm.usr.pw.title.ph' | translate}}"
                        [(ngModel)]="user.password" (keyup)="$event.keyCode == 13 ? login() : null;"
