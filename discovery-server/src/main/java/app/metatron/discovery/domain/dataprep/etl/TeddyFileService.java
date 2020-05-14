@@ -1,7 +1,6 @@
 package app.metatron.discovery.domain.dataprep.etl;
 
-import static app.metatron.discovery.domain.dataprep.PrepProperties.ETL_LIMIT_ROWS;
-import static app.metatron.discovery.domain.dataprep.PrepProperties.HADOOP_CONF_DIR;
+import static app.metatron.discovery.domain.dataprep.PrepProperties.*;
 import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_FAILED_TO_CLOSE_CSV;
 import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_FAILED_TO_CLOSE_JSON;
 import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_FAILED_TO_CLOSE_SQL;
@@ -55,11 +54,13 @@ public class TeddyFileService {
 
   private String hadoopConfDir;
   private Configuration hadoopConf = null;
+  private String hadoopUser = null;
   private Integer limitRows = null;
 
   public void setPrepPropertiesInfo(Map<String, Object> prepPropertiesInfo) {
     hadoopConfDir = (String) prepPropertiesInfo.get(HADOOP_CONF_DIR);
     limitRows = (Integer) prepPropertiesInfo.get(ETL_LIMIT_ROWS);
+    hadoopUser = (String) prepPropertiesInfo.get(HADOOP_USER);
 
     if (hadoopConfDir != null) {
       hadoopConf = PrepUtil.getHadoopConf(hadoopConfDir);
@@ -101,7 +102,8 @@ public class TeddyFileService {
             .withQuoteChar(quoteChar)
             .withLimitRows(limitRows)
             .withManualColCnt(manualColCnt)
-            .withHadoopConf(hadoopConf);
+            .withHadoopConf(hadoopConf)
+            .withHadoopUser(hadoopUser);
     PrepParseResult result = csvUtil.parse(strUri);
     df.setByGrid(result);
 
@@ -109,13 +111,12 @@ public class TeddyFileService {
     return df;
   }
 
-  public DataFrame loadJsonFile(String dsId, String strUri, Integer manualColCnt)
-          throws URISyntaxException {
+  public DataFrame loadJsonFile(String dsId, String strUri, Integer manualColCnt) {
     DataFrame df = new DataFrame();
 
     LOGGER.debug("loadJsonFile(): dsId={} strUri={}", dsId, strUri);
 
-    PrepParseResult result = PrepJsonUtil.parse(strUri, limitRows, manualColCnt, hadoopConf);
+    PrepParseResult result = PrepJsonUtil.parse(strUri, limitRows, manualColCnt, hadoopConf, hadoopUser);
     df.setByGrid(result);
 
     LOGGER.debug("loadJsonFile(): done");
@@ -123,7 +124,11 @@ public class TeddyFileService {
   }
 
   public int writeCsv(String ssId, String strUri, DataFrame df) {
-    CSVPrinter printer = PrepCsvUtil.DEFAULT.withHadoopConf(hadoopConf).getPrinter(strUri);
+    CSVPrinter printer = PrepCsvUtil.DEFAULT
+            .withHadoopConf(hadoopConf)
+            .withHadoopUser(hadoopUser)
+            .getPrinter(strUri);
+
     String errmsg = null;
 
     try {
@@ -170,7 +175,7 @@ public class TeddyFileService {
 
   public int writeJson(String ssId, String strUri, DataFrame df) {
     LOGGER.debug("TeddyExecutor.wirteJSON(): strUri={} hadoopConfDir={}", strUri, hadoopConfDir);
-    PrintWriter printWriter = PrepJsonUtil.getPrinter(strUri, hadoopConf);
+    PrintWriter printWriter = PrepJsonUtil.getPrinter(strUri, hadoopConf, hadoopUser);
     ObjectMapper mapper = GlobalObjectMapper.getDefaultMapper();
     String errmsg = null;
 
@@ -211,7 +216,7 @@ public class TeddyFileService {
   }
 
   public int writeSql(String ssId, String ssName, String strUri, DataFrame df) {
-    Writer writer = PrepSqlUtil.getWriter(strUri, hadoopConf);
+    Writer writer = PrepSqlUtil.getWriter(strUri, hadoopConf, hadoopUser);
     String errmsg = null;
     String tblname = StringEscapeUtils.escapeSql(ssName.replaceAll("_.+", ""));
 

@@ -35,8 +35,8 @@ public class FileLoaderProperties implements Serializable {
   String remoteDir;
 
   /**
-   * SSH type 일 경우, 관련 Host 기입 <br/>
-   * Key 에 위치할 hostname 이 "." 포함된 경우, "[test.com]" 로 기입
+   * In case of SSH type, enter the relevant host <br/>
+   * The hostname to be located in the key is "." If included, write "[test.com]"
    */
   Map<String, EngineProperties.Host> hosts = Maps.newHashMap();
 

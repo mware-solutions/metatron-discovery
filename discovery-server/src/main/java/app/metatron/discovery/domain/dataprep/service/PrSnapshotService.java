@@ -14,6 +14,7 @@
 
 package app.metatron.discovery.domain.dataprep.service;
 
+import app.metatron.discovery.domain.dataprep.util.HdfsUtil;
 import com.google.common.collect.Lists;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -190,7 +191,7 @@ public class PrSnapshotService {
               break;
             case "hdfs":
               Configuration conf = PrepUtil.getHadoopConf(prepProperties.getHadoopConfDir(true));
-              FileSystem fs = FileSystem.get(conf);
+              FileSystem fs = HdfsUtil.get(conf, prepProperties.hadoopUser);
               Path path = new Path(new URI(storedUri));
 
               if (false == fs.exists(path)) {
@@ -260,7 +261,7 @@ public class PrSnapshotService {
               }
 
               try {
-                FileSystem fs = FileSystem.get(conf);
+                FileSystem fs = HdfsUtil.get(conf, prepProperties.hadoopUser);
                 Path path = new Path(new URI(storedUri));
 
                 if (!fs.exists(path)) {
@@ -286,7 +287,7 @@ public class PrSnapshotService {
           }
           //                } else if( PrSnapshot.SS_TYPE.HDFS==ss_type ) {
           //                    Configuration conf = this.hdfsService.getConf();
-          //                    FileSystem fs = FileSystem.get(conf);
+          //                    FileSystem fs = HdfsUtil.get(conf, prepProperties.hadoopUser);
           //                    String dirPath = snapshot.getHiveExtDir();
           //                    if(dirPath!=null) {
           //                        dirPath = dirPath.substring(0, dirPath.lastIndexOf("/"));
@@ -495,14 +496,18 @@ public class PrSnapshotService {
           // We generated JSON snapshots to have ".json" at the end of the URI.
           Configuration hadoopConf = PrepUtil.getHadoopConf(prepProperties.getHadoopConfDir(false));
           if (storedUri.endsWith(".json")) {
-            PrepParseResult result = PrepJsonUtil.parse(snapshot.getStoredUri(), 10000, null, hadoopConf);
+            PrepParseResult result = PrepJsonUtil.parse(snapshot.getStoredUri(), 10000, null, hadoopConf, prepProperties.hadoopUser);
             gridResponse.setByGrid(result);
           } else if (storedUri.endsWith(".sql")) {
-            PrepParseResult result = PrepSqlUtil.parse(snapshot.getStoredUri(), 10000, null, hadoopConf);
+            PrepParseResult result = PrepSqlUtil.parse(snapshot.getStoredUri(), 10000, null, hadoopConf, prepProperties.hadoopUser);
             gridResponse.setByGrid(result);
             custom = "{'colDescs':[\"type\":\"STRING\"]}";
           } else {
-            PrepCsvUtil csvUtil = PrepCsvUtil.DEFAULT.withHeader(true).withHadoopConf(hadoopConf);
+            PrepCsvUtil csvUtil = PrepCsvUtil.DEFAULT
+                    .withHeader(true)
+                    .withHadoopConf(hadoopConf)
+                    .withHadoopUser(prepProperties.hadoopUser);
+
             PrepParseResult result = csvUtil.parse(snapshot.getStoredUri());
             gridResponse.setByGrid(result);
           }

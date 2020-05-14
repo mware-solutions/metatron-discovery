@@ -77,7 +77,7 @@ public class LiveJdbcEngineRepository {
 
       rs = stmt.executeQuery(queryStr);
 
-      // CSV 와 JSON 의 경우 ResultSet 에서 전달 받은 Timestamp 값 처리가 달라 추후 보정작업 필요
+      // In the case of CSV and JSON, the processing of Timestamp value received from ResultSet is different, so correction is required later.
       if(resultForward == null) {
         resultNode = GlobalObjectMapper.getResultSetMapper().convertValue(rs, JsonNode.class);
       } else if(resultForward instanceof JsonResultForward) {

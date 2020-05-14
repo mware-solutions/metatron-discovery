@@ -49,6 +49,7 @@ public class PrepCsvUtil {
   private int limitRows;
   private Integer manualColCnt;
   private Configuration hadoopConf;
+  private String hadoopUser;
 
   private boolean onlyCount;
 
@@ -73,7 +74,7 @@ public class PrepCsvUtil {
   }
 
   private PrepCsvUtil(String strDelim, Character quoteChar, Character escape, boolean header, int limitRows,
-          Integer manualColCnt, Configuration hadoopConf, boolean onlyCount) {
+          Integer manualColCnt, Configuration hadoopConf, String hadoopUser, boolean onlyCount) {
     this.strDelim = strDelim;
     charDelim = getUnescapedDelimiter(strDelim);
 
@@ -84,6 +85,7 @@ public class PrepCsvUtil {
     this.limitRows = limitRows;
     this.manualColCnt = manualColCnt;
     this.hadoopConf = hadoopConf;
+    this.hadoopUser = hadoopUser;
 
     this.onlyCount = onlyCount;
 
@@ -97,7 +99,7 @@ public class PrepCsvUtil {
    * escape = null
    * header = false
    */
-  public static final PrepCsvUtil DEFAULT = new PrepCsvUtil(",", '"', null, false, 1000, null, null, false);
+  public static final PrepCsvUtil DEFAULT = new PrepCsvUtil(",", '"', null, false, 1000, null, null, "bdl", false);
 
 
   /**
@@ -105,7 +107,7 @@ public class PrepCsvUtil {
    * @return this
    */
   public PrepCsvUtil withDelim(String strDelim) {
-    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, onlyCount);
+    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
   }
 
   /**
@@ -113,7 +115,7 @@ public class PrepCsvUtil {
    * @return this
    */
   public PrepCsvUtil withQuoteChar(Character quoteChar) {
-    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, onlyCount);
+    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
   }
 
   /**
@@ -130,7 +132,7 @@ public class PrepCsvUtil {
       quoteChar = quoteStr.charAt(0);
     }
 
-    return new PrepCsvUtil(strDelim, newQuoteChar, escape, header, limitRows, manualColCnt, hadoopConf, onlyCount);
+    return new PrepCsvUtil(strDelim, newQuoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
   }
 
   /**
@@ -138,7 +140,7 @@ public class PrepCsvUtil {
    * @return this
    */
   public PrepCsvUtil withEscape(Character escape) {
-    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, onlyCount);
+    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
   }
 
   /**
@@ -146,7 +148,7 @@ public class PrepCsvUtil {
    * @return this
    */
   public PrepCsvUtil withHeader(boolean header) {
-    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, onlyCount);
+    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
   }
 
   /**
@@ -154,7 +156,7 @@ public class PrepCsvUtil {
    * @return this
    */
   public PrepCsvUtil withLimitRows(int limitRows) {
-    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, onlyCount);
+    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
   }
 
   /**
@@ -162,7 +164,7 @@ public class PrepCsvUtil {
    * @return this
    */
   public PrepCsvUtil withManualColCnt(Integer manualColCnt) {
-    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, onlyCount);
+    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
   }
 
   /**
@@ -170,7 +172,15 @@ public class PrepCsvUtil {
    * @return this
    */
   public PrepCsvUtil withHadoopConf(Configuration hadoopConf) {
-    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, onlyCount);
+    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
+  }
+
+  /**
+   * @param hadoopUser Hadoop user
+   * @return this
+   */
+  public PrepCsvUtil withHadoopUser(String hadoopUser) {
+    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
   }
 
   /**
@@ -178,7 +188,7 @@ public class PrepCsvUtil {
    * @return this
    */
   public PrepCsvUtil withOnlyCount(boolean onlyCount) {
-    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, onlyCount);
+    return new PrepCsvUtil(strDelim, quoteChar, escape, header, limitRows, manualColCnt, hadoopConf, hadoopUser, onlyCount);
   }
 
   /**
@@ -192,7 +202,7 @@ public class PrepCsvUtil {
             "PrepCsvUtil.parse(): strUri={} delim={} quoteChar={} header={} limitRows={} manualColCnt={} hadoopConf={}",
             strUri, strDelim, quoteChar, header, limitRows, manualColCnt, hadoopConf);
 
-    Reader reader = getReader(strUri, hadoopConf, onlyCount, result);
+    Reader reader = getReader(strUri, hadoopConf, hadoopUser, onlyCount, result);
 
     try {
       // \", "" both become " by default
@@ -288,7 +298,7 @@ public class PrepCsvUtil {
   public CSVPrinter getPrinter(String strUri) {
     LOGGER.debug("PrepCsvUtil.getPrinter(): strUri={} hadoopConf={}", strUri, hadoopConf);
 
-    Writer writer = getWriter(strUri, hadoopConf);
+    Writer writer = getWriter(strUri, hadoopConf, hadoopUser);
 
     CSVPrinter printer;
     try {

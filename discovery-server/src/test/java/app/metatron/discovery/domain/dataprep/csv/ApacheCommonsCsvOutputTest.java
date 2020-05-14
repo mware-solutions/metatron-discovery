@@ -102,7 +102,7 @@ public class ApacheCommonsCsvOutputTest {
 
   private void cat(String strUri, Configuration conf) {
     PrepParseResult result = new PrepParseResult();
-    Reader reader = getReader(strUri, conf, false, result);
+    Reader reader = getReader(strUri, conf, "bdl", false, result);
     BufferedReader br = new BufferedReader(reader);
 
     try {

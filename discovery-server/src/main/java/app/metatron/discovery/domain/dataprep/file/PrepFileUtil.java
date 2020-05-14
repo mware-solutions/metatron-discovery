@@ -15,6 +15,7 @@ import static app.metatron.discovery.domain.dataprep.util.PrepUtil.configError;
 import static app.metatron.discovery.domain.dataprep.util.PrepUtil.datasetError;
 import static app.metatron.discovery.domain.dataprep.util.PrepUtil.snapshotError;
 
+import app.metatron.discovery.domain.dataprep.util.HdfsUtil;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 import java.io.File;
@@ -88,7 +89,7 @@ public class PrepFileUtil {
 
   }
 
-  public static Reader getReader(String strUri, Configuration conf, boolean onlyCount, PrepParseResult result) {
+  public static Reader getReader(String strUri, Configuration conf, String hdfsUser, boolean onlyCount, PrepParseResult result) {
     Reader reader;
     URI uri;
     String charset;
@@ -109,7 +110,7 @@ public class PrepFileUtil {
 
         FileSystem hdfsFs;
         try {
-          hdfsFs = FileSystem.get(conf);
+          hdfsFs = HdfsUtil.get(conf, hdfsUser);
         } catch (IOException e) {
           e.printStackTrace();
           throw datasetError(MSG_DP_ALERT_CANNOT_GET_HDFS_FILE_SYSTEM, strUri);
@@ -176,7 +177,7 @@ public class PrepFileUtil {
     return writer;
   }
 
-  public static Writer getWriter(String strUri, Configuration conf) {
+  public static Writer getWriter(String strUri, Configuration conf, String hdfsUser) {
     Writer writer;
     URI uri;
 
@@ -196,7 +197,7 @@ public class PrepFileUtil {
 
         FileSystem hdfsFs;
         try {
-          hdfsFs = FileSystem.get(conf);
+          hdfsFs = HdfsUtil.get(conf, hdfsUser);
         } catch (IOException e) {
           e.printStackTrace();
           throw snapshotError(MSG_DP_ALERT_CANNOT_GET_HDFS_FILE_SYSTEM, strUri);

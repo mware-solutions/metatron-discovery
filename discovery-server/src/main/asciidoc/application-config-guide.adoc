@@ -141,6 +141,7 @@ polaris:
   dataprep:
     localBaseDir: ${user.home}/dataprep                       # Where uploaded files, local file snapshots, serialized previews are stored
     hadoopConfDir: /etc/hadoop                                # Set $HADOOP_CONF_DIR
+    hadoopUser: bdl                                           # user to connect to HDFS
     stagingBaseDir: hdfs://localhost:9000/user/hive/dataprep  # Where uploaded files, HDFS file snapshots, files for Hive external tables are stored
     sampling:
       timeout: 20       # Timeout for rule edit sessions

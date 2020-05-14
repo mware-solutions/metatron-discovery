@@ -128,19 +128,19 @@ public class PrepJsonUtil {
    * @return PrepParseResult: grid, colNames
    */
   public static PrepParseResult parse(String strUri, int limitRows, Integer manualColCnt, Configuration conf,
-          boolean onlyCount) {
+          String hadoopUser, boolean onlyCount) {
     PrepParseResult result = new PrepParseResult();
 
     LOGGER.debug("PrepJsonUtil.parse(): strUri={} conf={}", strUri, conf);
 
-    Reader reader = PrepFileUtil.getReader(strUri, conf, onlyCount, result);
+    Reader reader = PrepFileUtil.getReader(strUri, conf, hadoopUser, onlyCount, result);
     readJson(reader, limitRows, manualColCnt, onlyCount, result);
 
     return result;
   }
 
-  public static PrepParseResult parse(String strUri, int limitRows, Integer manualColCnt, Configuration conf) {
-    return parse(strUri, limitRows, manualColCnt, conf, false);
+  public static PrepParseResult parse(String strUri, int limitRows, Integer manualColCnt, Configuration conf, String hadoopUser) {
+    return parse(strUri, limitRows, manualColCnt, conf, hadoopUser, false);
   }
 
   /**
@@ -151,9 +151,9 @@ public class PrepJsonUtil {
    *
    * Sorry for so many try-catches. Sacrificed readability for end-users' usability.
    */
-  public static Map<String, Long> countJson(String strUri, int limitRows, Configuration conf) {
+  public static Map<String, Long> countJson(String strUri, int limitRows, Configuration conf, String hadoopUser) {
     Map<String, Long> mapTotal = new HashMap();
-    PrepParseResult result = parse(strUri, limitRows, null, conf, true);
+    PrepParseResult result = parse(strUri, limitRows, null, conf, hadoopUser, true);
     mapTotal.put("totalRows", result.totalRows);
     mapTotal.put("totalBytes", result.totalBytes);
     return mapTotal;
@@ -165,10 +165,10 @@ public class PrepJsonUtil {
    *
    * header will be false for table-type snapshots.
    */
-  public static PrintWriter getPrinter(String strUri, Configuration conf) {
+  public static PrintWriter getPrinter(String strUri, Configuration conf, String hadoopUser) {
     LOGGER.debug("PrepJsonUtil.getJsonPrinter(): strUri={} conf={}", strUri, conf);
 
-    return new PrintWriter(new BufferedWriter(getWriter(strUri, conf)));
+    return new PrintWriter(new BufferedWriter(getWriter(strUri, conf, hadoopUser)));
   }
 
   /**

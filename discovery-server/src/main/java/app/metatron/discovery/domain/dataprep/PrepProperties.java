@@ -31,6 +31,7 @@ public class PrepProperties {
 
   public static final String LOCAL_BASE_DIR = "polaris.dataprep.localBaseDir";
   public static final String HADOOP_CONF_DIR = "polaris.dataprep.hadoopConfDir";
+  public static final String HADOOP_USER = "polaris.dataprep.hadoopUser";
   public static final String STAGING_BASE_DIR = "polaris.dataprep.stagingBaseDir";
   public static final String S3_BASE_DIR = "polaris.dataprep.s3BaseDir";
 
@@ -68,6 +69,7 @@ public class PrepProperties {
   public String stagingBaseDir;
   public String s3BaseDir;
   public String hadoopConfDir;
+  public String hadoopUser;
   public SamplingInfo sampling;
   public EtlInfo etl;
 
@@ -524,6 +526,14 @@ public class PrepProperties {
 
   public String getHadoopConfDir() {
     return hadoopConfDir;
+  }
+
+  public String getHadoopUser() {
+    return hadoopUser;
+  }
+
+  public void setHadoopUser(String hadoopUser) {
+    this.hadoopUser = hadoopUser;
   }
 
   public SamplingInfo getSampling() {

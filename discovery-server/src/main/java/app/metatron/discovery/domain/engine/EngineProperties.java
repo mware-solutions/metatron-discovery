@@ -101,7 +101,7 @@ public class EngineProperties {
   public void init() {
     api.forEach((s, engineApi) -> engineApi.makeTargetUrl(hostname.get(engineApi.getTarget())));
 
-    // 설정 하위 호환을 위하여 처리
+    // Processed for backward compatibility of settings
     if (ingestion.getLoader() == null) {
       ingestion.setLoader(new FileLoaderProperties(FileLoaderProperties.RemoteType.SSH,
                                                    ingestion.getBaseDir(),
@@ -228,7 +228,7 @@ public class EngineProperties {
 
 
   /**
-   * 엔진(Druid) 적재를 위한 정보
+   * Information for loading the engine (Druid)
    */
   public static class IngestionInfo {
 
@@ -239,7 +239,7 @@ public class EngineProperties {
     Map<String, Host> hosts = Maps.newHashMap();
 
     /**
-     * 적재를 위한 파일 처리 정보
+     * File processing information for loading
      */
     FileLoaderProperties loader;
 
@@ -251,7 +251,7 @@ public class EngineProperties {
     }
 
     /**
-     * 하위 호환을 위하여 처리
+     * Processed for backward compatibility
      */
     public String getBaseDir() {
       if (StringUtils.isEmpty(baseDir) && loader != null) {
@@ -265,7 +265,7 @@ public class EngineProperties {
     }
 
     /**
-     * 하위 호환을 위하여 처리
+     * Processed for backward compatibility
      */
     public Map<String, Host> getHosts() {
       if (MapUtils.isEmpty(hosts) && loader != null) {
@@ -295,7 +295,7 @@ public class EngineProperties {
   }
 
   /**
-   * 엔진(Druid) 질의를 위한 정보
+   * Information for querying engines
    */
   public static class QueryInfo {
 
@@ -309,17 +309,17 @@ public class EngineProperties {
     Map<String, Host> hosts = Maps.newHashMap();
 
     /**
-     * 엔진에서 사용하는 기본 타임존, 기본값 'UTC'
+     * Default time zone used by the engine, default 'UTC'
      */
     String defaultTimezone;
 
     /**
-     * 엔진에서 사용하는 기본 Locale 값, 기본값 'en'
+     * Default Locale value used by engine, default 'en'
      */
     String defaultLocale;
 
     /**
-     * Broker 노드와의 파일 처리 관련 정보
+     * Information related to file processing with broker nodes
      */
     FileLoaderProperties loader;
 
@@ -331,7 +331,7 @@ public class EngineProperties {
     }
 
     /**
-     * 하위 호환을 위하여 처리
+     * Processed for backward compatibility
      */
     public String getLocalResultDir() {
       if (StringUtils.isEmpty(localResultDir) && loader != null) {
@@ -345,7 +345,7 @@ public class EngineProperties {
     }
 
     /**
-     * 하위 호환을 위하여 처리
+     * Processed for backward compatibility
      */
     public String getDefaultForwardUrl() {
       if (StringUtils.isEmpty(defaultForwardUrl) && loader != null) {
@@ -375,7 +375,7 @@ public class EngineProperties {
     }
 
     /**
-     * 하위 호환을 위하여 처리
+     * Processed for backward compatibility
      */
     public Map<String, Host> getHosts() {
       if (MapUtils.isEmpty(hosts) && loader != null) {

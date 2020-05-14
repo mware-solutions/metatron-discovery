@@ -42,6 +42,7 @@ import app.metatron.discovery.domain.dataprep.teddy.DataFrame;
 import app.metatron.discovery.domain.dataprep.teddy.DataFrameService;
 import app.metatron.discovery.domain.dataprep.teddy.exceptions.TeddyException;
 import app.metatron.discovery.domain.dataprep.transform.TeddyImpl;
+import app.metatron.discovery.domain.dataprep.util.HdfsUtil;
 import app.metatron.discovery.domain.dataprep.util.PrepUtil;
 import app.metatron.discovery.domain.storage.StorageProperties;
 import app.metatron.discovery.util.ExcelProcessor;
@@ -140,7 +141,7 @@ public class PrepDatasetFileService {
             throw datasetError(MSG_DP_ALERT_UNKOWN_ERROR, "Excel files should have converted as CSV");
           case "json":
             Configuration hadoopConf = PrepUtil.getHadoopConf(prepProperties.getHadoopConfDir(false));
-            result = PrepJsonUtil.countJson(storedUri, limitRows, hadoopConf);
+            result = PrepJsonUtil.countJson(storedUri, limitRows, hadoopConf, prepProperties.hadoopUser);
             break;
           default:
             hadoopConf = PrepUtil.getHadoopConf(prepProperties.getHadoopConfDir(false));
@@ -150,7 +151,8 @@ public class PrepDatasetFileService {
                     .withQuoteChar(dataset.getQuoteChar())
                     .withLimitRows(limitRows)
                     .withOnlyCount(true)
-                    .withHadoopConf(hadoopConf);
+                    .withHadoopConf(hadoopConf)
+                    .withHadoopUser(prepProperties.hadoopUser);
             result = csvUtil.countCsvFile(storedUri);
         }
 
@@ -205,7 +207,7 @@ public class PrepDatasetFileService {
 
         FileSystem hdfsFs = null;
         try {
-          hdfsFs = FileSystem.get(conf);
+          hdfsFs = HdfsUtil.get(conf, prepProperties.hadoopUser);
           if (!hdfsFs.exists(path)) {
             hdfsFs.mkdirs(path);
           }
@@ -341,7 +343,7 @@ public class PrepDatasetFileService {
 
         FileSystem hdfsFs;
         try {
-          hdfsFs = FileSystem.get(conf);
+          hdfsFs = HdfsUtil.get(conf, prepProperties.hadoopUser);
         } catch (IOException e) {
           e.printStackTrace();
           throw datasetError(MSG_DP_ALERT_CANNOT_GET_HDFS_FILE_SYSTEM, storedUri);
@@ -414,7 +416,7 @@ public class PrepDatasetFileService {
     Configuration hadoopConf = PrepUtil.getHadoopConf(prepProperties.getHadoopConfDir(false));
 
     DataFrame df = new DataFrame("df_for_preview");
-    df.setByGrid(PrepJsonUtil.parse(storedUri, limitRows, columnCount, hadoopConf));
+    df.setByGrid(PrepJsonUtil.parse(storedUri, limitRows, columnCount, hadoopConf, prepProperties.hadoopUser));
 
     if (autoTyping && 0 < df.rows.size()) {
       df = teddyImpl.applyAutoTyping(df);
@@ -438,7 +440,8 @@ public class PrepDatasetFileService {
             .withQuoteChar(quoteChar)
             .withLimitRows(limitRows)
             .withManualColCnt(columnCount)
-            .withHadoopConf(hadoopConf);
+            .withHadoopConf(hadoopConf)
+            .withHadoopUser(prepProperties.hadoopUser);
     df.setByGrid(csvUtil.parse(storedUri));
 
     if (autoTyping && 0 < df.rows.size()) {
@@ -673,7 +676,7 @@ public class PrepDatasetFileService {
       InputStream in = new BufferedInputStream(new FileInputStream(inFile));
 
       Configuration conf = PrepUtil.getHadoopConf(prepProperties.getHadoopConfDir(true));
-      FileSystem fs = FileSystem.get(conf);
+      FileSystem fs = HdfsUtil.get(conf, prepProperties.hadoopUser);
       Path outPath = new Path(storedUri);
       OutputStream out = fs.create(outPath);
 
@@ -812,7 +815,7 @@ public class PrepDatasetFileService {
 
         FileSystem hdfsFs;
         try {
-          hdfsFs = FileSystem.get(conf);
+          hdfsFs = HdfsUtil.get(conf, prepProperties.hadoopUser);
         } catch (IOException e) {
           e.printStackTrace();
           throw datasetError(MSG_DP_ALERT_CANNOT_GET_HDFS_FILE_SYSTEM, storedUri);
@@ -872,7 +875,7 @@ public class PrepDatasetFileService {
 
         FileSystem hdfsFs;
         try {
-          hdfsFs = FileSystem.get(conf);
+          hdfsFs = HdfsUtil.get(conf, prepProperties.hadoopUser);
         } catch (IOException e) {
           e.printStackTrace();
           throw datasetError(MSG_DP_ALERT_CANNOT_GET_HDFS_FILE_SYSTEM, storedUri);

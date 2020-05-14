@@ -79,7 +79,7 @@ public class ApacheCommonsCsvIntegrationTest extends AbstractRestIntegrationTest
     Reader reader;
 
     PrepParseResult result = new PrepParseResult();
-    reader = PrepFileUtil.getReader(strLocalUri, null, false, result);
+    reader = PrepFileUtil.getReader(strLocalUri, null, "bdl", false, result);
 
     try {
       URI uri = new URI(strHdfsUri);

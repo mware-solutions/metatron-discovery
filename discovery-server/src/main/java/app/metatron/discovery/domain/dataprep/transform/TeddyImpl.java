@@ -280,7 +280,7 @@ public class TeddyImpl {
     String extensionType = FilenameUtils.getExtension(strUri);
     switch (extensionType) {
       case "json":
-        df.setByGrid(PrepJsonUtil.parse(strUri, samplingRows, columnCount, hadoopConf));
+        df.setByGrid(PrepJsonUtil.parse(strUri, samplingRows, columnCount, hadoopConf, prepProperties.hadoopUser));
         break;
       default: // csv
         PrepCsvUtil csvUtil = PrepCsvUtil.DEFAULT
@@ -288,7 +288,8 @@ public class TeddyImpl {
                 .withQuoteChar(quoteChar)
                 .withLimitRows(samplingRows)
                 .withManualColCnt(columnCount)
-                .withHadoopConf(hadoopConf);
+                .withHadoopConf(hadoopConf)
+                .withHadoopUser(prepProperties.hadoopUser);
         df.setByGrid(csvUtil.parse(strUri));
     }
 

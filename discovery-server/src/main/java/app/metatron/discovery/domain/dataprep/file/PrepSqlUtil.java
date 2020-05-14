@@ -52,18 +52,18 @@ public class PrepSqlUtil extends PrepFileUtil {
    * @return PrepParseResult: grid, colNames
    */
   public static PrepParseResult parse(String strUri, int limitRows, Integer manualColCnt, Configuration conf,
-                                      boolean onlyCount) {
+                                      String hadoopUser, boolean onlyCount) {
     PrepParseResult result = new PrepParseResult();
 
     LOGGER.debug("PrepSqlUtil.parse(): strUri={} conf={}", strUri, conf);
 
-    Reader reader = PrepSqlUtil.getReader(strUri, conf, onlyCount, result);
+    Reader reader = PrepSqlUtil.getReader(strUri, conf, hadoopUser, onlyCount, result);
     readSql(reader, limitRows, manualColCnt, onlyCount, result);
 
     return result;
   }
 
-  public static PrepParseResult parse(String strUri, int limitRows, Integer manualColCnt, Configuration conf) {
-    return parse(strUri, limitRows, manualColCnt, conf, false);
+  public static PrepParseResult parse(String strUri, int limitRows, Integer manualColCnt, Configuration conf, String hadoopUser) {
+    return parse(strUri, limitRows, manualColCnt, conf, hadoopUser, false);
   }
 }
