@@ -10995,3 +10995,6 @@ table.ddp-table-solid-bg tr td {padding:5px 15px; font-size:13px; color:#4b515b;
 .options .ant-checkbox-checked .ant-checkbox-inner:after{
   border-color: #333;
 }
+.ddp-icon-control-fav.sp:before{
+  padding-top: 6px;
+}
