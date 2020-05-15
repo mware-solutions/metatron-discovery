@@ -117,7 +117,7 @@ export class ExtendInputFormulaComponent extends AbstractComponent implements On
     this._command = data.command;
 
     const condition = data.val;
-    const needCol = data.needCol; // need $col 
+    const needCol = data.needCol; // need $col
 
     // set fields (columns)
     this._fields = _.cloneDeep(fields);
@@ -206,7 +206,7 @@ export class ExtendInputFormulaComponent extends AbstractComponent implements On
    * @param {Field} field
    */
   public selectField(field: Field) {
-    let color = '#439fe5';
+    let color = '#2187A7';
 
     this._insertAtCursor('<span style="color: ' + color + '">' + field.name + '<span id="focusElement"></span></span>');
 
@@ -330,7 +330,7 @@ export class ExtendInputFormulaComponent extends AbstractComponent implements On
       return '<span >' + value + '( <span id="focusElement"></span> )</span>';
     } else {
 
-      let color = '#439fe5';
+      let color = '#2187A7';
 
       if (value.hasOwnProperty('indexOf') && value.indexOf('[') === 0) {
         return '<span style="color:' + color + '">' + value.substring(1) + '</span>';

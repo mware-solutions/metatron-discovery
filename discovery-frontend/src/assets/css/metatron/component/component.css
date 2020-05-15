@@ -292,17 +292,17 @@ ul.ddp-list-typebasic.ddp-view li.ddp-selected a .ddp-icon-plus {display:block;}
 
 .gu-mirror .ddp-wrap-icons,
 .gu-mirror .ddp-ui-icons {display:none;}
-.gu-mirror.ddp-ui-dimension {position:relative; padding:7px 7px 7px 33px; color:#fff; background-color:#439fe5; box-sizing:border-box;}
-.gu-mirror.ddp-ui-measure {position:relative; padding:7px 7px 7px 33px; color:#fff; background-color:#5fd7a5; box-sizing:border-box;}
+.gu-mirror.ddp-ui-dimension {position:relative; padding:7px 7px 7px 33px; color:#fff; background-color:#2187A7; box-sizing:border-box;}
+.gu-mirror.ddp-ui-measure {position:relative; padding:7px 7px 7px 33px; color:#fff; background-color:#21A79C; box-sizing:border-box;}
 .gu-mirror .type-apply {display:none !important;}
 .gu-mirror .ddp-icon-alias {display:none;}
 .gu-mirror .ddp-icon-dimension-calen {position:absolute; top:8px; left:11px; background-position:-12px -74px;}
 .gu-mirror .ddp-icon-dimension-ab {position:absolute; top:8px; left:11px; background-position:-14px top;}
 .gu-mirror .ddp-icon-dimension-local {position:absolute; top:8px; left:11px; background-position:-10px -11px;}
 .gu-mirror .ddp-icon-measure-sharp {position:absolute; top:9px; left:11px; background-position:-15px -23px;}
-.gu-mirror .ddp-ui-dimension-wrap {display:block; position:relative; padding:7px 9px 5px 9px; height:30px; color:#fff; border-radius:3px; background-color:#439fe5; box-sizing:border-box;}
+.gu-mirror .ddp-ui-dimension-wrap {display:block; position:relative; padding:7px 9px 5px 9px; height:30px; color:#fff; border-radius:3px; background-color:#2187A7; box-sizing:border-box;}
 .gu-mirror .ddp-ui-dimension-wrap span.ddp-data {color:#fff;}
-.gu-mirror .ddp-ui-measure-wrap {display:block; position:relative; padding:7px 9px 5px 9px; height:30px; color:#fff; border-radius:3px; background-color:#5fd7a5; box-sizing:border-box;}
+.gu-mirror .ddp-ui-measure-wrap {display:block; position:relative; padding:7px 9px 5px 9px; height:30px; color:#fff; border-radius:3px; background-color:#21A79C; box-sizing:border-box;}
 .gu-mirror .ddp-ui-measure-wrap span.ddp-data {color:#fff;}
 
 .gu-hide {
@@ -327,14 +327,14 @@ ul.ddp-list-typebasic.ddp-view li.ddp-selected a .ddp-icon-plus {display:block;}
 }
 .gu-transit .ddp-wrap-icons,
 .gu-transit .ddp-ui-icons{display:none;}
-.gu-transit.ddp-ui-dimension {position:relative; padding:6px 7px 6px 33px; color:#fff; background-color:#439fe5; box-sizing:border-box;}
+.gu-transit.ddp-ui-dimension {position:relative; padding:6px 7px 6px 33px; color:#fff; background-color:#2187A7; box-sizing:border-box;}
 .gu-transit.ddp-ui-measure,
-.gu-transit .ddp-ui-measure-wrap span.ddp-data {position:relative; padding:6px 7px 6px 33px; color:#fff; background-color:#5fd7a5; box-sizing:border-box;}
+.gu-transit .ddp-ui-measure-wrap span.ddp-data {position:relative; padding:6px 7px 6px 33px; color:#fff; background-color:#21A79C; box-sizing:border-box;}
 
 .ddp-ui-chart-contents .gu-transit {position:absolute !important; top:0; left:0;}
-.ddp-ui-chart-contents .gu-transit .ddp-ui-dimension-wrap {display:block; position:relative; padding:7px 9px 5px 9px; height:30px; color:#fff; border-radius:3px; background-color:#439fe5; box-sizing:border-box;}
+.ddp-ui-chart-contents .gu-transit .ddp-ui-dimension-wrap {display:block; position:relative; padding:7px 9px 5px 9px; height:30px; color:#fff; border-radius:3px; background-color:#2187A7; box-sizing:border-box;}
 .ddp-ui-chart-contents .gu-transit .ddp-ui-dimension-wrap span.ddp-data {color:#fff;}
-.ddp-ui-chart-contents .gu-transit .ddp-ui-measure-wrap {display:block; position:relative; padding:7px 9px 5px 9px; height:30px; color:#fff; border-radius:3px; background-color:#5fd7a5; box-sizing:border-box;}
+.ddp-ui-chart-contents .gu-transit .ddp-ui-measure-wrap {display:block; position:relative; padding:7px 9px 5px 9px; height:30px; color:#fff; border-radius:3px; background-color:#21A79C; box-sizing:border-box;}
 .ddp-ui-chart-contents .gu-transit .ddp-ui-measure-wrap span.ddp-data {color:#fff;}
 
 .gu-transit .type-apply {display:none !important;}
@@ -370,8 +370,8 @@ ul.ddp-list-typebasic.ddp-view li.ddp-selected a .ddp-icon-plus {display:block;}
     box-sizing:border-box;
 }
 .node-content-wrapper em.ddp-box-type {position:relative; float:left; width:28px; height:28px; border-radius:2px; border:1px solid red;}
-.node-content-wrapper em.ddp-box-type.type-dimension {border:1px solid #439fe5;}
-.node-content-wrapper em.ddp-box-type.type-measure {border:1px solid #5fd7a5;}
+.node-content-wrapper em.ddp-box-type.type-dimension {border:1px solid #2187A7;}
+.node-content-wrapper em.ddp-box-type.type-measure {border:1px solid #21A79C;}
 .node-content-wrapper em.ddp-box-type em[class*="ddp-icon-"] {position:absolute; top:50%; left:50%;}
 .node-content-wrapper em[class*="ddp-img-chart"] {float:left; vertical-align: middle;}
 .node-content-wrapper span {display:block; padding:6px 0 6px 12px; color:#4b515b; font-size:13px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; word-wrap:normal;}

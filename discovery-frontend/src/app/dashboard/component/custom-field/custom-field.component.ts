@@ -418,9 +418,9 @@ export class CustomFieldComponent extends AbstractComponent implements OnInit, O
       return '<span >' + value + '( <span id="focusElement"></span> )</span>';
     } else {
 
-      let color = '#439fe5';
+      let color = '#2187A7';
       if (data.role === FieldRole.DIMENSION) {
-        color = '#5fd7a5';
+        color = '#21A79C';
       }
 
       if (value.hasOwnProperty('indexOf') && value.indexOf('[') === 0) {
@@ -551,9 +551,9 @@ export class CustomFieldComponent extends AbstractComponent implements OnInit, O
 
   // 컬럼 클릭
   public selectColumn(column: Field) {
-    let color = '#439fe5';
+    let color = '#2187A7';
     if (column.role === FieldRole.DIMENSION) {
-      color = '#5fd7a5';
+      color = '#21A79C';
     }
     let inserColumn = '<span style="color: ' + color + '">';
     if (column.ref) {

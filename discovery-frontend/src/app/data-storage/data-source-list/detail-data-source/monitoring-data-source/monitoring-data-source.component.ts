@@ -350,7 +350,7 @@ export class MonitoringDataSourceComponent extends AbstractPopupComponent implem
 
     // line chart option
     this.lineOption = {
-      color: ['#00dba2'],
+      color: ['#21A79C'],
       grid: {
         left: 0,
         right: 7,

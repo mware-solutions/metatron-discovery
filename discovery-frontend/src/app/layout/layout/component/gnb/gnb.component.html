@@ -68,24 +68,24 @@
             <!-- //popup -->
           </div>
         </li>
-        <li>
-          <a href="javascript:" class="ddp-cursor-default" (click)="$event.stopImmediatePropagation();">
-            <span class="ddp-txt-list">
-                <em class="ddp-icon-info-theme"></em>
-                {{'msg.comm.menu.theme' | translate}}
-            </span>
-          </a>
-          <div class="ddp-theme-check">
-            <label class="theme-check ">
-              <input type="checkbox" [checked]="!isThemeDark()">
-              <i (click)="themeCheckboxClick(constTheme.WHITE);$event.preventDefault();"></i>
-            </label>
-            <label class="theme-check type-dark">
-              <input type="checkbox" [checked]="isThemeDark()">
-              <i (click)="themeCheckboxClick(constTheme.DARK);$event.preventDefault();"></i>
-            </label>
-          </div>
-        </li>
+<!--        <li>-->
+<!--          <a href="javascript:" class="ddp-cursor-default" (click)="$event.stopImmediatePropagation();">-->
+<!--            <span class="ddp-txt-list">-->
+<!--                <em class="ddp-icon-info-theme"></em>-->
+<!--                {{'msg.comm.menu.theme' | translate}}-->
+<!--            </span>-->
+<!--          </a>-->
+<!--          <div class="ddp-theme-check">-->
+<!--            <label class="theme-check ">-->
+<!--              <input type="checkbox" [checked]="!isThemeDark()">-->
+<!--              <i (click)="themeCheckboxClick(constTheme.WHITE);$event.preventDefault();"></i>-->
+<!--            </label>-->
+<!--            <label class="theme-check type-dark">-->
+<!--              <input type="checkbox" [checked]="isThemeDark()">-->
+<!--              <i (click)="themeCheckboxClick(constTheme.DARK);$event.preventDefault();"></i>-->
+<!--            </label>-->
+<!--          </div>-->
+<!--        </li>-->
       </ul>
       <div class="ddp-ui-part"><a href="javascript:" (click)="logout();">{{'msg.comm.menu.logout' | translate}}</a></div>
     </div>
