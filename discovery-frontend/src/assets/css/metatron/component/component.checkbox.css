@@ -151,7 +151,7 @@
 .ddp-checkbox-slide input[type=checkbox]:checked + label {
     background-color:#b7bcdb;
 }
-.ddp-checkbox-slide input[type=checkbox]:checked + label > span.ddp-slide {background-color:#666fad;}
+.ddp-checkbox-slide input[type=checkbox]:checked + label > span.ddp-slide {background-color:#21A79C;}
 .ddp-checkbox-slide input[type=checkbox]:checked + label:after {
     color: #9f9f9f;
     position: absolute;

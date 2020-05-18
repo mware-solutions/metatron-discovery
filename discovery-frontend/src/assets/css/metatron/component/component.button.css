@@ -11,8 +11,8 @@ a.ddp-btn-type.ddp-bg-orange:hover {border:1px solid #f28400; background-color:#
 a.ddp-btn-type.ddp-btn-disabled,
 a.ddp-btn-type.ddp-btn-disabled:hover {background-color:#fff; color:#707070; border:1px solid #afb3b7; cursor:no-drop;}
 
-a.ddp-btn-buttons2 {display:inline-block; padding:7px 0; width:115px; border-radius:2px; background-color:#f3f3f5; border:1px solid #8086bd; color:#21A79C; font-weight:bold; font-size:12px; text-align:center;}
-a.ddp-btn-buttons2:hover {background-color:#707cc4; border:1px solid #707cc4; color:#fff;}
+a.ddp-btn-buttons2 {display:inline-block; padding:7px 0; width:115px; border-radius:2px; background-color:#f3f3f5; border:1px solid #21A79C; color:#21A79C; font-weight:bold; font-size:12px; text-align:center;}
+a.ddp-btn-buttons2:hover {background-color:#21A79C; border:1px solid #21A79C; color:#fff;}
 a.ddp-btn-buttons2:hover em.ddp-icon-btndone {background-position:-16px -163px;}
 
 a.ddp-btn-buttons3 {display:inline-block; padding:7px 0; width:115px; border-radius:2px; border:1px solid #b8bdc4; color:#4b525b; font-weight:bold; font-size:12px; text-align:center;}
