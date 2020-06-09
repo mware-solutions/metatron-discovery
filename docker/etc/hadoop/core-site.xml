@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+	<property>
+	   <name>fs.default.name</name>
+	   <value>hdfs://HDFS_ROOT</value>
+	 </property>
+
+  <property>
+    <name>fs.trash.interval</name>
+    <value>0</value>
+  </property>
+
+  <property>
+    <name>hadoop.security.group.mapping</name>
+    <value>org.apache.hadoop.security.JniBasedUnixGroupsMappingWithFallback</value>
+  </property>
+</configuration>

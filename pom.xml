@@ -28,7 +28,7 @@
         <module>discovery-prep-parser</module>
         <module>discovery-common</module>
         <module>discovery-extensions</module>
-        <module>discovery-distribution</module>
+<!--        <module>discovery-distribution</module>-->
     </modules>
 
     <properties>

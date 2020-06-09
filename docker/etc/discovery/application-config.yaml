@@ -1,0 +1,60 @@
+spring:
+  profiles: ${METATRON_ENV_MODE:local}
+  datasource:
+    platform: h2
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:${BDL_DIR}/data/discovery/h2db/polaris;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: sa
+    max-active: 10
+server:
+  port: 8180
+logging:
+  config: classpath:logback-console.xml
+polaris:
+  storage:
+    stagedb:
+      hostname: localhost
+      port: 10000
+      username: hive
+      password: hive
+      metastore:
+        uri: thrift://localhost:9083
+        jdbc:
+          url: jdbc:mysql://localhost:3306/hive
+          username: hive
+          password: hive
+
+  engine:
+    hostname:
+      broker: http://discovery-${TENANT_ID}_druid:8082
+      overlord: http://discovery-${TENANT_ID}_druid:8090
+      coordinator: http://discovery-${TENANT_ID}_druid:8081
+    
+    ingestion:
+      baseDir: /opt/bdl/ingest  # druid will look in this folder on his container
+      loader:
+        remoteType: SHARED
+        remoteDir: /opt/bdl/ingest # we will copy the ingest file here
+
+    query:
+      localResultDir: ${java.io.tmpdir:-/tmp}
+      defaultForwardUrl: local:/tmp
+ 
+  datasource:
+    ingestion:
+      retries:
+        delay: 3
+        maxDelay: 90
+        maxDuration : 3600
+ 
+  #Set up Hive related information when using Data Prep.
+  dataprep:
+    localBaseDir: $BDL_DIR/data/discovery/dataprep
+    hadoopConfDir: /opt/bdl/etc/hadoop
+    hadoopUser: bdl
+    stagingBaseDir: hdfs://im1.bdl.local:19998/${TENANT_ID}//dataprep
+    sampling:
+      timeout: 20 # Timeout for rule edit sessions
+    etl:
+      timeout: 36000  # Timeout for generating snapshots

@@ -128,23 +128,6 @@
             </plugin>
 
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.2.3</version>
-                <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <dockerDirectory>src/main/docker</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.war</include>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>${liquibase.version}</version>
@@ -751,7 +734,7 @@
             <version>1.1.1</version>
         </dependency>
 
-        <!-- Spec 관련 Library -->
+        <!-- Spec Related Library -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -820,14 +803,14 @@
             <version>5.1.0</version>
         </dependency>
 
-        <!-- 도구 관련 Library -->
+        <!-- Tools Related Library -->
         <dependency>
             <groupId>org.jolokia</groupId>
             <artifactId>jolokia-core</artifactId>
             <version>1.3.5</version>
         </dependency>
 
-        <!-- 2016.11.21 dbcp추가 -->
+        <!-- 2016.11.21 dbcp added -->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
@@ -897,7 +880,7 @@
         <dependency>
             <groupId>io.prestosql</groupId>
             <artifactId>presto-jdbc</artifactId>
-            <version>329</version>
+            <version>333</version>
         </dependency>
 
         <dependency>
@@ -916,7 +899,7 @@
             </exclusions>
         </dependency>
 
-        <!-- Phoenix 관련 Client Jackson 충돌로 인한 버전 업
+        <!-- Version upgrade due to Phoenix-related Client Jackson crash
              https://issues.apache.org/jira/browse/CALCITE-1110
         -->
         <dependency>
@@ -926,12 +909,6 @@
         </dependency>
 
         <!-- used in dataprep -->
-        <dependency>
-            <groupId>org.alluxio</groupId>
-            <artifactId>alluxio-shaded-client</artifactId>
-            <version>2.2.0</version>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
