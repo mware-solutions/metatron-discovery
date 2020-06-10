@@ -53,7 +53,7 @@ input.ddp-input-type {display:block; width:100%; padding-bottom:10px; font-size:
 
 .ddp-input-apply input.ddp-input-txt:focus + .ddp-icon-apply{display:block;}
 .ddp-input-apply.ddp-edit input.ddp-input-txt {border:1px solid #b7b9c2;}
-.ddp-input-apply.ddp-edit .ddp-icon-apply {display:block; background-color:#9ca2cc;}
+.ddp-input-apply.ddp-edit .ddp-icon-apply {display:block; background-color:#21A79C;}
 
 .ddp-input-apply.ddp-loading input.ddp-input-txt {border:1px solid #b7b9c2;}
 .ddp-input-apply .ddp-icon-apply-loading {display:none; position:absolute; top:50%; right:8px;margin-top:-6px; width:12px; height:12px; background:url(../../../images/icon_tabloading.png) no-repeat; vertical-align: middle; animation-name: spin;animation-duration: 1s;
