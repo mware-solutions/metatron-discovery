@@ -14,6 +14,7 @@
 
 package app.metatron.discovery.domain.workbook.configurations.widget.shelf;
 
+import app.metatron.discovery.query.druid.aggregations.DoubleSumAggregation;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
@@ -32,7 +33,6 @@ import app.metatron.discovery.common.datasource.LogicalType;
 import app.metatron.discovery.query.druid.Aggregation;
 import app.metatron.discovery.query.druid.PostAggregation;
 import app.metatron.discovery.query.druid.aggregations.CountAggregation;
-import app.metatron.discovery.query.druid.aggregations.GenericSumAggregation;
 import app.metatron.discovery.query.druid.aggregations.RelayAggregation;
 import app.metatron.discovery.query.druid.postaggregations.ExprPostAggregator;
 import app.metatron.discovery.util.EnumUtils;
@@ -110,8 +110,8 @@ public interface LayerView extends Serializable {
       List<String> pointKeyList = LogicalType.GEO_POINT.getGeoPointKeys();
 
       List<Aggregation> aggregations = Lists.newArrayList();
-      aggregations.add(new GenericSumAggregation("SUM_LAT", null, fieldName + "." + pointKeyList.get(0), "double"));
-      aggregations.add(new GenericSumAggregation("SUM_LON", null, fieldName + "." + pointKeyList.get(1), "double"));
+      aggregations.add(new DoubleSumAggregation("SUM_LAT", null, fieldName + "." + pointKeyList.get(0)));
+      aggregations.add(new DoubleSumAggregation("SUM_LON", null, fieldName + "." + pointKeyList.get(1)));
       aggregations.add(new CountAggregation("count"));
 
       return aggregations;

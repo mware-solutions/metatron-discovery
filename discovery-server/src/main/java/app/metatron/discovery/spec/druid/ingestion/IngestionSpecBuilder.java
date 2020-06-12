@@ -28,6 +28,9 @@
 
 package app.metatron.discovery.spec.druid.ingestion;
 
+import app.metatron.discovery.spec.druid.ingestion.input.LocalInputSource;
+import app.metatron.discovery.spec.druid.ingestion.io.*;
+import app.metatron.discovery.spec.druid.ingestion.parser.CsvStreamParser;
 import org.apache.commons.collections.MapUtils;
 
 import java.util.List;
@@ -38,9 +41,6 @@ import app.metatron.discovery.spec.druid.ingestion.firehose.LocalFirehose;
 import app.metatron.discovery.spec.druid.ingestion.index.IndexSpec;
 import app.metatron.discovery.spec.druid.ingestion.input.HadoopInputSpec;
 import app.metatron.discovery.spec.druid.ingestion.input.HiveInputSpec;
-import app.metatron.discovery.spec.druid.ingestion.io.BatchIoConfig;
-import app.metatron.discovery.spec.druid.ingestion.io.HadoopIoConfig;
-import app.metatron.discovery.spec.druid.ingestion.io.IoConfig;
 import app.metatron.discovery.spec.druid.ingestion.tuning.BatchTuningConfig;
 import app.metatron.discovery.spec.druid.ingestion.tuning.HadoopTuningConfig;
 import app.metatron.discovery.spec.druid.ingestion.tuning.TuningConfig;
@@ -109,13 +109,20 @@ public class IngestionSpecBuilder extends AbstractSpecBuilder {
 
   public IngestionSpecBuilder localIoConfig(String baseDir, String filter) {
 
-    LocalFirehose firehose = new LocalFirehose();
-    firehose.setBaseDir(baseDir);
-    firehose.setFilter(filter);
+    LocalInputSource inputSource = new LocalInputSource();
+    inputSource.setBaseDir(baseDir);
+    inputSource.setFilter(filter);
 
     BatchIoConfig config = new BatchIoConfig();
-    config.setFirehose(firehose);
+    config.setInputSource(inputSource);
 
+    TsvInputFormat tsvInputFormat = new TsvInputFormat();
+    CsvStreamParser parser = (CsvStreamParser) dataSchema.getParser();
+    tsvInputFormat.setColumns(parser.getColumns());
+    tsvInputFormat.setDelimiter(parser.getDelimiter());
+    tsvInputFormat.setSkipHeaderRows(parser.getSkipHeaderRecord());
+    tsvInputFormat.setListDelimiter(parser.getRecordSeparator());
+    config.setInputFormat(tsvInputFormat);
     ioConfig = config;
 
     return this;

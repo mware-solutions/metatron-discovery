@@ -1,0 +1,61 @@
+spring:
+  profiles: ${METATRON_ENV_MODE:local}
+  datasource:
+    platform: h2
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:${BDL_DIR}/data/discovery/h2db/polaris;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: sa
+    max-active: 10
+server:
+  port: 8180
+logging:
+  config: classpath:logback-console.xml
+polaris:
+  storage:
+    stagedb:
+      hostname: localhost
+      port: 10000
+      username: hive
+      password: hive
+      metastore:
+        uri: thrift://localhost:9083
+        jdbc:
+          url: jdbc:mysql://localhost:3306/hive
+          username: hive
+          password: hive
+
+  engine:
+    hostname:
+      broker: http://localhost:8082
+      overlord: http://localhost:8081
+      coordinator: http://localhost:8081
+
+    ingestion:
+      loader:
+        remoteType: LOCAL
+        localBaseDir: ${java.io.tmpdir:-/tmp}
+
+    query:
+      localResultDir: ${java.io.tmpdir:-/tmp}
+      defaultForwardUrl: local:/tmp
+      loader:
+        remoteType: LOCAL
+        localBaseDir: ${java.io.tmpdir:-/tmp}
+
+  datasource:
+    ingestion:
+      retries:
+        delay: 3
+        maxDelay: 90
+        maxDuration : 3600
+
+  #Set up Hive related information when using Data Prep.
+  dataprep:
+    localBaseDir: /opt/xxx/dataprep
+    hadoopConfDir: /opt/bdl/etc/hadoop
+    stagingBaseDir: hdfs://localhost:9000/user/hive/dataprep
+    sampling:
+      timeout: 20 # Timeout for rule edit sessions
+    etl:
+      timeout: 36000  # Timeout for generating snapshots

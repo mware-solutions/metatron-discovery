@@ -665,19 +665,19 @@ public class ComputationalField {
       String dataType = "double";
 
       if ("sumof".equals(context.IDENTIFIER().getText().toLowerCase())) {
-        aggregations.add(new GenericSumAggregation(paramName, null, fieldExpression, dataType));
+        aggregations.add(new DoubleSumAggregation(paramName, null, fieldExpression));
       } else if ("minof".equals(context.IDENTIFIER().getText().toLowerCase())) {
-        aggregations.add(new GenericMinAggregation(paramName, null, fieldExpression, dataType));
+        aggregations.add(new DoubleMinAggregation(paramName, null, fieldExpression));
       } else if ("maxof".equals(context.IDENTIFIER().getText().toLowerCase())) {
-        aggregations.add(new GenericMaxAggregation(paramName, null, fieldExpression, dataType));
+        aggregations.add(new DoubleMaxAggregation(paramName, null, fieldExpression));
       } else if ("varianceof".equals(context.IDENTIFIER().getText().toLowerCase())) {
         aggregations.add(new VarianceAggregation(paramName, null, fieldExpression));
       } else if ("stddevof".equals(context.IDENTIFIER().getText().toLowerCase())) {
         aggregations.add(new VarianceAggregation(paramName, null, fieldExpression));
         paramName = "sqrt(" + paramName + ")";
       } else if ("avgof".equals(context.IDENTIFIER().getText().toLowerCase())) {
-        aggregations.add(new GenericSumAggregation("count", "count", null, dataType));
-        aggregations.add(new GenericSumAggregation(paramName, null, fieldExpression, dataType));
+        aggregations.add(new DoubleSumAggregation("count", "count", null));
+        aggregations.add(new DoubleSumAggregation(paramName, null, fieldExpression));
         paramName = "(" + paramName + "/count)";
         //postAggregation = postAggregation.replace(aggregationFunction, "(" + paramName + "/count)");
       } else if ("countof".equals(context.IDENTIFIER().getText().toLowerCase())) {

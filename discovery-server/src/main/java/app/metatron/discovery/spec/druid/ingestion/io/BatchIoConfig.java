@@ -17,6 +17,7 @@ package app.metatron.discovery.spec.druid.ingestion.io;
 import javax.validation.constraints.NotNull;
 
 import app.metatron.discovery.spec.druid.ingestion.firehose.Firehose;
+import app.metatron.discovery.spec.druid.ingestion.input.InputSource;
 
 /**
  * Created by kyungtaak on 2016. 6. 18..
@@ -24,30 +25,27 @@ import app.metatron.discovery.spec.druid.ingestion.firehose.Firehose;
 public class BatchIoConfig implements IoConfig {
 
   @NotNull
-  Firehose firehose;
+  InputSource inputSource;
 
-  String firehoseV2;
+  @NotNull
+  InputFormat inputFormat;
 
   public BatchIoConfig() {
   }
 
-  public BatchIoConfig(Firehose firehose) {
-    this.firehose = firehose;
+  public InputSource getInputSource() {
+    return inputSource;
   }
 
-  public Firehose getFirehose() {
-    return firehose;
+  public void setInputSource(InputSource inputSource) {
+    this.inputSource = inputSource;
   }
 
-  public void setFirehose(Firehose firehose) {
-    this.firehose = firehose;
+  public InputFormat getInputFormat() {
+    return inputFormat;
   }
 
-  public String getFirehoseV2() {
-    return firehoseV2;
-  }
-
-  public void setFirehoseV2(String firehoseV2) {
-    this.firehoseV2 = firehoseV2;
+  public void setInputFormat(InputFormat inputFormat) {
+    this.inputFormat = inputFormat;
   }
 }

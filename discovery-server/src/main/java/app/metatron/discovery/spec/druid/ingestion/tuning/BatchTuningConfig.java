@@ -45,8 +45,6 @@ public class BatchTuningConfig implements TuningConfig {
 
   Boolean useCombiner;
 
-  Boolean buildV9Directly;
-
   Integer numBackgroundPersistThreads;
 
   IndexSpec indexSpec;
@@ -59,9 +57,6 @@ public class BatchTuningConfig implements TuningConfig {
   }
 
   public void overrideConfig(Map<String, Object> tuningConfig) {
-
-    this.buildV9Directly = true;
-
     if(MapUtils.isNotEmpty(tuningConfig)) {
       for (String key : tuningConfig.keySet()) {
         try {
@@ -143,14 +138,6 @@ public class BatchTuningConfig implements TuningConfig {
 
   public void setUseCombiner(Boolean useCombiner) {
     this.useCombiner = useCombiner;
-  }
-
-  public Boolean getBuildV9Directly() {
-    return buildV9Directly;
-  }
-
-  public void setBuildV9Directly(Boolean buildV9Directly) {
-    this.buildV9Directly = buildV9Directly;
   }
 
   public Integer getNumBackgroundPersistThreads() {

@@ -14,135 +14,142 @@
 
 package app.metatron.discovery.spec.druid.ingestion;
 
-import com.google.common.collect.Lists;
-
-import java.util.List;
-
-import javax.validation.constraints.NotNull;
-
 import app.metatron.discovery.query.druid.Aggregation;
 import app.metatron.discovery.spec.druid.ingestion.granularity.GranularitySpec;
+import app.metatron.discovery.spec.druid.ingestion.parser.CsvStreamParser;
+import app.metatron.discovery.spec.druid.ingestion.parser.DimensionsSpec;
 import app.metatron.discovery.spec.druid.ingestion.parser.Parser;
+import app.metatron.discovery.spec.druid.ingestion.parser.TimestampSpec;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by kyungtaak on 2016. 6. 17..
  */
 public class DataSchema {
 
-  @NotNull
-  String dataSource;
+    @NotNull
+    String dataSource;
 
-  @NotNull
-  Parser parser;
+    @NotNull
+    @JsonProperty("timestampSpec")
+    TimestampSpec timestampSpec;
 
-  @NotNull
-  List<Aggregation> metricsSpec;
+    @NotNull
+    @JsonProperty("dimensionsSpec")
+    DimensionsSpec dimensionsSpec;
 
-  @NotNull
-  GranularitySpec granularitySpec;
+    @NotNull
+    List<Aggregation> metricsSpec;
 
-  /**
-   * Perform type casting at the time of parsing row, if true.
-   */
-  Boolean enforceType = true;
+    @NotNull
+    GranularitySpec granularitySpec;
 
-  /**
-   * 검증조건 기입
-   */
-  List<Validation> validations;
+    /**
+     * Perform type casting at the time of parsing row, if true.
+     */
+    Boolean enforceType = true;
 
-  /**
-   * 대체조건 기입
-   */
-  List<Evaluation> evaluations;
+    /**
+     * Fill in verification conditions
+     */
+    List<Validation> validations;
 
-  public DataSchema() {
-  }
+    /**
+     * Fill in the alternative conditions
+     */
+    List<Evaluation> evaluations;
 
-  public DataSchema(String dataSource, Parser parser, List<Aggregation> metricsSpec, GranularitySpec granularitySpec) {
-    this.dataSource = dataSource;
-    this.parser = parser;
-    this.metricsSpec = metricsSpec;
-    this.granularitySpec = granularitySpec;
-  }
+    @JsonIgnore
+    Parser parser;
 
-  public void addMetrics(Aggregation aggregation) {
-
-    if(metricsSpec == null) {
-      metricsSpec = Lists.newArrayList();
+    public DataSchema() {
     }
-    if(aggregation != null) {
-      metricsSpec.add(aggregation);
+
+    public void addMetrics(Aggregation aggregation) {
+
+        if (metricsSpec == null) {
+            metricsSpec = Lists.newArrayList();
+        }
+        if (aggregation != null) {
+            metricsSpec.add(aggregation);
+        }
     }
-  }
 
-  public void addValidation(Validation validation) {
-    if(validations == null) {
-      validations = Lists.newArrayList();
+    public void addValidation(Validation validation) {
+        if (validations == null) {
+            validations = Lists.newArrayList();
+        }
+        validations.add(validation);
     }
-    validations.add(validation);
-  }
 
-  public void addEvaluation(Evaluation evaluation) {
-    if(evaluations == null) {
-      evaluations = Lists.newArrayList();
+    public void addEvaluation(Evaluation evaluation) {
+        if (evaluations == null) {
+            evaluations = Lists.newArrayList();
+        }
+        evaluations.add(evaluation);
     }
-    evaluations.add(evaluation);
-  }
 
-  public String getDataSource() {
-    return dataSource;
-  }
+    public String getDataSource() {
+        return dataSource;
+    }
 
-  public void setDataSource(String dataSource) {
-    this.dataSource = dataSource;
-  }
+    public void setDataSource(String dataSource) {
+        this.dataSource = dataSource;
+    }
 
-  public Parser getParser() {
-    return parser;
-  }
+    public void setParser(Parser parser) {
+        CsvStreamParser csvStreamParser = (CsvStreamParser) parser;
+        this.timestampSpec = csvStreamParser.getTimestampSpec();
+        this.dimensionsSpec = csvStreamParser.getDimensionsSpec();
+        this.parser = parser;
+    }
 
-  public void setParser(Parser parser) {
-    this.parser = parser;
-  }
+    public List<Aggregation> getMetricsSpec() {
+        return metricsSpec;
+    }
 
-  public List<Aggregation> getMetricsSpec() {
-    return metricsSpec;
-  }
+    public void setMetricsSpec(List<Aggregation> metricsSpec) {
+        this.metricsSpec = metricsSpec;
+    }
 
-  public void setMetricsSpec(List<Aggregation> metricsSpec) {
-    this.metricsSpec = metricsSpec;
-  }
+    public GranularitySpec getGranularitySpec() {
+        return granularitySpec;
+    }
 
-  public GranularitySpec getGranularitySpec() {
-    return granularitySpec;
-  }
+    public void setGranularitySpec(GranularitySpec granularitySpec) {
+        this.granularitySpec = granularitySpec;
+    }
 
-  public void setGranularitySpec(GranularitySpec granularitySpec) {
-    this.granularitySpec = granularitySpec;
-  }
+    public Boolean getEnforceType() {
+        return enforceType;
+    }
 
-  public Boolean getEnforceType() {
-    return enforceType;
-  }
+    public void setEnforceType(Boolean enforceType) {
+        this.enforceType = enforceType;
+    }
 
-  public void setEnforceType(Boolean enforceType) {
-    this.enforceType = enforceType;
-  }
+    public List<Validation> getValidations() {
+        return validations;
+    }
 
-  public List<Validation> getValidations() {
-    return validations;
-  }
+    public void setValidations(List<Validation> validations) {
+        this.validations = validations;
+    }
 
-  public void setValidations(List<Validation> validations) {
-    this.validations = validations;
-  }
+    public List<Evaluation> getEvaluations() {
+        return evaluations;
+    }
 
-  public List<Evaluation> getEvaluations() {
-    return evaluations;
-  }
+    public void setEvaluations(List<Evaluation> evaluations) {
+        this.evaluations = evaluations;
+    }
 
-  public void setEvaluations(List<Evaluation> evaluations) {
-    this.evaluations = evaluations;
-  }
+    public Parser getParser() {
+        return parser;
+    }
 }

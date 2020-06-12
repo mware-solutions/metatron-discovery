@@ -28,6 +28,7 @@
 
 package app.metatron.discovery.domain.datasource;
 
+import app.metatron.discovery.query.druid.aggregations.*;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
@@ -78,14 +79,6 @@ import app.metatron.discovery.domain.workbook.configurations.format.TimeFieldFor
 import app.metatron.discovery.domain.workbook.configurations.format.UnixTimeFormat;
 import app.metatron.discovery.extension.dataconnection.jdbc.dialect.JdbcDialect;
 import app.metatron.discovery.query.druid.Aggregation;
-import app.metatron.discovery.query.druid.aggregations.ApproxHistogramFoldAggregation;
-import app.metatron.discovery.query.druid.aggregations.AreaAggregation;
-import app.metatron.discovery.query.druid.aggregations.GenericMaxAggregation;
-import app.metatron.discovery.query.druid.aggregations.GenericMinAggregation;
-import app.metatron.discovery.query.druid.aggregations.GenericSumAggregation;
-import app.metatron.discovery.query.druid.aggregations.RangeAggregation;
-import app.metatron.discovery.query.druid.aggregations.RelayAggregation;
-import app.metatron.discovery.query.druid.aggregations.VarianceAggregation;
 import app.metatron.discovery.spec.druid.ingestion.parser.TimestampSpec;
 import app.metatron.discovery.util.TimeUnits;
 
@@ -408,17 +401,17 @@ public class Field implements MetatronDomain<Long> {
     }
 
     if (aggrType == null) {
-      return new GenericSumAggregation(name, getOriginalName(), "double");
+      return new DoubleSumAggregation(name, getOriginalName());
     }
 
     // TODO: SUM/MIN/MAX 타입도 체크해야하는지 확인 해볼것
     switch (aggrType) {
       case SUM:
-        return new GenericSumAggregation(name, getOriginalName(), "double");
+        return new DoubleSumAggregation(name, getOriginalName());
       case MIN:
-        return new GenericMinAggregation(name, getOriginalName(), "double");
+        return new DoubleMinAggregation(name, getOriginalName());
       case MAX:
-        return new GenericMaxAggregation(name, getOriginalName(), "double");
+        return new DoubleMaxAggregation(name, getOriginalName());
       case AREA:
         return new AreaAggregation(name, getOriginalName());
       case RANGE:
@@ -428,7 +421,7 @@ public class Field implements MetatronDomain<Long> {
       case APPROX:
         return new ApproxHistogramFoldAggregation(name, getOriginalName());
       default:
-        return new GenericSumAggregation(name, getOriginalName(), "double");
+        return new DoubleSumAggregation(name, getOriginalName());
     }
   }
 

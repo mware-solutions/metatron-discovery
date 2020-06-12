@@ -708,10 +708,10 @@ public abstract class AbstractQueryBuilder {
       case NONE:
         break;
       case MIN:
-        aggregations.add(new GenericMinAggregation(aliasName, fieldName, dataType));
+        aggregations.add(new DoubleMinAggregation(aliasName, fieldName));
         break;
       case MAX:
-        aggregations.add(new GenericMaxAggregation(aliasName, fieldName, dataType));
+        aggregations.add(new DoubleMaxAggregation(aliasName, fieldName));
         break;
       case COUNT:
         aggregations.add(new CountAggregation(aliasName));
@@ -720,16 +720,16 @@ public abstract class AbstractQueryBuilder {
         aggregations.add(new HyperUniqueAggregation(aliasName, fieldName));
         break;
       case SUM:
-        aggregations.add(new GenericSumAggregation(aliasName, fieldName, dataType));
+        aggregations.add(new DoubleSumAggregation(aliasName, fieldName));
         break;
 
       case AVG:
         String countField = measureField.getRef() == null ? "count" : measureField.getRef() + "." + "count";
-        aggregations.add(new GenericSumAggregation(fieldName + "_sum", fieldName, dataType));
+        aggregations.add(new DoubleSumAggregation(fieldName + "_sum", fieldName));
 
         if (!(dataSource instanceof MultiDataSource)
             && dataSource.getMetaDataSource().rollup()) {
-          aggregations.add(new GenericSumAggregation("count", countField, dataType));
+          aggregations.add(new DoubleSumAggregation("count", countField));
         } else {
           aggregations.add(new CountAggregation("count"));
         }

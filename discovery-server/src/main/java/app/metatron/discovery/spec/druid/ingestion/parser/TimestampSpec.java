@@ -19,9 +19,6 @@ import org.joda.time.DateTime;
 
 import javax.validation.constraints.NotNull;
 
-/**
- *
- */
 public class TimestampSpec {
 
   String type;
