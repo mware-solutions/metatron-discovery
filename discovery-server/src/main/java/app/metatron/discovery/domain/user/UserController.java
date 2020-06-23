@@ -189,6 +189,8 @@ public class UserController {
   private User createKeycloakUser(String username) {
     User keycloakUser = new User();
     keycloakUser.setUsername(username);
+    keycloakUser.setFullName(username);
+    keycloakUser.setEmail(username + "@cloud.bigconnect.io");
     keycloakUser.setStatus(User.Status.ACTIVATED);
     workspaceService.createWorkspaceByUserCreation(keycloakUser, false);
 

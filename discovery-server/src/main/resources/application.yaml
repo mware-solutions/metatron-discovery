@@ -295,6 +295,7 @@ polaris:
 
 sso:
   enabled: true
+  forceHttps: true
 
 ---
 spring:
