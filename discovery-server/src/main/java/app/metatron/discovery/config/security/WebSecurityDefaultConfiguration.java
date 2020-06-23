@@ -14,11 +14,19 @@
 
 package app.metatron.discovery.config.security;
 
+import app.metatron.discovery.common.oauth.BasePermissionEvaluator;
+import app.metatron.discovery.common.oauth.CustomDaoAuthenticationProvider;
+import app.metatron.discovery.common.oauth.CustomUserStatusChecker;
 import com.google.common.collect.ImmutableList;
-
+import org.keycloak.adapters.KeycloakConfigResolver;
+import org.keycloak.adapters.KeycloakDeployment;
+import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
+import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
+import org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -28,8 +36,9 @@ import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -37,20 +46,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebSecurityExpressionRoot;
+import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import app.metatron.discovery.common.oauth.BasePermissionEvaluator;
-import app.metatron.discovery.common.oauth.CustomDaoAuthenticationProvider;
-import app.metatron.discovery.common.oauth.CustomUserStatusChecker;
-
 
 /**
  * Created by kyungtaak on 2016. 5. 2..
  */
-public class WebSecurityDefaultConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityDefaultConfiguration extends KeycloakWebSecurityConfigurerAdapter {
 
   @Autowired
   @Qualifier(value = BeanIds.USER_DETAILS_SERVICE)
@@ -64,6 +71,9 @@ public class WebSecurityDefaultConfiguration extends WebSecurityConfigurerAdapte
 
   @Value("${polaris.password-encoder:}")
   private String passwordEncoderType;
+
+  @Value("${sso.enabled}")
+  private boolean ssoEnabled;
 
   @Override
   public void configure(WebSecurity web) throws Exception {
@@ -102,9 +112,15 @@ public class WebSecurityDefaultConfiguration extends WebSecurityConfigurerAdapte
   }
 
   @Override
-  @Autowired // <-- This is crucial otherwise Spring Boot creates its own
+  @Autowired
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    if (ssoEnabled) {
+      KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
+      keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(new SimpleAuthorityMapper());
+      auth.authenticationProvider(keycloakAuthenticationProvider);
+    } else {
+      auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
   }
 
   private SecurityExpressionHandler<FilterInvocation> webExpressionHandler() {
@@ -114,33 +130,50 @@ public class WebSecurityDefaultConfiguration extends WebSecurityConfigurerAdapte
     return defaultWebSecurityExpressionHandler;
   }
 
+  /**
+   * Defines the session authentication strategy.
+   */
+  @Bean
+  @Override
+  protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+    return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
+  }
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    if (ssoEnabled) {
+      super.configure(http);
+    }
 
     // @formatter:off
-    http.cors() // if Spring MVC is on classpath and no CorsConfigurationSource is provided,  Spring Security will use CORS configuration provided to Spring MVC
-      .and()
-      .authenticationProvider(customAuthProvider())
-      .csrf()
-        .ignoringAntMatchers("/stomp/**")
-        .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize"))
-        .disable()
-      .headers()
-        .frameOptions().disable()
-      .and()
-        .authorizeRequests()
-        .expressionHandler(webExpressionHandler())
-        .antMatchers("/oauth/token").permitAll()
-        .anyRequest().authenticated()
-      .and()
-        .exceptionHandling()
-        // TODO: 예외 처리 방식은 추후 정리
-        .accessDeniedPage("/station.login.jsp?authorization_error=true");
+    http.cors(); // if Spring MVC is on classpath and no CorsConfigurationSource is provided,  Spring Security will use CORS configuration provided to Spring MVC
+
+    if (!ssoEnabled) {
+      http.authenticationProvider(customAuthProvider());
+    }
+
+    http.csrf()
+      .ignoringAntMatchers("/stomp/**")
+      .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize"))
+      .disable()
+    .headers()
+      .frameOptions().disable()
+    .and()
+      .authorizeRequests()
+      .expressionHandler(webExpressionHandler())
+      .antMatchers("/oauth/token").permitAll()
+      .antMatchers("/api/ping").permitAll()
+      .anyRequest().authenticated()
+    .and()
+      .exceptionHandling()
+      // TODO: 예외 처리 방식은 추후 정리
+      .accessDeniedPage("/station.login.jsp?authorization_error=true");
     // @formatter:on
 
     http.headers().frameOptions().disable();
-    http.authorizeRequests().anyRequest().permitAll();
-
+    if (!ssoEnabled) {
+      http.authorizeRequests().anyRequest().permitAll();
+    }
   }
 
   @Bean
@@ -172,6 +205,20 @@ public class WebSecurityDefaultConfiguration extends WebSecurityConfigurerAdapte
     CustomUserStatusChecker provider = new CustomUserStatusChecker();
     provider.setMessageSource(messageSource);
     return provider;
+  }
+
+  @Bean
+  public KeycloakConfigResolver KeycloakConfigResolver() {
+    return facade -> new KeycloakDeployment();
+  }
+
+  @Bean
+  @Override
+  @ConditionalOnProperty(name="sso.enabled")
+  protected KeycloakAuthenticationProcessingFilter keycloakAuthenticationProcessingFilter() throws Exception {
+    KeycloakAuthenticationProcessingFilter filter = new KeycloakAuthenticationProcessingFilter(authenticationManagerBean());
+    filter.setSessionAuthenticationStrategy(sessionAuthenticationStrategy());
+    return filter;
   }
 }
 

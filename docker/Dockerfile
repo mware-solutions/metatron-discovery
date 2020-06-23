@@ -1,5 +1,7 @@
 FROM registry.cloud.bigconnect.io/service-container-base:latest
 
+ENV KC_CONFIG /opt/bdl/etc/
+
 RUN apt install -y unzip \
     && mkdir /opt/bdl \
     && mkdir -p /opt/bdl/data \
@@ -13,7 +15,6 @@ COPY ./sbin /opt/bdl/sbin
 
 RUN unzip -d /opt/bdl/lib/discovery/extensions/athena-connection-1.0.0-2.0.2-3.4.0-rc4 /opt/bdl/lib/discovery/extensions/athena*.zip \
     && unzip -d /opt/bdl/lib/discovery/extensions/mssql-connection-7.3.0-3.4.0-rc4 /opt/bdl/lib/discovery/extensions/mssql*.zip \
-    && unzip -d /opt/bdl/lib/discovery/extensions/oracle-connection-18.3.0.0-3.4.0-rc4 /opt/bdl/lib/discovery/extensions/oracle*.zip \
     && rm -f /opt/bdl/lib/discovery/extensions/*.zip
 
 VOLUME /opt/bdl/data

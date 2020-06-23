@@ -14,14 +14,33 @@
 
 package app.metatron.discovery.domain.user;
 
+import app.metatron.discovery.common.Mailer;
+import app.metatron.discovery.common.entity.SearchParamValidator;
+import app.metatron.discovery.common.exception.BadRequestException;
+import app.metatron.discovery.common.exception.ResourceNotFoundException;
+import app.metatron.discovery.config.security.SecurityConfigurationKeycloak;
+import app.metatron.discovery.domain.images.Image;
+import app.metatron.discovery.domain.images.ImageService;
+import app.metatron.discovery.domain.user.group.Group;
+import app.metatron.discovery.domain.user.group.GroupMember;
+import app.metatron.discovery.domain.user.group.GroupRepository;
+import app.metatron.discovery.domain.user.group.GroupService;
+import app.metatron.discovery.domain.user.role.RoleRepository;
+import app.metatron.discovery.domain.user.role.RoleService;
+import app.metatron.discovery.domain.user.role.RoleSetRepository;
+import app.metatron.discovery.domain.user.role.RoleSetService;
+import app.metatron.discovery.domain.workspace.Workspace;
+import app.metatron.discovery.domain.workspace.WorkspaceMemberRepository;
+import app.metatron.discovery.domain.workspace.WorkspaceService;
+import app.metatron.discovery.util.AuthUtils;
+import app.metatron.discovery.util.PolarisUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import com.querydsl.core.types.Predicate;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.keycloak.KeycloakPrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,34 +59,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
-
-import app.metatron.discovery.common.Mailer;
-import app.metatron.discovery.common.entity.SearchParamValidator;
-import app.metatron.discovery.common.exception.BadRequestException;
-import app.metatron.discovery.common.exception.ResourceNotFoundException;
-import app.metatron.discovery.domain.images.Image;
-import app.metatron.discovery.domain.images.ImageService;
-import app.metatron.discovery.domain.user.group.Group;
-import app.metatron.discovery.domain.user.group.GroupMember;
-import app.metatron.discovery.domain.user.group.GroupService;
-import app.metatron.discovery.domain.user.role.RoleRepository;
-import app.metatron.discovery.domain.user.role.RoleService;
-import app.metatron.discovery.domain.user.role.RoleSetRepository;
-import app.metatron.discovery.domain.user.role.RoleSetService;
-import app.metatron.discovery.domain.workspace.Workspace;
-import app.metatron.discovery.domain.workspace.WorkspaceMemberRepository;
-import app.metatron.discovery.domain.workspace.WorkspaceService;
-import app.metatron.discovery.util.AuthUtils;
-import app.metatron.discovery.util.PolarisUtils;
 
 import static app.metatron.discovery.domain.user.UserService.DuplicatedTarget.EMAIL;
 import static app.metatron.discovery.domain.user.UserService.DuplicatedTarget.USERNAME;
@@ -125,6 +121,9 @@ public class UserController {
   @Autowired
   PasswordEncoder passwordEncoder;
 
+  @Autowired
+  GroupRepository groupRepository;
+
   /**
    * User 목록 조회
    */
@@ -170,14 +169,33 @@ public class UserController {
   @RequestMapping(path = "/users/{username:.+}", method = RequestMethod.GET)
   public ResponseEntity<?> findDetailUser(@PathVariable("username") String username,
                                           PersistentEntityResourceAssembler resourceAssembler) {
-
     User user = userRepository.findByUsername(username);
     if (user == null) {
+      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      if (authentication != null) {
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof KeycloakPrincipal) {
+          User keycloakUser = createKeycloakUser(((KeycloakPrincipal) principal).getName());
+          return ResponseEntity.ok(resourceAssembler.toResource(keycloakUser));
+        }
+      }
+
       return ResponseEntity.notFound().build();
     }
 
     return ResponseEntity.ok(resourceAssembler.toResource(user));
+  }
 
+  private User createKeycloakUser(String username) {
+    User keycloakUser = new User();
+    keycloakUser.setUsername(username);
+    keycloakUser.setStatus(User.Status.ACTIVATED);
+    workspaceService.createWorkspaceByUserCreation(keycloakUser, false);
+
+    Group defaultGroup = groupRepository.findOne(SecurityConfigurationKeycloak.DEFAULT_GROUP);
+    defaultGroup.addGroupMember(new GroupMember(keycloakUser.getUsername(), keycloakUser.getFullName()));
+
+    return userRepository.save(keycloakUser);
   }
 
   /**

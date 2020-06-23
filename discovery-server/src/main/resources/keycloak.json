@@ -1,0 +1,10 @@
+{
+  "realm": "5562982248501569",
+  "auth-server-url": "https://idm.cloud.bigconnect.io/auth/",
+  "ssl-required": "external",
+  "resource": "discovery",
+  "public-client": true,
+  "expose-token": false,
+  "confidential-port": 443,
+  "principal-attribute": "preferred_username"
+}

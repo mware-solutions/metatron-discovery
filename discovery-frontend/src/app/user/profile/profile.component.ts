@@ -553,23 +553,20 @@ export class ProfileComponent extends AbstractComponent implements OnInit, OnDes
    */
   private _getUpdateProfileParams(): object {
     const result = {};
-    // 이메일 변경이 일어난 경우
-    if (this._userEmail !== this.user.email.trim()) {
+
+    if (!isNullOrUndefined(this.user.email) && this._userEmail !== this.user.email.trim()) {
       result['email'] = this.user.email.trim();
     }
-    // 이름 변경이 일어난 경우
-    if (this._userName !== this.user.fullName.trim()) {
+    if (!isNullOrUndefined(this.user.fullName) && this._userName !== this.user.fullName.trim()) {
       result['fullName'] = this.user.fullName.trim();
     }
-
-    // phone 변경이 일어난 경우
     if (this._userTel !== this.user.tel) {
       result['tel'] = this.user.tel;
     }
-    // 이미지 변경
     if (this._imageUrl !== this.user.imageUrl) {
       result['imageUrl'] = this.user.imageUrl;
     }
+
     return result;
   }
 

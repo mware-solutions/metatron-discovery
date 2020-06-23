@@ -94,6 +94,10 @@ export class UserService extends AbstractService {
     return this.get(this.URL_USER + '/' + username);
   }
 
+  public logout(): Promise<any> {
+    return this.get(this.API_URL + 'logout');
+  }
+
   // 사용자 신청
   public join(user: User): Promise<any> {
     return this.postWithoutToken(this.API_URL + 'users/signup', user);

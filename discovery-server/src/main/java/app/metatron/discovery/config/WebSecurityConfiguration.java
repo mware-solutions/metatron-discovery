@@ -14,21 +14,20 @@
 
 package app.metatron.discovery.config;
 
+import app.metatron.discovery.config.security.WebSecurityDefaultConfiguration;
+import app.metatron.discovery.config.security.WebSecuritySAMLConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-import app.metatron.discovery.config.security.WebSecurityDefaultConfiguration;
-import app.metatron.discovery.config.security.WebSecuritySAMLConfiguration;
-
 @Configuration
 class WebSecurityConfiguration {
 
   @EnableWebSecurity
   @Configuration
-  @ConditionalOnExpression("!${polaris.saml.enable:false}")
+  @ConditionalOnExpression("!${sso.enabled:false}")
   // https://stackoverflow.com/questions/42822875/springboot-1-5-x-security-oauth2
   @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
   protected static class DefaultWebSecurityConfig extends WebSecurityDefaultConfiguration {

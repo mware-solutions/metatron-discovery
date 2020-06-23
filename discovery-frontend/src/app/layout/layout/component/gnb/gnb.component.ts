@@ -148,14 +148,17 @@ export class GnbComponent extends AbstractComponent implements OnInit, OnDestroy
     if( CommonUtil.isSamlSSO() ) {
       location.href = '/saml/logout';
     } else {
-      this.cookieService.delete(CookieConstant.KEY.LOGIN_TOKEN, '/');
-      this.cookieService.delete(CookieConstant.KEY.LOGIN_TOKEN_TYPE, '/');
-      this.cookieService.delete(CookieConstant.KEY.LOGIN_USER_ID, '/');
-      this.cookieService.delete(CookieConstant.KEY.REFRESH_LOGIN_TOKEN, '/');
-      this.cookieService.delete(CookieConstant.KEY.CURRENT_WORKSPACE, '/');
-      this.cookieService.delete(CookieConstant.KEY.MY_WORKSPACE, '/');
-      this.cookieService.delete(CookieConstant.KEY.PERMISSION, '/');
-      this.router.navigate(['/user/login']).then();
+      this.userService.logout().then(() => {
+        this.cookieService.delete(CookieConstant.KEY.LOGIN_TOKEN, '/');
+        this.cookieService.delete(CookieConstant.KEY.LOGIN_TOKEN_TYPE, '/');
+        this.cookieService.delete(CookieConstant.KEY.LOGIN_USER_ID, '/');
+        this.cookieService.delete(CookieConstant.KEY.REFRESH_LOGIN_TOKEN, '/');
+        this.cookieService.delete(CookieConstant.KEY.CURRENT_WORKSPACE, '/');
+        this.cookieService.delete(CookieConstant.KEY.MY_WORKSPACE, '/');
+        this.cookieService.delete(CookieConstant.KEY.PERMISSION, '/');
+
+        location.href='/'
+      }).catch((err) => this.commonExceptionHandler(err));
     }
   }
 

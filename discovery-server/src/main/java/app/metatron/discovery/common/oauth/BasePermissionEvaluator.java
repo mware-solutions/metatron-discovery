@@ -19,6 +19,7 @@ import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -60,10 +61,16 @@ public class BasePermissionEvaluator implements PermissionEvaluator {
   @Autowired
   public WorkspaceService workspaceService;
 
+  @Value("${sso.enabled}")
+  private boolean ssoEnabled;
+
   @Override
   public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
+    if (ssoEnabled) { // We don't need method security for now
+      return true;
+    }
 
-    if(targetDomainObject instanceof Workspace) {
+    if (targetDomainObject instanceof Workspace) {
       return checkWorkspacePermission(authentication, (Workspace) targetDomainObject, permission);
     } else if(targetDomainObject instanceof WorkBook) {
       return checkWorkBookPermission(authentication, (WorkBook) targetDomainObject, permission);
@@ -89,7 +96,7 @@ public class BasePermissionEvaluator implements PermissionEvaluator {
       return checkWorkbenchPermission(authentication, (Workbench) targetDomainObject, permission);
     }
 
-    return false;
+    return true;
   }
 
   @Override

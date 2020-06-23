@@ -292,6 +292,10 @@ polaris:
 #          auto: create
 #          import_files: /scripts/default.sql,/scripts/default_expressions.sql,/scripts/default_datasource_ingestion_options.sql
 #          import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+
+sso:
+  enabled: true
+
 ---
 spring:
   profiles: local

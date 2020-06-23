@@ -376,6 +376,21 @@ public class AuthenticationController {
     }
   }
 
+  @RequestMapping(value = "/logout")
+  public ResponseEntity<?> logout(HttpServletRequest request) {
+    try {
+     request.logout();
+     return ResponseEntity.ok().build();
+    } catch (Exception e) {
+      throw new MetatronException(e);
+    }
+  }
+
+  @RequestMapping(value = "/ping")
+  public ResponseEntity<?> ping() {
+    return ResponseEntity.ok().build();
+  }
+
   private void makeAdditionalInformation(OauthClientInformation oauthClientInformation, Map additionalInformation) {
     if (StringUtils.isNotEmpty(oauthClientInformation.getClientName())) {
       additionalInformation.put("clientName", oauthClientInformation.getClientName());

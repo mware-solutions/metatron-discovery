@@ -33,18 +33,25 @@ public class AuthUtils {
     return SecurityContextHolder.getContext().getAuthentication();
   }
 
+  public static List<String> getPermissions() {
+    return getPermissions("PERM_");
+  }
+
+  public static List<String> getKeycloakPermissions() {
+    return getPermissions("ROLE_PERM_");
+  }
+
   /**
    * Get permissions of user
    *
    * @return permission list
    */
-  public static List<String> getPermissions() {
-
+  private static List<String> getPermissions(String prefix) {
     return getAuthentication()
-                      .getAuthorities().stream()
-                      .filter(auth -> auth.getAuthority().startsWith("PERM_"))
-                      .map(auth -> auth.getAuthority())
-                      .collect(Collectors.toList());
+            .getAuthorities().stream()
+            .filter(auth -> auth.getAuthority().startsWith(prefix))
+            .map(auth -> auth.getAuthority())
+            .collect(Collectors.toList());
   }
 
   public static String getAuthUserName() {

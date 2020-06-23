@@ -25,6 +25,10 @@
 
     <artifactId>discovery-server</artifactId>
 
+    <properties>
+        <keycloak.version>11.0.0-SNAPSHOT</keycloak.version>
+    </properties>
+
     <build>
         <resources>
             <resource>
@@ -215,11 +219,16 @@
                 </dependencies>
             </plugin>
         </plugins>
-
     </build>
 
-
     <dependencies>
+        <!--Keycloak-->
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-spring-security-adapter</artifactId>
+            <version>${keycloak.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>app.metatron.discovery</groupId>
             <artifactId>discovery-prep-parser</artifactId>
