@@ -69,7 +69,7 @@ public class TokenChannelInterceptorAdapter extends ChannelInterceptorAdapter {
 
     // Set User infomation after getting JWT Token value
     Principal principal = jwtTokenStore.readAuthentication(token).getUserAuthentication();
-    if(principal == null && !StompCommand.DISCONNECT.equals(accessor.getCommand())) {
+    if (principal == null && !StompCommand.DISCONNECT.equals(accessor.getCommand())) {
       return message;
     } else {
       accessor.setUser(principal);

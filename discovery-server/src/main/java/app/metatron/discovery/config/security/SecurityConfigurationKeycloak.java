@@ -17,6 +17,7 @@ import org.keycloak.adapters.springsecurity.filter.AdapterStateCookieRequestMatc
 import org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter;
 import org.keycloak.adapters.springsecurity.filter.QueryParamPresenceRequestMatcher;
 import org.keycloak.common.util.KeycloakUriBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,6 +26,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Request;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -38,8 +43,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Configuration
 @EnableWebSecurity
@@ -64,6 +68,9 @@ public class SecurityConfigurationKeycloak extends WebSecurityDefaultConfigurati
                     "PERM_SYSTEM_MANAGE_PRIVATE_WORKSPACE"
             };
 
+
+    @Autowired
+    DefaultTokenServices defaultTokenServices;
 
     public SecurityConfigurationKeycloak() {}
 
@@ -166,12 +173,12 @@ public class SecurityConfigurationKeycloak extends WebSecurityDefaultConfigurati
                 if (fallback != null) {
                     fallback.onAuthenticationSuccess(request, response, authentication);
                 } else {
-                    redirectToIndex(request, response);
+                    redirectToIndex(request, response, authentication);
                 }
             } else {
                 try {
                     response.addCookie(KeycloakCookieBasedRedirect.createCookieFromRedirectUrl(null));
-                    redirectToIndex(request, response);
+                    redirectToIndex(request, response, authentication);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -180,14 +187,16 @@ public class SecurityConfigurationKeycloak extends WebSecurityDefaultConfigurati
         }
 
         private void redirectToIndex(HttpServletRequest request,
-                                     HttpServletResponse response) throws IOException {
+                                     HttpServletResponse response, Authentication authentication) throws IOException {
             KeycloakUriBuilder builder = KeycloakUriBuilder
                     .fromUri(request.getRequestURL().toString())
                     .replacePath("/");
 
-            CookieManager.addCookie(CookieManager.ACCESS_TOKEN, "keycloak", response);
-            CookieManager.addCookie(CookieManager.TOKEN_TYPE, "Keycloak", response);
-            CookieManager.addCookie(CookieManager.REFRESH_TOKEN, "keycloak", response);
+            OAuth2AccessToken token = createToken(authentication);
+
+            CookieManager.addCookie(CookieManager.ACCESS_TOKEN, token.getValue(), response);
+            CookieManager.addCookie(CookieManager.TOKEN_TYPE, token.getTokenType(), response);
+            CookieManager.addCookie(CookieManager.REFRESH_TOKEN, token.getRefreshToken().getValue(), response);
             CookieManager.addCookie(CookieManager.LOGIN_ID,
                     SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString(), response);
 
@@ -210,6 +219,31 @@ public class SecurityConfigurationKeycloak extends WebSecurityDefaultConfigurati
 
             response.sendRedirect(builder.build().toString());
         }
+    }
+
+    private OAuth2AccessToken createToken(Authentication authentication) {
+        HashMap<String, String> authorizationParameters = new HashMap<>();
+        authorizationParameters.put("scope", "read");
+        authorizationParameters.put("username", "user");
+        authorizationParameters.put("client_id", "client_id");
+        authorizationParameters.put("grant", "password");
+
+        Set<String> responseType = new HashSet<>();
+        responseType.add("password");
+
+        Set<String> scopes = new HashSet<>();
+        scopes.add("read");
+        scopes.add("write");
+
+        OAuth2Request authorizationRequest = new OAuth2Request(
+                authorizationParameters, "keycloak",
+                authentication.getAuthorities(), true, scopes, null, "",
+                responseType, null);
+
+        OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(authorizationRequest, authentication);
+        oAuth2Authentication.setAuthenticated(true);
+
+        return defaultTokenServices.createAccessToken(oAuth2Authentication);
     }
 
     @Override
