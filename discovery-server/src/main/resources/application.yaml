@@ -343,11 +343,6 @@ polaris:
     maxFetchSize: 1000
     tempHdfsPath: /tmp/hive
     tempCSVPath: /tmp
-  geoserver:
-    baseUrl: http://localhost:9090
-    username: admin
-    password: geoserver
-    defaultWorkspace: metatron
   storage:
     s3:
       bucket: dataprep
@@ -360,17 +355,26 @@ polaris:
       metastore:
         uri: thrift://localhost:9083
         jdbc:
-          url:
-          username:
-          password:
+          url: jdbc:mysql://localhost:3306/hive?useSSL=false
+          username: hive
+          password: hive
   dataprep:
     localBaseDir: ${user.home}/dataprep
-#    hadoopConfDir: /etc/hadoop
-#    stagingBaseDir: hdfs://localhost:9000/user/hive/dataprep
-#    sampling:
-#      timeout: 20
-#    etl:
-#      timeout: 36000
+    hadoopConfDir: /opt/bdl/etc/hadoop
+    stagingBaseDir: hdfs://localhost:9000/user/hive/dataprep
+    s3BaseDir: s3a://dataprep
+    sampling:
+      timeout: 20
+      cores: 4
+      limit-rows: 10000
+    etl:
+      timeout: 36000
+      limit-rows: 1000000000
+      cores: 4
+      spark:
+        port: 5300
+        master: spark://localhost:7077
+
 ---
 # (mysql DB 생성 script)
 # create database polaris CHARACTER SET utf8;
@@ -447,7 +451,7 @@ spring:
         naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
   h2:
     console:
-      enabled: true
+      enabled: false
       path: /console
 
 ---
@@ -538,3 +542,4 @@ polaris:
         filterKey: published
         filterValue: true
         filterName: msg.storage.ui.criterion.open-data
+
