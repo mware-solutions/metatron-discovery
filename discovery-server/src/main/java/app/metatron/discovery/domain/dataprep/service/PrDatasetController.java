@@ -410,7 +410,7 @@ public class PrDatasetController {
         } else if (uploadFile.getStorageType() == PrUploadFile.STORAGE_TYPE.HDFS) {
           datasetFileService.copyLocalToStaging(uploadFile);
         } else if (uploadFile.getStorageType() == PrUploadFile.STORAGE_TYPE.S3) {
-          // not implemented yet
+          datasetFileService.copyLocalToStaging(uploadFile);
         } else {
           throw datasetError(MSG_DP_ALERT_UNSUPPORTED_URI_SCHEME, uploadFile.getStorageType() + " is not supported");
         }

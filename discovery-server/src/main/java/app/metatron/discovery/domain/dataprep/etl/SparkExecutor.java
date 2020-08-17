@@ -15,6 +15,7 @@
 package app.metatron.discovery.domain.dataprep.etl;
 
 import static app.metatron.discovery.domain.dataprep.PrepProperties.ETL_SPARK_PORT;
+import static app.metatron.discovery.domain.dataprep.PrepProperties.HADOOP_CONF_DIR;
 
 import app.metatron.discovery.common.GlobalObjectMapper;
 import java.io.BufferedReader;
@@ -24,8 +25,12 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
+
+import app.metatron.discovery.domain.dataprep.util.PrepUtil;
+import org.apache.hadoop.conf.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
@@ -45,6 +50,28 @@ public class SparkExecutor {
     Map<String, Object> datasetInfo = GlobalObjectMapper.readValue(argv[1], HashMap.class);
     Map<String, Object> snapshotInfo = GlobalObjectMapper.readValue(argv[2], HashMap.class);
     Map<String, Object> callbackInfo = GlobalObjectMapper.readValue(argv[3], HashMap.class);
+
+    String storedUri = (String) datasetInfo.get("storedUri");
+    if (storedUri.startsWith("s3a://")) {
+      String hadoopConfDir = (String) prepPropertiesInfo.get(HADOOP_CONF_DIR);
+      Configuration conf = PrepUtil.getHadoopConf(hadoopConfDir);
+
+      datasetInfo.put("fs.s3a.endpoint", conf.get("fs.s3a.endpoint"));
+      datasetInfo.put("fs.s3a.access.key", conf.get("fs.s3a.access.key"));
+      datasetInfo.put("fs.s3a.secret.key", conf.get("fs.s3a.secret.key"));
+
+      if (datasetInfo.containsKey("upstreamDatasetInfos")) {
+        List<Map<String, Object>> upstreamDatasetInfos = (List<Map<String, Object>>) datasetInfo.get("upstreamDatasetInfos");
+        upstreamDatasetInfos.forEach((map) -> {
+          String uStoredUri = (String) map.get("storedUri");
+          if (uStoredUri.startsWith("s3a://")) {
+            map.put("fs.s3a.endpoint", conf.get("fs.s3a.endpoint"));
+            map.put("fs.s3a.access.key", conf.get("fs.s3a.access.key"));
+            map.put("fs.s3a.secret.key", conf.get("fs.s3a.secret.key"));
+          }
+        });
+      }
+    }
 
     String ssName = (String) snapshotInfo.get("ssName");
     String ssType = (String) snapshotInfo.get("ssType");

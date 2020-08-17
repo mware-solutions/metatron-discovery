@@ -13,6 +13,9 @@ logging:
   config: classpath:logback-console.xml
 polaris:
   storage:
+    s3:
+      bucket: dataprep
+      region: default
     stagedb:
       hostname: localhost
       port: 10000
@@ -30,7 +33,7 @@ polaris:
       broker: http://discovery-${TENANT_ID}_druid:8082
       overlord: http://discovery-${TENANT_ID}_druid:8090
       coordinator: http://discovery-${TENANT_ID}_druid:8081
-    
+
     ingestion:
       baseDir: /opt/bdl/ingest  # druid will look in this folder on his container
       loader:
@@ -40,21 +43,29 @@ polaris:
     query:
       localResultDir: ${java.io.tmpdir:-/tmp}
       defaultForwardUrl: local:/tmp
- 
+
   datasource:
     ingestion:
       retries:
         delay: 3
         maxDelay: 90
         maxDuration : 3600
- 
+
   #Set up Hive related information when using Data Prep.
   dataprep:
     localBaseDir: $BDL_DIR/data/discovery/dataprep
     hadoopConfDir: /opt/bdl/etc/hadoop
     hadoopUser: bdl
     stagingBaseDir: hdfs://im1.bdl.local:19998/${TENANT_ID}//dataprep
+    s3BaseDir: s3a://dataprep
     sampling:
       timeout: 20 # Timeout for rule edit sessions
+      limit-rows: 10000
+      cores: 1
     etl:
-      timeout: 36000  # Timeout for generating snapshots
+      timeout: 360000  # Timeout for generating snapshots
+      limit-rows: 1000000000
+        cores: 4
+        spark:
+          port: 5300
+          master: spark://dproc-${TENANT_ID}-master:7077

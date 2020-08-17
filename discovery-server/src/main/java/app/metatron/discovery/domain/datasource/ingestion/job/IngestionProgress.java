@@ -49,7 +49,6 @@ public enum IngestionProgress {
   ENGINE_INIT_TASK,                 // Building ingestion specification
   ENGINE_RUNNING_TASK,              // Do Ingestion!
   ENGINE_REGISTER_DATASOURCE,       // Registering DataSource
-  GEOSERVER_REGISTER_DATASTORE,     // Registering GeoServer
   FAIL_INGESTION_JOB,               // Ingestion Fail
   END_INGESTION_JOB,                // Successfully end ingestion
 }

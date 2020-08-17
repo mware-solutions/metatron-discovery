@@ -32,7 +32,7 @@ import static org.springframework.messaging.simp.stomp.StompCommand.DISCONNECT;
 import static org.springframework.messaging.simp.stomp.StompCommand.UNSUBSCRIBE;
 
 /**
- * WebSocket COMMAND 이벤트를 통해 처리하는 로직 위치
+ * Logic location handled through WebSocket COMMAND event
  */
 public class BizChannelInterceptorAdapter extends ChannelInterceptorAdapter {
 
@@ -70,9 +70,9 @@ public class BizChannelInterceptorAdapter extends ChannelInterceptorAdapter {
     } else if(accessor.getCommand().equals(CONNECT)) {
       LOGGER.debug("Do Action for connect!!!");
     } else if(accessor.getCommand().equals(DISCONNECT)) {
-      // Session Id 및 채널명을 통해 관련 된 워크 벤치 커넥션 해제
+      // Release the associated workbench connection through Session ID and channel name
       LOGGER.debug("Do Action for disconnection!!!");
-      // Session Id 를 통해 관련된 워크벤치 해제
+      // Release workbench related through Session Id
       workbenchDataSourceManager.destroyDataSource(accessor.getSessionId());
     }
   }

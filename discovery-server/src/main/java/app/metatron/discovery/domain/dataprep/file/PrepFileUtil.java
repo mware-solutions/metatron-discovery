@@ -103,6 +103,7 @@ public class PrepFileUtil {
 
     switch (uri.getScheme()) {
       case "hdfs":
+      case "s3a":
         if (conf == null) {
           throw configError(MSG_DP_ALERT_REQUIRED_PROPERTY_MISSING, HADOOP_CONF_DIR);
         }

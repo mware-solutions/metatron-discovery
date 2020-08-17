@@ -349,6 +349,9 @@ polaris:
     password: geoserver
     defaultWorkspace: metatron
   storage:
+    s3:
+      bucket: dataprep
+      region: default
     stagedb:
       hostname: localhost
       port: 10000
@@ -444,7 +447,7 @@ spring:
         naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
   h2:
     console:
-      enabled: false
+      enabled: true
       path: /console
 
 ---

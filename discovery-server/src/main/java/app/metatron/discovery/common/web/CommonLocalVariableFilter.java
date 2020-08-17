@@ -51,16 +51,16 @@ public class CommonLocalVariableFilter implements Filter {
     }
 
     CommonLocalVariable.getLocalVariable();
-    LOGGER.debug("Init local variable at {}{}",
-        url == null ? "" : url,
-        queryString == null ? "" : "?" + queryString);
+//    LOGGER.debug("Init local variable at {}{}",
+//        url == null ? "" : url,
+//        queryString == null ? "" : "?" + queryString);
 
     chain.doFilter(request, response);
 
     CommonLocalVariable.remove();
-    LOGGER.debug("Clear local variable at {}{}",
-        url == null ? "" : url,
-        queryString == null ? "" : "?" + queryString);
+//    LOGGER.debug("Clear local variable at {}{}",
+//        url == null ? "" : url,
+//        queryString == null ? "" : "?" + queryString);
   }
 
   @Override

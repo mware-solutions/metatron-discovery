@@ -90,7 +90,7 @@
         <hive.version>2.3.6</hive.version>
 
         <!-- used in dataprep -->
-        <hadoop.version>2.7.3</hadoop.version>
+        <hadoop.version>2.10.0</hadoop.version>
 
         <!-- Metatron Build Version -->
         <metatron.app.version>${project.version}</metatron.app.version>

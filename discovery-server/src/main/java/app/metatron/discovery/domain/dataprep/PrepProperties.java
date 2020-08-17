@@ -156,10 +156,6 @@ public class PrepProperties {
     return etl.getExplicitGC();
   }
 
-  public String getEtlSparkJar() {
-    return etl.spark.getJar();
-  }
-
   public String getEtlSparkPort() {
     return etl.spark.getPort();
   }
@@ -325,21 +321,12 @@ public class PrepProperties {
 
   public static class SparkInfo {
 
-    public String jar;
     public String port;
     public String appName;
     public String master;
     public String warehouseDir;
 
     public SparkInfo() {
-    }
-
-    public String getJar() {
-      return jar;
-    }
-
-    public void setJar(String jar) {
-      this.jar = jar;
     }
 
     public String getPort() {
@@ -386,7 +373,6 @@ public class PrepProperties {
     @Override
     public String toString() {
       return "SparkInfo{" +
-              "jar='" + jar + '\'' +
               ", port='" + port + '\'' +
               ", appName='" + appName + '\'' +
               ", master='" + master + '\'' +

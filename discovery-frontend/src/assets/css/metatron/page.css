@@ -517,7 +517,7 @@ dl.ddp-dl-detail dd br {display:block; margin-top:5px;}
 .ddp-ui-preview-contents {position:absolute; top:38px; left:0; right:0; bottom:0; border:1px solid #4b515b; background-color:#fff; overflow:auto;}
 .ddp-ui-preview-contents.type-relative {position:Relative; top:0; left:0; right:0; height:100%;}
 .ddp-ui-preview-contents ul.ddp-ui-tab li.ddp-selected a:after {border-bottom:none;}
-.ddp-pop-preview.ddp-type {position:fixed; top:50px; left:90px; right:90px; bottom:52px;}
+.ddp-pop-preview.ddp-type {position:fixed; top:90px; left:90px; right:90px; bottom:52px;}
 .ddp-ui-preview-contents.ddp-add {padding-bottom:38px;}
 .ddp-ui-preview-contents.ddp-add .ddp-box-add-link  {position:absolute; left:0; right:0; bottom:0;}
 .ddp-ui-preview-contents.ddp-add .ddp-table-scroll {height:100%; overflow:auto;}

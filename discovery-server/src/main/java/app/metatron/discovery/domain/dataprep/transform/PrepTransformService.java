@@ -14,11 +14,7 @@
 
 package app.metatron.discovery.domain.dataprep.transform;
 
-import static app.metatron.discovery.domain.dataprep.PrepProperties.STAGEDB_HOSTNAME;
-import static app.metatron.discovery.domain.dataprep.PrepProperties.STAGEDB_METASTORE_URI;
-import static app.metatron.discovery.domain.dataprep.PrepProperties.STAGEDB_PASSWORD;
-import static app.metatron.discovery.domain.dataprep.PrepProperties.STAGEDB_PORT;
-import static app.metatron.discovery.domain.dataprep.PrepProperties.STAGEDB_USERNAME;
+import static app.metatron.discovery.domain.dataprep.PrepProperties.*;
 import static app.metatron.discovery.domain.dataprep.entity.PrDataset.DS_TYPE.IMPORTED;
 import static app.metatron.discovery.domain.dataprep.entity.PrDataset.DS_TYPE.WRANGLED;
 
@@ -168,6 +164,7 @@ public class PrepTransformService {
 
       if (snapshot.getEngine() == ENGINE.SPARK) {
         mapEveryForEtl.put(STAGEDB_METASTORE_URI, stageDB.getMetastoreUri());
+        mapEveryForEtl.put(HADOOP_CONF_DIR, prepProperties.getHadoopConfDir(true));
       }
     }
 
@@ -1331,6 +1328,14 @@ public class PrepTransformService {
         } catch (Exception e) {
           // Suppress
         }
+
+        try {
+          String s3Dir = snapshotService.getSnapshotDir(prepProperties.getS3BaseDir(true), ssName);
+          fileUri.put("S3", s3Dir);
+        } catch (Exception e) {
+          // Suppress
+        }
+
         configuration.put("file_uri", fileUri);
       }
 

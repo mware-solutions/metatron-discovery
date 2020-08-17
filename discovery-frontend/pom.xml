@@ -27,54 +27,54 @@
 
   <artifactId>discovery-frontend</artifactId>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.4</version>
+<!--  <build>-->
+<!--    <plugins>-->
+<!--      <plugin>-->
+<!--        <groupId>com.github.eirslett</groupId>-->
+<!--        <artifactId>frontend-maven-plugin</artifactId>-->
+<!--        <version>1.4</version>-->
 
-        <configuration>
-          <nodeVersion>v10.20.1</nodeVersion>
-          <npmVersion>6.14.5</npmVersion>
-          <workingDirectory>./</workingDirectory>
-        </configuration>
+<!--        <configuration>-->
+<!--          <nodeVersion>v10.20.1</nodeVersion>-->
+<!--          <npmVersion>6.14.5</npmVersion>-->
+<!--          <workingDirectory>./</workingDirectory>-->
+<!--        </configuration>-->
 
-        <executions>
-          <execution>
-            <id>install node and npm</id>
-            <goals>
-              <goal>install-node-and-npm</goal>
-            </goals>
-          </execution>
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>install node and npm</id>-->
+<!--            <goals>-->
+<!--              <goal>install-node-and-npm</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
 
-          <execution>
-            <id>npm install</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
+<!--          <execution>-->
+<!--            <id>npm install</id>-->
+<!--            <goals>-->
+<!--              <goal>npm</goal>-->
+<!--            </goals>-->
 
-            <configuration>
-              <environmentVariables>
-                <METATRON_APP_VERSION>${metatron.app.version}</METATRON_APP_VERSION>
-              </environmentVariables>
-              <arguments>run prebuild</arguments>
-            </configuration>
-          </execution>
+<!--            <configuration>-->
+<!--              <environmentVariables>-->
+<!--                <METATRON_APP_VERSION>${metatron.app.version}</METATRON_APP_VERSION>-->
+<!--              </environmentVariables>-->
+<!--              <arguments>run prebuild</arguments>-->
+<!--            </configuration>-->
+<!--          </execution>-->
 
-          <execution>
-            <id>npm run build</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
+<!--          <execution>-->
+<!--            <id>npm run build</id>-->
+<!--            <goals>-->
+<!--              <goal>npm</goal>-->
+<!--            </goals>-->
 
-            <configuration>
-              <arguments>run prod</arguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+<!--            <configuration>-->
+<!--              <arguments>run prod</arguments>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--    </plugins>-->
+<!--  </build>-->
 
 </project>

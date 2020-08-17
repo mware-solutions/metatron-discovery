@@ -343,7 +343,8 @@ export class DataSourceCreateService {
       } else {  // if JSON file
         result.format.type = 'json';
       }
-    } else if (sourceInfo.snapshotData.selectedSnapshot.storedUri.match(/^hdfs:/)) { // if HDFS type
+    } else if (sourceInfo.snapshotData.selectedSnapshot.storedUri.match(/^hdfs:/) || sourceInfo.snapshotData.selectedSnapshot.storedUri.match(/^s3a:/)) {
+      // if HDFS or S3A type
       result.type = 'hdfs';
       result.findRecursive = false;
       result.paths = [sourceInfo.snapshotData.selectedSnapshot.storedUri];

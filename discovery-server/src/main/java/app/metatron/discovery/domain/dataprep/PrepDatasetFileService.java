@@ -76,10 +76,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataInputStream;
-import org.apache.hadoop.fs.FSDataOutputStream;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.IOUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -188,6 +185,19 @@ public class PrepDatasetFileService {
   private String fileDatasetUploadStagingPath = null;
   private String fileDatasetUploadS3Path = null;
 
+  public static void main(String[] args) throws Exception {
+    Configuration conf = new Configuration();
+    conf.set("fs.s3a.endpoint", "https://storage-3882463932808256.cloud.bigconnect.io");
+    conf.set("fs.s3a.path.style.access", "true");
+    conf.set("fs.s3a.access.key", "3882463932808256");
+    conf.set("fs.s3a.secret.key", "3882463932808256");
+    conf.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem");
+    conf.set("fs.default.name", "s3a://dataprep");
+    FileSystem hdfsFs = FileSystem.get(conf);
+    final boolean exists = hdfsFs.exists(new Path("/xxx21"));
+    System.out.print(exists);
+  }
+
   private void mkdirsIfNotExist(String dirUri) {
     URI uri;
     try {
@@ -199,6 +209,7 @@ public class PrepDatasetFileService {
 
     switch (uri.getScheme()) {
       case "hdfs":
+      case "s3a":
         Configuration conf = PrepUtil.getHadoopConf(prepProperties.getHadoopConfDir(true));
         if (conf == null) {
           throw configError(MSG_DP_ALERT_REQUIRED_PROPERTY_MISSING, HADOOP_CONF_DIR);
@@ -465,6 +476,7 @@ public class PrepDatasetFileService {
 
     switch (uri.getScheme()) {
       case "hdfs":
+      case "s3a":
         uri.getPath();
         break;
 
