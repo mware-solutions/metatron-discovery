@@ -2,18 +2,36 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <configuration>
-	<property>
-	   <name>fs.default.name</name>
-	   <value>hdfs://HDFS_ROOT</value>
-	 </property>
-
-  <property>
-    <name>fs.trash.interval</name>
-    <value>0</value>
-  </property>
-
-  <property>
-    <name>hadoop.security.group.mapping</name>
-    <value>org.apache.hadoop.security.JniBasedUnixGroupsMappingWithFallback</value>
-  </property>
+    <property>
+        <name>fs.default.name</name>
+        <value>s3a://dataprep</value>
+    </property>
+    <property>
+        <name>fs.s3a.endpoint</name>
+        <value>https://storage-TENANT_ID.cloud.bigconnect.io</value>
+    </property>
+    <property>
+        <name>fs.s3a.access.key</name>
+        <value>TENANT_ID</value>
+    </property>
+    <property>
+        <name>fs.s3a.secret.key</name>
+        <value>TENANT_ID</value>
+    </property>
+    <property>
+        <name>fs.s3a.path.style.access</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>fs.s3a.fast.upload</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>fs.s3a.impl</name>
+        <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
+    </property>
+    <property>
+        <name>fs.s3a.connection.maximum</name>
+        <value>1000</value>
+    </property>
 </configuration>

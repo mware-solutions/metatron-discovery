@@ -65,7 +65,8 @@ polaris:
     etl:
       timeout: 360000  # Timeout for generating snapshots
       limit-rows: 1000000000
-        cores: 4
-        spark:
-          port: 5300
-          master: spark://dproc-${TENANT_ID}-master:7077
+      cores: 4
+      spark:
+        port: 5300
+        master: spark://dproc-${TENANT_ID}-master:7077
+

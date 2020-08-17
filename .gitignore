@@ -73,3 +73,5 @@ discovery-frontend/src/environments/build.env.ts
 
 # extensions target dir
 **/extensions/
+
+discovery-prep-spark-engine-4.1.0.jar
