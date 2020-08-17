@@ -3,7 +3,7 @@ spring:
   datasource:
     platform: h2
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:${BDL_DIR}/data/discovery/h2db/polaris;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:file:/opt/bdl/data/discovery/h2db/polaris;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE
     username: sa
     password: sa
     max-active: 10
@@ -53,10 +53,10 @@ polaris:
 
   #Set up Hive related information when using Data Prep.
   dataprep:
-    localBaseDir: $BDL_DIR/data/discovery/dataprep
+    localBaseDir: /opt/bdl/data/discovery/dataprep
     hadoopConfDir: /opt/bdl/etc/hadoop
     hadoopUser: bdl
-    stagingBaseDir: hdfs://im1.bdl.local:19998/${TENANT_ID}//dataprep
+    stagingBaseDir: hdfs://im1.bdl.local:19998/${TENANT_ID}/dataprep
     s3BaseDir: s3a://dataprep
     sampling:
       timeout: 20 # Timeout for rule edit sessions
