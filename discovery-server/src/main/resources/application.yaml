@@ -297,6 +297,9 @@ sso:
   enabled: true
   forceHttps: true
 
+spark:
+  driver-host: localhost
+
 ---
 spring:
   profiles: local

@@ -70,3 +70,5 @@ polaris:
         port: 5300
         master: spark://dproc-${TENANT_ID}-master:7077
 
+spark:
+  driver-host: discovery-${TENANT_ID}-discovery

@@ -1,6 +1,7 @@
 FROM registry.cloud.bigconnect.io/service-container-base:latest
 
 ENV KC_CONFIG /opt/bdl/etc/
+ENV HADOOP_CONF_DIR /opt/bdl/etc/hadoop
 
 RUN apt install -y unzip \
     && mkdir /opt/bdl \

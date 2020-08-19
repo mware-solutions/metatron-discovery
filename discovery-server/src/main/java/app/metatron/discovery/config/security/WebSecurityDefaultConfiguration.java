@@ -163,6 +163,7 @@ public class WebSecurityDefaultConfiguration extends KeycloakWebSecurityConfigur
       .expressionHandler(webExpressionHandler())
       .antMatchers("/oauth/token").permitAll()
       .antMatchers("/api/ping").permitAll()
+      .antMatchers("/api/preparationsnapshots/**").permitAll() //TODO - Secure this (spark app needs sso token)
       .anyRequest().authenticated()
     .and()
       .exceptionHandling()

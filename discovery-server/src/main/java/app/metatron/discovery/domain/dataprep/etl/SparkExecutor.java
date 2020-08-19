@@ -33,6 +33,7 @@ import app.metatron.discovery.domain.dataprep.util.PrepUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ import org.springframework.stereotype.Service;
 public class SparkExecutor {
 
   private static Logger LOGGER = LoggerFactory.getLogger(SparkExecutor.class);
+
+  @Value("${spark.driver-host}")
+  private String driverHost;
 
   @Async("prepThreadPoolTaskExecutor")
   public Future<String> run(String[] argv) throws IOException {
@@ -59,6 +63,7 @@ public class SparkExecutor {
       datasetInfo.put("fs.s3a.endpoint", conf.get("fs.s3a.endpoint"));
       datasetInfo.put("fs.s3a.access.key", conf.get("fs.s3a.access.key"));
       datasetInfo.put("fs.s3a.secret.key", conf.get("fs.s3a.secret.key"));
+      datasetInfo.put("spark.driverHost", driverHost);
 
       if (datasetInfo.containsKey("upstreamDatasetInfos")) {
         List<Map<String, Object>> upstreamDatasetInfos = (List<Map<String, Object>>) datasetInfo.get("upstreamDatasetInfos");
@@ -68,6 +73,7 @@ public class SparkExecutor {
             map.put("fs.s3a.endpoint", conf.get("fs.s3a.endpoint"));
             map.put("fs.s3a.access.key", conf.get("fs.s3a.access.key"));
             map.put("fs.s3a.secret.key", conf.get("fs.s3a.secret.key"));
+            map.put("spark.driverHost", driverHost);
           }
         });
       }
