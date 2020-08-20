@@ -16,6 +16,7 @@ package app.metatron.discovery.domain.scheduling.engine;
 
 import com.google.common.collect.Lists;
 
+import org.apache.commons.lang3.StringUtils;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -86,8 +87,9 @@ public class EngineMonitoringSetter extends QuartzJobBean {
       for (String hostname : hostnames.keySet()) {
         try {
           URI uri = new URI(hostnames.get(hostname));
-          LOGGER.debug("Added {} server {}:{}", hostname, uri.getHost(), uri.getPort());
-          monitoringRepository.save(new EngineMonitoring(uri.getHost(), String.valueOf(uri.getPort()), hostname));
+          URIWrapper wrapper = new URIWrapper(uri);
+          LOGGER.debug("Added {} server {}:{}", hostname, wrapper.getHost(), wrapper.getPort());
+          monitoringRepository.save(new EngineMonitoring(wrapper.getHost(), String.valueOf(wrapper.getPort()), hostname));
         } catch (URISyntaxException e) {
           LOGGER.error("You have set wrong uri format. check your configuration.");
         }
@@ -118,8 +120,9 @@ public class EngineMonitoringSetter extends QuartzJobBean {
             fullHost.getHost(), String.valueOf(fullHost.getPort()), serverType);
         if (targetHistorical.isEmpty()) {
           LOGGER.debug("New historical server {}:{} is added to monitoring target.", fullHost.getHost(), fullHost.getPort());
+          URIWrapper wrapper = new URIWrapper(fullHost);
           monitoringRepository.save(
-              new EngineMonitoring(fullHost.getHost(), String.valueOf(fullHost.getPort()), serverType));
+              new EngineMonitoring(wrapper.getHost(), String.valueOf(wrapper.getPort()), serverType));
         } else {
           LOGGER.debug("Already added target.");
 
@@ -162,8 +165,9 @@ public class EngineMonitoringSetter extends QuartzJobBean {
           fullHost.getHost(), String.valueOf(fullHost.getPort()), "middleManager");
       if (targetMiddle.isEmpty()) {
         LOGGER.debug("New middlemanager server {}:{} is added to monitoring target.", fullHost.getHost(), fullHost.getPort());
+        URIWrapper wrapper = new URIWrapper(fullHost);
         monitoringRepository.save(
-            new EngineMonitoring(fullHost.getHost(), String.valueOf(fullHost.getPort()), "middleManager"));
+            new EngineMonitoring(wrapper.getHost(), String.valueOf(wrapper.getPort()), "middleManager"));
       } else {
         LOGGER.debug("Already added target.");
 
@@ -183,5 +187,34 @@ public class EngineMonitoringSetter extends QuartzJobBean {
       monitoringRepository.delete(existingMiddleManagerList);
     }
 
+  }
+
+  class URIWrapper {
+    private String host;
+    private int port;
+
+    public URIWrapper(URI uri) {
+      parseURI(uri);
+    }
+
+    private void parseURI(URI uri) {
+      this.host = uri.getHost();
+      this.port = uri.getPort();
+
+      if ((StringUtils.isEmpty(this.host) || this.port == -1) &&
+              !StringUtils.isEmpty(uri.getAuthority()) && uri.getAuthority().contains(":")) {
+        final String[] splits = uri.getAuthority().split(":");
+        this.host = splits[0];
+        this.port = Integer.parseInt(splits[1]);
+      }
+    }
+
+    public String getHost() {
+      return host;
+    }
+
+    public int getPort() {
+      return port;
+    }
   }
 }

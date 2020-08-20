@@ -326,6 +326,8 @@ polaris:
       broker: http://localhost:8082
       overlord: http://localhost:8090
       coordinator: http://localhost:8081
+      historical: http://localhost:8083
+      middleManager: http://localhost:8091
     ingestion:
       loader:
         remoteType: LOCAL
