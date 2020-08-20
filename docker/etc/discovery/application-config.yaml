@@ -16,6 +16,7 @@ polaris:
     s3:
       bucket: dataprep
       region: default
+      only: true
     stagedb:
       hostname: localhost
       port: 10000

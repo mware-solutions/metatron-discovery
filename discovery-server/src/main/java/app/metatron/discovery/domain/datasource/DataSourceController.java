@@ -318,6 +318,19 @@ public class DataSourceController {
   }
 
   @Transactional
+  @RequestMapping(value = "/datasources/{dataSourceId}", method = RequestMethod.PATCH)
+  public ResponseEntity<?> publishDatasource(@PathVariable("dataSourceId") String dataSourceId,
+                                             @RequestBody DataSource patch,
+                                           PersistentEntityResourceAssembler resourceAssembler) {
+
+    DataSource resultDataSource = dataSourceRepository.findOne(dataSourceId);
+    resultDataSource.setPublished(patch.getPublished());
+    dataSourceRepository.save(resultDataSource);
+
+    return ResponseEntity.ok(resourceAssembler.toResource(resultDataSource));
+  }
+
+  @Transactional
   @RequestMapping(value = "/datasources/{dataSourceId}", method = RequestMethod.DELETE)
   public ResponseEntity<Void> deleteDataSource(@PathVariable("dataSourceId") String dataSourceId) {
 

@@ -337,16 +337,21 @@ public class PrDatasetController {
       response.put("limit_size", getLimitSize());
 
       List<PrDataset.STORAGE_TYPE> storageTypes = Lists.newArrayList();
-      if (prepProperties.getLocalBaseDir() != null) {
-        storageTypes.add(PrDataset.STORAGE_TYPE.LOCAL);
+
+      if (storageProperties.getS3() == null || !storageProperties.getS3().isOnly()) {
+        if (prepProperties.getLocalBaseDir() != null) {
+          storageTypes.add(PrDataset.STORAGE_TYPE.LOCAL);
+        }
+        if (storageProperties != null && prepProperties.getStagingBaseDir() != null
+                && storageProperties.getStagedb() != null) {
+          storageTypes.add(PrDataset.STORAGE_TYPE.HDFS);
+        }
       }
-      if (storageProperties != null && prepProperties.getStagingBaseDir() != null
-              && storageProperties.getStagedb() != null) {
-        storageTypes.add(PrDataset.STORAGE_TYPE.HDFS);
-      }
+
       if (storageProperties != null && storageProperties.getS3() != null) {
         storageTypes.add(PrDataset.STORAGE_TYPE.S3);
       }
+
       response.put("storage_types", storageTypes);
     } catch (Exception e) {
       LOGGER.error("file_upload GET(): caught an exception: ", e);

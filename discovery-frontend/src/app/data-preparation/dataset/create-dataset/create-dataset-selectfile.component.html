@@ -48,7 +48,7 @@
             xls, .xlsx, .txt, .csv and .json formats are allowed
           </div>
           <!-- upload -->
-          <div class="ddp-wrap-upload">
+          <div *ngIf="fileLocations?.length > 1" class="ddp-wrap-upload">
             <div class="ddp-box-upload-type">
               <div class="ddp-wrap-edit3 ddp-type">
                 <label class="ddp-label-type">Upload Location</label>

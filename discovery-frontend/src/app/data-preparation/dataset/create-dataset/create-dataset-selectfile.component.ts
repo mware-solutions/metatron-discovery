@@ -131,8 +131,6 @@ export class CreateDatasetSelectfileComponent extends AbstractPopupComponent imp
             this.fileLocations = [];
             if (this.uploadNegoParams.storage_types && this.uploadNegoParams.storage_types.length > 0) {
                 this.uploadNegoParams.storage_types.forEach((storage_type) => {
-                    // FIXME: The storage type is currently LOCAL.
-                    //if( storage_type === 'LOCAL' )
                     this.fileLocations.push({
                         'value': storage_type,
                         'label': storage_type

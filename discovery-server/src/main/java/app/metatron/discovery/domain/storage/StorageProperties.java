@@ -236,6 +236,7 @@ public class StorageProperties {
   public static class S3Connection implements Serializable {
     String bucket;
     String region;
+    boolean only;
 
     public String getBucket() {
       return bucket;
@@ -251,6 +252,14 @@ public class StorageProperties {
 
     public void setRegion(String region) {
       this.region = region;
+    }
+
+    public boolean isOnly() {
+      return only;
+    }
+
+    public void setOnly(boolean only) {
+      this.only = only;
     }
   }
 }
