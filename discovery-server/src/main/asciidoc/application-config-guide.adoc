@@ -23,8 +23,7 @@ Common properties in metatron depends on the spring boot configuration. Therefor
 spring:
   http:
     multipart: # Used to adjust the maximum size when uploading files
-      max-file-size: 300Mb
-      max-request-size: 300Mb
+      max-file-size: 10Mb # Size of upload chunks (Has impact on displayed progress in fe)
   # The default value is set according to the setting of the METATRON_DB_TYPE value(h2 or mysql) in discovery-env.sh.
   # If you want additional configuration, it is recommended to manage only connection pool or jpa related properties.
   # If you want to set up a new data source type, you can change it from the 'platform' property.

@@ -7,8 +7,7 @@ spring:
     initialize: false
   http:
     multipart:
-      max-file-size: 300Mb
-      max-request-size: 300Mb
+      max-file-size: 10Mb
   mvc:
     favicon:
         enabled: false
