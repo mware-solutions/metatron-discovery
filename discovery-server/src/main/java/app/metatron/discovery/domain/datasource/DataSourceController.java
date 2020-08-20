@@ -193,12 +193,6 @@ public class DataSourceController {
   public DataSourceController() {
   }
 
-  /**
-   * 저장된 Linked 데이터 소스 정보를 기반으로 임시 데이터 소스를 생성합니다
-   *
-   * @param filters 지정된 Essential Filter 정보
-   * @param async   비동기 처리 여부
-   */
   @RequestMapping(value = "/datasources/{dataSourceId}/temporary", method = RequestMethod.POST)
   public ResponseEntity<?> createDataSourceTemporary(@PathVariable("dataSourceId") String dataSourceId,
                                                      @RequestBody(required = false) List<Filter> filters,
@@ -228,7 +222,6 @@ public class DataSourceController {
         return ResponseEntity.ok(temporary);
 
       } else if (temporary.getStatus() == DataSourceTemporary.LoadStatus.PREPARING) {
-        // 진행상황에 대한 정보를 전달 후 리턴
         Map<String, Object> responseMap = Maps.newHashMap();
         responseMap.put("id", temporary.getId());
         responseMap.put("progressTopic", String.format(EngineLoadService.TOPIC_LOAD_PROGRESS, temporary.getId()));
@@ -236,7 +229,6 @@ public class DataSourceController {
         return ResponseEntity.ok(responseMap);
 
       } else if (temporary.getStatus() == DataSourceTemporary.LoadStatus.DISABLE) {
-        // Reload 프로세스
         tempoaryId = temporary.getId();
       }
     }
@@ -244,9 +236,6 @@ public class DataSourceController {
     return handleTemporaryDatasource(dataSource, tempoaryId, filters, async);
   }
 
-  /**
-   * 지정된 데이터 소스 정보를 가지고 임시 데이터 소스를 생성합니다. (WorkBench 에서 활용)
-   */
   @RequestMapping(value = "/datasources/temporary", method = RequestMethod.POST)
   public ResponseEntity<?> createDataSourceTemporary(@RequestBody Resource<DataSource> dataSourceResource,
                                                      @RequestParam(value = "async", required = false) boolean async) {
@@ -267,9 +256,6 @@ public class DataSourceController {
     return handleTemporaryDatasource(dataSource, null, null, async);
   }
 
-  /**
-   * Link 데이터 소스 정보를 통해 생성된 임시 데이터 소스 목록 조회
-   */
   @RequestMapping(value = "/datasources/{dataSourceId}/temporaries/{temporaryId}/reload", method = RequestMethod.POST)
   public ResponseEntity<?> reloadTemporaryDataSources(@PathVariable("dataSourceId") String dataSourceId,
                                                       @PathVariable("temporaryId") String temporaryId,
@@ -292,9 +278,6 @@ public class DataSourceController {
     return handleTemporaryDatasource(dataSource, temporary.getId(), temporary.getFilterList(), async);
   }
 
-  /**
-   * 임시 데이터 소스 생성 합니다.
-   */
   private ResponseEntity<?> handleTemporaryDatasource(DataSource dataSource, String temporaryId, List<Filter> filters, boolean async) {
     // Generate Temporary ID
     final String tempTargetId = StringUtils.isNotEmpty(temporaryId) ?
@@ -307,7 +290,6 @@ public class DataSourceController {
           .setDaemon(true)
           .build();
 
-      // FIXME: 전용 Thread Pool 로 변경하는 것을 검토해보자!
       ExecutorService service = Executors.newSingleThreadExecutor(factory);
       service.submit(() ->
                          engineLoadService.load(dataSource, filters, async, tempTargetId)
@@ -324,9 +306,6 @@ public class DataSourceController {
     }
   }
 
-  /**
-   * 데이터 소스의 상세정보를 가져옵니다. 임시 데이터 소스가 존재할 경우
-   */
   @Transactional(readOnly = true)
   @RequestMapping(value = "/datasources/{dataSourceId}", method = RequestMethod.GET)
   public ResponseEntity<?> findDataSources(@PathVariable("dataSourceId") String dataSourceId,
@@ -336,6 +315,15 @@ public class DataSourceController {
     DataSource resultDataSource = dataSourceService.findDataSourceIncludeTemporary(dataSourceId, includeUnloadedField);
 
     return ResponseEntity.ok(resourceAssembler.toResource(resultDataSource));
+  }
+
+  @Transactional
+  @RequestMapping(value = "/datasources/{dataSourceId}", method = RequestMethod.DELETE)
+  public ResponseEntity<Void> deleteDataSource(@PathVariable("dataSourceId") String dataSourceId) {
+
+    dataSourceRepository.delete(dataSourceId);
+
+    return ResponseEntity.ok().build();
   }
 
   @Transactional(readOnly = true)
@@ -351,9 +339,6 @@ public class DataSourceController {
                                                             results));
   }
 
-  /**
-   * Link 데이터 소스 정보를 통해 생성된 임시 데이터 소스 목록 조회
-   */
   @RequestMapping(value = "/datasources/{dataSourceId}/temporaries", method = RequestMethod.GET)
   public ResponseEntity<?> findTemporaryDataSources(@PathVariable("dataSourceId") String dataSourceId) {
 
@@ -371,7 +356,6 @@ public class DataSourceController {
 
 
   /**
-   * 데이터 소스 목록을 조회합니다.
    *
    * @param type       DataSourceType
    * @param connection ConnectionType
@@ -417,7 +401,6 @@ public class DataSourceController {
     //        .searchList(dataSourceType, connectionType, sourceType, statusType,
     //                    published, nameContains, searchDateBy, from, to);
 
-    // 기본 정렬 조건 셋팅
     if (pageable.getSort() == null || !pageable.getSort().iterator().hasNext()) {
       pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                                  new Sort(Sort.Direction.ASC, "createdTime", "name"));
@@ -484,9 +467,6 @@ public class DataSourceController {
     return ResponseEntity.ok(engineQueryService.search(request));
   }
 
-  /**
-   * 데이터 소스내 데이터 추가
-   */
   @RequestMapping(path = "/datasources/{id}/data", method = {RequestMethod.PATCH, RequestMethod.PUT})
   public @ResponseBody
   ResponseEntity<?> appendDataSource(
@@ -499,7 +479,6 @@ public class DataSourceController {
       throw new ResourceNotFoundException(id);
     }
 
-    // TODO: 기존 적재 작업과 비교하여 제한이 필요한 경우 제한 필요
     dataSource.setIngestionInfo(ingestionInfo);
 
     // 기존 진행중인 적재 작업 ShutDown
@@ -520,10 +499,6 @@ public class DataSourceController {
 
   }
 
-
-  /**
-   * 데이터 소스내 필드 정보를 수정합니다.
-   */
   @RequestMapping(path = "/datasources/{id}/fields", method = RequestMethod.PATCH)
   public @ResponseBody
   ResponseEntity<?> patchFieldsInDataSource(
@@ -566,9 +541,6 @@ public class DataSourceController {
     return ResponseEntity.noContent().build();
   }
 
-  /**
-   * Engine Datasource에는 존재하지만 Metatron Datasource 필드에 존재하지 않는 값을 동기화 하여 추가합니다.
-   */
   @RequestMapping(path = "/datasources/{id}/fields/sync", method = RequestMethod.PATCH)
   public ResponseEntity<?> synchronizeFieldsInDataSource(@PathVariable("id") final String id) {
     final DataSource dataSource = dataSourceRepository.findOne(id);
@@ -605,9 +577,7 @@ public class DataSourceController {
     }
   }
 
-  /**
-   * metatron 을 통해서가 아닌 기존에 엔진에 적재된 데이터 소스를 등록 합니다.
-   */
+
   @RequestMapping(value = "/datasources/import/{engineSourceName}", method = RequestMethod.POST)
   public ResponseEntity<?> importEngineDataSources(@PathVariable("engineSourceName") String engineName,
                                                    @RequestBody(required = false) DataSource dataSource) {
@@ -618,18 +588,12 @@ public class DataSourceController {
     return ResponseEntity.created(URI.create("")).body(importedDataSource);
   }
 
-  /**
-   * 엔진 내에서 등록되지 않은 데이터 소스 목록 전달
-   */
   @RequestMapping(value = "/datasources/import/datasources", method = RequestMethod.GET)
   public ResponseEntity<?> importAvailableEngineDataSources() {
 
     return ResponseEntity.ok(dataSourceService.findImportAvailableEngineDataSource());
   }
 
-  /**
-   * 엔진에 적재된 데이터 소스의 스키마 정보를 확인합니다.
-   */
   @RequestMapping(value = "/datasources/import/{engineSourceName}/preview", method = RequestMethod.GET)
   public ResponseEntity<?> findEngineDataSourcesInfo(@PathVariable("engineSourceName") String engineName,
                                                      @RequestParam(value = "withData", required = false) boolean withData,
@@ -807,9 +771,6 @@ public class DataSourceController {
   }
 
 
-  /**
-   * datetime 포맷 유효성을 체크합니다.
-   */
   @RequestMapping(value = "/datasources/validation/datetime", method = RequestMethod.POST)
   public ResponseEntity<?> checkDateTimeFormat(@RequestBody TimeFormatCheckRequest request) {
 
@@ -821,9 +782,6 @@ public class DataSourceController {
 
   }
 
-  /**
-   * Cron 표현식의 유효성을 체크합니다
-   */
   @RequestMapping(value = "/datasources/validation/cron", method = RequestMethod.POST)
   public ResponseEntity<?> checkCronExpression(@RequestParam String expr,
                                                @RequestParam(value = "timeZone", required = false, defaultValue = "UTC") String timeZone,
@@ -851,9 +809,6 @@ public class DataSourceController {
     return ResponseEntity.ok(new CronValidationResponse(true, afterTimes));
   }
 
-  /**
-   * Cron 표현식의 유효성을 체크합니다
-   */
   @RequestMapping(value = "/datasources/validation/wkt", method = RequestMethod.POST)
   public ResponseEntity<?> checkWktType(@RequestBody WktCheckRequest wktCheckRequest) {
 
@@ -936,11 +891,6 @@ public class DataSourceController {
 
   }
 
-  /**
-   * 엑셀파일 업로드
-   *
-   * @return 업로드 성공여부, 파일키, sheet 이름목록
-   */
   @RequestMapping(value = "/datasources/file/upload", method = RequestMethod.POST, produces = "application/json")
   public
   @ResponseBody
@@ -984,9 +934,6 @@ public class DataSourceController {
     return ResponseEntity.ok(responseMap);
   }
 
-  /**
-   * 업로드한 파일 Sheet 내용 조회
-   */
   @RequestMapping(value = "/datasources/file/{fileKey}/data", method = RequestMethod.GET, produces = "application/json")
   public @ResponseBody
   ResponseEntity<?> getPreviewFromFile(@PathVariable(value = "fileKey") String fileKey,
