@@ -14,6 +14,8 @@
 
 package app.metatron.discovery.domain.datasource;
 
+import app.metatron.discovery.domain.workspace.Workspace;
+import app.metatron.discovery.domain.workspace.WorkspaceRepository;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -62,12 +64,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -184,6 +181,9 @@ public class DataSourceController {
 
   @Autowired
   WorkbenchProperties workbenchProperties;
+
+  @Autowired
+  WorkspaceRepository workspaceRepository;
 
   @Autowired
   MetatronProperties metatronProperties;
@@ -494,6 +494,24 @@ public class DataSourceController {
         .build();
     ExecutorService service = Executors.newSingleThreadExecutor(factory);
     service.submit(() -> jobRunner.ingestion(dataSource));
+
+    return ResponseEntity.noContent().build();
+
+  }
+
+  @RequestMapping(path = "/datasources/{id}/workspaces", method = {RequestMethod.PATCH, RequestMethod.PUT})
+  public @ResponseBody ResponseEntity<?> addDatasourceWorkspaces(@PathVariable("id") String id,
+                                                                 @RequestBody List<String> workspaceIds) {
+
+    DataSource ds = dataSourceRepository.getOne(id);
+    if (ds.getWorkspaces() == null) {
+      ds.setWorkspaces(new HashSet<>());
+    }
+    for (String wid : workspaceIds) {
+      Workspace workspace = workspaceRepository.findOne(wid);
+      ds.getWorkspaces().add(workspace);
+    }
+    dataSourceRepository.save(ds);
 
     return ResponseEntity.noContent().build();
 

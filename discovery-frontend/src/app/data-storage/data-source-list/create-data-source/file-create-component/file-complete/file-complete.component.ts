@@ -24,12 +24,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {
-  DatasourceInfo,
-  Field,
-  FieldFormatType,
-  IngestionRuleType
-} from '../../../../../domain/datasource/datasource';
+import {DatasourceInfo, Field, FieldFormatType, IngestionRuleType} from '../../../../../domain/datasource/datasource';
 import {Alert} from '../../../../../common/util/alert.util';
 import {DatasourceService} from '../../../../../datasource/service/datasource.service';
 import {CommonUtil} from '../../../../../common/util/common.util';
@@ -40,10 +35,7 @@ import {Modal} from '../../../../../common/domain/modal';
 import {CookieConstant} from '../../../../../common/constant/cookie.constant';
 import {CommonConstant} from "../../../../../common/constant/common.constant";
 import {GranularityService} from "../../../../service/granularity.service";
-import {
-  CreateSourceCompleteData,
-  DataSourceCreateService
-} from "../../../../service/data-source-create.service";
+import {CreateSourceCompleteData, DataSourceCreateService} from "../../../../service/data-source-create.service";
 import {DataStorageConstant} from "../../../../constant/data-storage-constant";
 
 /**
@@ -230,6 +222,7 @@ export class FileCompleteComponent extends AbstractPopupComponent implements OnI
         Alert.success(`'${this.createCompleteData.sourceName.trim()}' ` + this.translateService.instant('msg.storage.alert.source.create.success'));
         // 개인 워크스페이스
         const workspace = JSON.parse(this.cookieService.get(CookieConstant.KEY.MY_WORKSPACE));
+
         // 워크스페이스 매핑
         this.datasourceService.addDatasourceWorkspaces(result.id, [workspace['id']])
           .then(() => {

@@ -115,12 +115,12 @@ public class EngineMonitoringJob extends QuartzJobBean {
           }
         } catch (Exception e) {
           EngineMonitoring patchTarget = monitoringRepository.findOne(target.getId());
+          if (patchTarget != null) {
+            patchTarget.setErrorMessage(e.getMessage());
+            patchTarget.setStatus(false);
 
-          patchTarget.setErrorMessage(e.getMessage());
-          patchTarget.setStatus(false);
-
-          monitoringRepository.save(patchTarget);
-
+            monitoringRepository.save(patchTarget);
+          }
         }
       }
     }

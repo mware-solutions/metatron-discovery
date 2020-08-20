@@ -843,17 +843,8 @@ export class DatasourceService extends AbstractService {
     return this.post(url, null);
   }
 
-  /**
-   * 현재 데이터소스에 워크스페이스 연결
-   * @param {string} datasourceId
-   * @param param
-   * @returns {Promise<any>}
-   */
   public addDatasourceWorkspaces(datasourceId: string, param: any): Promise<any> {
-    const connIds = param.map((id) => {
-      return '/api/workspaces/' + id;
-    }).join('\n');
-    return this.patch(this.API_URL + `datasources/${datasourceId}/workspaces`, connIds, 'text/uri-list');
+    return this.put(this.API_URL + `datasources/${datasourceId}/workspaces`, param);
   }
 
   /**
