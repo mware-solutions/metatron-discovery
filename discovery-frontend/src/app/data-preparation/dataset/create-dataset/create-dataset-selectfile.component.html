@@ -151,7 +151,7 @@
                 xls, .xlsx, .txt, .csv and .json formats are allowed
               </div>
 
-              <div class="ddp-wrap-edit3 ddp-type">
+              <div *ngIf="fileLocations?.length > 1" class="ddp-wrap-edit3 ddp-type">
                 <label class="ddp-label-type">Upload Location</label>
                 <!-- edit option -->
                 <div class="ddp-ui-edit-option ddp-type">
