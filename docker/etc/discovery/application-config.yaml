@@ -75,3 +75,7 @@ polaris:
 
 spark:
   driver-host: discovery-${TENANT_ID}-discovery
+
+sso:
+  enabled: true
+  forceHttps: true
