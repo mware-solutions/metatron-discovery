@@ -8,7 +8,7 @@
     </property>
     <property>
         <name>fs.s3a.endpoint</name>
-        <value>https://storage-TENANT_ID.cloud.bigconnect.io</value>
+        <value>http://storage-TENANT_ID-storage:9000</value>
     </property>
     <property>
         <name>fs.s3a.access.key</name>
