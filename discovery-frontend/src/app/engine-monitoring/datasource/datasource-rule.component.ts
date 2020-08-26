@@ -117,6 +117,9 @@ export class DatasourceRuleComponent extends AbstractComponent implements OnInit
       if (!_.isNil(rule['period'])) {
         delete rule['period'];
       }
+      rule['tieredReplicants'] = {
+        _default_tier : 1
+      }
     }
   }
 
@@ -142,6 +145,14 @@ export class DatasourceRuleComponent extends AbstractComponent implements OnInit
           rule.durationString = moment.duration(moment(text.split('/')[1]).diff(text.split('/')[0])).locale("en").humanize();
         }
       }
+    }
+  }
+
+  public onChangeReplicas(text, rule) {
+    if (_.isNil(text) || text.length == 0) {
+      rule.tieredReplicants._default_tier = 0;
+    } else {
+      rule.tieredReplicants._default_tier = parseInt(text);
     }
   }
 
@@ -178,6 +189,16 @@ export class DatasourceRuleComponent extends AbstractComponent implements OnInit
         Alert.warning(this.translateService.instant('msg.engine.monitoring.alert.ds.retention.interval'));
         result = false;
         break;
+      } else if (rule.type.indexOf('Forever') > -1) {
+        const replicas = rule.tieredReplicants._default_tier;
+        if (replicas < 1) {
+          setTimeout(() => {
+            $('input.ddp-input-typebasic')[idx].focus();
+          }, 400);
+          Alert.warning(this.translateService.instant('msg.engine.monitoring.alert.ds.retention.replicas'));
+          result = false;
+          break;
+        }
       }
     }
     return result;

@@ -4366,6 +4366,7 @@
   "msg.engine.monitoring.alert.ds.retention.type": "Choose a Retention Type",
   "msg.engine.monitoring.alert.ds.retention.interval": "Check the Retention Interval",
   "msg.engine.monitoring.alert.ds.retention.period": "Check the Retention Period",
+  "msg.engine.monitoring.alert.ds.retention.replicas": "Check the number of replicas (min is 1)",
   "msg.engine.monitoring.confirm.ds.del.description": "Do you want to permanently delete the datasource?",
   "msg.engine.monitoring.alert.ds.del.success": "Datasource permanently deleted",
   "msg.engine.monitoring.confirm.ds.enable.title": "Enable Datasource",

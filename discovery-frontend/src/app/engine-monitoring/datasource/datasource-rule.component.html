@@ -86,6 +86,21 @@
                 </div>
               </div>
               <!-- //edit -->
+              <!-- edit -->
+              <div class="ddp-wrap-edit3 ddp-type" *ngIf="rule.type && rule.type.indexOf('Forever') > -1">
+                <label class="ddp-label-type">Replicas</label>
+                <!-- edit option -->
+                <div class="ddp-ui-edit-option ">
+                  <component-input
+                    [value]="rule.tieredReplicants._default_tier"
+                    [valueType]="'number'"
+                    [inputClass]="'ddp-input-typebasic'"
+                    [placeHolder]="'Replicas for default tier'"
+                    [immediately]="true"
+                    (changeValue)="onChangeReplicas($event, rule);"></component-input>
+                </div>
+              </div>
+              <!-- //edit -->
             </div>
           </li>
         </ul>
