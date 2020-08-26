@@ -31,11 +31,11 @@ polaris:
 
   engine:
     hostname:
-      broker: http://discovery-${TENANT_ID}_druid:8082
-      overlord: http://discovery-${TENANT_ID}_druid:8090
-      coordinator: http://discovery-${TENANT_ID}_druid:8081
-      historical: http://discovery-${TENANT_ID}_druid:8083
-      middleManager: http://discovery-${TENANT_ID}_druid:8091
+      broker: http://discovery-${TENANT_ID}-druid:8082
+      overlord: http://discovery-${TENANT_ID}-druid:8090
+      coordinator: http://discovery-${TENANT_ID}-druid:8081
+      historical: http://discovery-${TENANT_ID}-druid:8083
+      middleManager: http://discovery-${TENANT_ID}-druid:8091
 
     ingestion:
       baseDir: /opt/bdl/ingest  # druid will look in this folder on his container
