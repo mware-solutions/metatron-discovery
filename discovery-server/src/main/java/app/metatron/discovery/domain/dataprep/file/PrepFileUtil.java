@@ -1,47 +1,25 @@
 package app.metatron.discovery.domain.dataprep.file;
 
-import static app.metatron.discovery.domain.dataprep.PrepProperties.HADOOP_CONF_DIR;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_CANNOT_GET_HDFS_FILE_SYSTEM;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_CANNOT_READ_FROM_HDFS_PATH;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_CANNOT_READ_FROM_LOCAL_PATH;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_CANNOT_WRITE_TO_HDFS_PATH;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_CANNOT_WRITE_TO_LOCAL_PATH;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_FAILED_TO_READ_CSV;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_MALFORMED_URI_SYNTAX;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_REQUIRED_PROPERTY_MISSING;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_UNSUPPORTED_CHARSET;
-import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.MSG_DP_ALERT_UNSUPPORTED_URI_SCHEME;
-import static app.metatron.discovery.domain.dataprep.util.PrepUtil.configError;
-import static app.metatron.discovery.domain.dataprep.util.PrepUtil.datasetError;
-import static app.metatron.discovery.domain.dataprep.util.PrepUtil.snapshotError;
-
 import app.metatron.discovery.domain.dataprep.util.HdfsUtil;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.charset.Charset;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.ContentSummary;
-import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.Charset;
+
+import static app.metatron.discovery.domain.dataprep.PrepProperties.HADOOP_CONF_DIR;
+import static app.metatron.discovery.domain.dataprep.exceptions.PrepMessageKey.*;
+import static app.metatron.discovery.domain.dataprep.util.PrepUtil.*;
 
 public class PrepFileUtil {
 
@@ -117,16 +95,17 @@ public class PrepFileUtil {
           throw datasetError(MSG_DP_ALERT_CANNOT_GET_HDFS_FILE_SYSTEM, strUri);
         }
 
-        FSDataInputStream his;
-        FSDataInputStream dhis;
+        InputStream his;
+        InputStream dhis;
         try {
           if (onlyCount) {
             ContentSummary cSummary = hdfsFs.getContentSummary(path);
             result.totalBytes = cSummary.getLength();
           }
 
-          his = hdfsFs.open(path);
-          dhis = hdfsFs.open(path);
+          his = HdfsUtil.openFile(hdfsFs, path);
+          dhis = HdfsUtil.openFile(hdfsFs, path);
+
         } catch (IOException e) {
           e.printStackTrace();
           throw datasetError(MSG_DP_ALERT_CANNOT_READ_FROM_HDFS_PATH, strUri);
