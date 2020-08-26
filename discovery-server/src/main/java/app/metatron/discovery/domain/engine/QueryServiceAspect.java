@@ -128,7 +128,7 @@ public class QueryServiceAspect {
         queryId = "UNKNOWN";
       }
 
-      LOGGER.info("[{}] Elapsed Engine Query Time : {}", queryId, stopWatch.getTotalTimeMillis());
+      LOGGER.debug("[{}] Elapsed Engine Query Time : {}", queryId, stopWatch.getTotalTimeMillis());
     }
 
     return retVal;
