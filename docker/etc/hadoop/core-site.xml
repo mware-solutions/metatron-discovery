@@ -34,4 +34,37 @@
         <name>fs.s3a.connection.maximum</name>
         <value>1000</value>
     </property>
+    <property>
+        <name>fs.s3a.connection.establish.timeout</name>
+        <value>10000</value>
+    </property>
+
+    <property>
+        <name>fs.s3a.block.size</name>
+  	    <value>128M</value>
+    </property>
+    <property>
+        <name>fs.s3a.fast.upload.buffer</name>
+  	    <value>bytebuffer</value>
+    </property>    
+    <property>
+        <name>fs.s3a.socket.send.buffer</name>
+  	    <value>16384</value>
+    </property>  
+    <property>
+        <name>fs.s3a.socket.recv.buffer</name>
+  	    <value>16384</value>
+    </property>    
+    <property>
+        <name>fs.s3a.readahead.range</name>
+  	    <value>64K</value>
+    </property> 
+    <property>
+        <name>fs.s3a.threads.max</name>
+  	    <value>100</value>
+    </property>   
+    <property>
+        <name>fs.s3a.max.total.tasks</name>
+  	    <value>20</value>
+    </property>     
 </configuration>

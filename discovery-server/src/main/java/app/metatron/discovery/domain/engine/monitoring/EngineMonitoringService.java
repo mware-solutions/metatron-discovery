@@ -267,9 +267,16 @@ public class EngineMonitoringService {
     Map result = (Map) getEngineData(queryRequest);
     List usedMemList = (List) result.get("usedMem");
     List maxMemList = (List) result.get("maxMem");
-    float useMem = new Float(String.valueOf(usedMemList.get(usedMemList.size()-1)));
-    float maxMem = new Float(String.valueOf(maxMemList.get(maxMemList.size()-1)));
-    float percentage = 100 * useMem / maxMem;
+
+    float useMem = 0.0f;
+    float maxMem = 0.0f;
+    float percentage = 0.0f;
+
+    if (usedMemList.size() > 0) {
+      useMem = new Float(String.valueOf(usedMemList.get(usedMemList.size() - 1)));
+      maxMem = new Float(String.valueOf(maxMemList.get(maxMemList.size()-1)));
+      percentage = 100 * useMem / maxMem;
+    }
 
     useMemMap.put("name", "useMem");
     useMemMap.put("value", useMem);
