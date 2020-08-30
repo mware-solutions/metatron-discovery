@@ -34,6 +34,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +56,7 @@ import app.metatron.discovery.domain.dataconnection.DataConnection;
 
 @Entity
 @Table(name = "pr_snapshot")
-public class PrSnapshot extends AbstractHistoryEntity {
+public class PrSnapshot extends AbstractHistoryEntity implements Serializable {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PrSnapshot.class);
 

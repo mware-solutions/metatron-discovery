@@ -133,9 +133,11 @@ public class DataQueryController {
       MatrixResponse response = (MatrixResponse) result;
       List<MatrixResponse.Column> columns = response.getColumns();
       columns.forEach(column -> {
-        for (int i=0; i<column.getPercentage().size(); i++) {
-          if (column.getPercentage().get(i) == null || "null".equals(column.getPercentage().get(i))) {
-            column.getPercentage().set(i, null);
+        if (column.getPercentage() != null) {
+          for (int i = 0; i < column.getPercentage().size(); i++) {
+            if (column.getPercentage().get(i) == null || "null".equals(column.getPercentage().get(i))) {
+              column.getPercentage().set(i, null);
+            }
           }
         }
       });
