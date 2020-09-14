@@ -20,6 +20,7 @@ import {StringUtil} from "../../common/util/string.util";
 import {Metadata, SourceType} from "../../domain/meta-data-management/metadata";
 import {ExploreDataConstant} from "../constant/explore-data-constant";
 import {EventBroadcaster} from "../../common/event/event.broadcaster";
+import {DataCreator} from "../../domain/meta-data-management/data-creator";
 
 @Component({
   selector: 'explore-data-main',
@@ -34,7 +35,7 @@ export class ExploreDataMainComponent extends AbstractComponent {
   popularMetadataList: Metadata[] = [];
   updatedMetadataList: Metadata[] = [];
   favoriteMetadataList: Metadata[] = [];
-  favoriteCreatorList: Metadata[] = [];
+  favoriteCreatorList: DataCreator[] = [];
 
   favoriteMetadataTotalCount: number = -1;
 
@@ -114,6 +115,10 @@ export class ExploreDataMainComponent extends AbstractComponent {
     this.clickedMetadata.emit(metadata);
   }
 
+  onClickCreator(username: string) {
+    this.router.navigate(['exploredata/favorite/creator', username]).then();
+  }
+
   /**
    * When click carousel right button
     */
@@ -183,9 +188,9 @@ export class ExploreDataMainComponent extends AbstractComponent {
 
   // change when api is ready
   private async _setFavoriteCreatorList() {
-    const result = await this._metadataService.getFavoriteCreatorList({size: 4, page: 0});
+    const result: DataCreator[] = await this._metadataService.getFavoriteCreatorList({size: 4, page: 0});
     if (!_.isNil(result)) {
-      // this.favoriteCreatorList = result;
+      this.favoriteCreatorList = result.filter(item => item.favorite);
     }
   }
 
