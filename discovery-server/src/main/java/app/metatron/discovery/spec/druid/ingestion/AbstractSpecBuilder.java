@@ -243,7 +243,7 @@ public class AbstractSpecBuilder {
       }
     }
 
-    // Set dimnesion field
+    // Set dimension field
     List<Field> dimensionfields = dataSource.getFieldByRole(Field.FieldRole.DIMENSION);
 
     List<Object> dimenstionSchemas = Lists.newArrayList();
@@ -374,10 +374,12 @@ public class AbstractSpecBuilder {
       parser = new OrcParser(parseSpec);
 
     } else if (fileFormat instanceof ParquetFileFormat) {
+      //If timestampSpec.replaceWrongColumn is true, there is an error that is treated as null, should be treated as false
+      timestampSpec.setReplaceWrongColumn(false);
+
       TimeAndDimsParseSpec parseSpec = new TimeAndDimsParseSpec();
       parseSpec.setTimestampSpec(timestampSpec);
       parseSpec.setDimensionsSpec(dimensionsSpec);
-
       parser = new ParquetParser(parseSpec);
 
     } else {
