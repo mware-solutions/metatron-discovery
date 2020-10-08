@@ -59,7 +59,7 @@ polaris:
     localBaseDir: /opt/bdl/data/discovery/dataprep
     hadoopConfDir: /opt/bdl/etc/hadoop
     hadoopUser: bdl
-    stagingBaseDir: hdfs://im1.bdl.local:19998/${TENANT_ID}/dataprep
+    stagingBaseDir: hdfs://bdlcluster.bdl.cloud:19998/${TENANT_ID}/dataprep
     s3BaseDir: s3a://dataprep
     sampling:
       timeout: 20 # Timeout for rule edit sessions

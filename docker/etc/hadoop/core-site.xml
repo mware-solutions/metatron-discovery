@@ -8,19 +8,15 @@
     </property>
     <property>
         <name>fs.s3a.endpoint</name>
-        <value>http://TENANT_ID.storage.bdl.cloud</value>
+        <value>storage.bigconnect.io</value>
     </property>
     <property>
         <name>fs.s3a.access.key</name>
-        <value>TENANT_ID</value>
+        <value>AWS_ACCESS_KEY</value>
     </property>
     <property>
         <name>fs.s3a.secret.key</name>
-        <value>TENANT_ID</value>
-    </property>
-    <property>
-        <name>fs.s3a.path.style.access</name>
-        <value>true</value>
+        <value>AWS_SECRET_KEY</value>
     </property>
     <property>
         <name>fs.s3a.fast.upload</name>
