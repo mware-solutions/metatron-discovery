@@ -44,7 +44,7 @@ if [[ -z "${METATRON_MEM}" ]]; then
   export METATRON_MEM="-Xms2048m -Xmx2048m -XX:MaxMetaspaceSize=512m"
 fi
 
-JAVA_OPTS+=" ${METATRON_JAVA_OPTS} -Dfile.encoding=${METATRON_ENCODING} ${METATRON_MEM}"
+JAVA_OPTS+=" ${METATRON_JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -Dfile.encoding=${METATRON_ENCODING} ${METATRON_MEM}"
 #JAVA_OPTS+=" -Dlog4j.configuration=file://${METATRON_CONF_DIR}/log4j.properties"
 export JAVA_OPTS
 
