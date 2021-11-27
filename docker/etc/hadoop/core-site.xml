@@ -4,7 +4,7 @@
 <configuration>
     <property>
         <name>fs.default.name</name>
-        <value>s3a://dataprep</value>
+        <value>s3a://dataprep-TENANT_ID</value>
     </property>
     <property>
         <name>fs.s3a.endpoint</name>
