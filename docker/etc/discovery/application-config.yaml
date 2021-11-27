@@ -18,7 +18,7 @@ logging:
 polaris:
   storage:
     s3:
-      bucket: dataprep
+      bucket: dataprep-${TENANT_ID}
       region: default
       only: true
     # The stagedb concept is internally used as an intermediary processing medium when processing large amounts of data
@@ -72,7 +72,7 @@ polaris:
     hadoopConfDir: /opt/bdl/etc/hadoop                # Set $HADOOP_CONF_DIR
     hadoopUser: bdl                                    # user to connect to HDFS
     stagingBaseDir: hdfs://bdlcluster.bdl.cloud:19998/${TENANT_ID}/dataprep   # Where uploaded files, HDFS file snapshots, files for Hive external tables are stored
-    s3BaseDir: s3a://dataprep
+    s3BaseDir: s3a://dataprep-${TENANT_ID}
     sampling:
       timeout: 20 # Timeout for rule edit sessions
       limit-rows: 10000
